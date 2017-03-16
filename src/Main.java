@@ -1,6 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hej!");
+        HejClassen.sigHej();
         System.out.println("sdfs");
         System.out.println("nej!");
     }
