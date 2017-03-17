@@ -1,3 +1,5 @@
+package View;
+
 import javafx.scene.layout.Pane;
 
 /**

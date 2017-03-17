@@ -1,3 +1,6 @@
+package View;
+
+import Model.Activity;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
@@ -14,7 +17,7 @@ import javafx.scene.layout.VBox;
     Class: Dat16v2
     Book Excersise: ***
     Handin-Excersise Titel: ***
-    Handin-Excersise: ActivityScene
+    Handin-Excersise: View.ActivityScene
     Question:
     ***
 */
@@ -102,7 +105,7 @@ public class ActivityScene extends BaseScene implements BaseLayout
     @Override
     public void createLayoutSettings()
     {
-        String style = getClass().getResource("StyleSheet.css").toExternalForm();
+        String style = getClass().getResource("View/StyleSheet.css").toExternalForm();
 
         activityNameField.setPromptText("Aktivitet Navn...");
         ageLimitField.setPromptText("Aldersbegrænsning...");

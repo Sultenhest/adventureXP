@@ -7,7 +7,7 @@ import javafx.stage.Stage;
  * Created by Christian and Sose on 16-03-2017.
  */
 
-public class Main extends Application
+public class Main_GUI extends Application
 {
     @Override
     public void start(Stage primaryStage) throws Exception

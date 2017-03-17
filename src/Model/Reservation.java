@@ -1,4 +1,4 @@
-import Model.Activity;
+package Model;
 
 /**
  * Created by Christian and Sose on 16-03-2017.
