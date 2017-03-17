@@ -84,20 +84,20 @@ public class ActivityView extends BaseScene implements BaseLayout
         activityID.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("ID"));
         activityID.setMinWidth(25);
 
-        TableColumn<Activity, Integer> ageLimit = new TableColumn<>("AgeLimit");
-        ageLimit.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("ageLimit"));
+        TableColumn<Activity, Integer> ageLimit = new TableColumn<>("Aldersgrænse");
+        ageLimit.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("Aldersgrænse"));
         ageLimit.setMinWidth(25);
 
-        TableColumn<Activity, Integer> heightLimit = new TableColumn<>("heightLimit");
-        heightLimit.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("heightLimit"));
+        TableColumn<Activity, Integer> heightLimit = new TableColumn<>("Minimum Højde");
+        heightLimit.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("Minimum Højde"));
         heightLimit.setMinWidth(25);
 
-        TableColumn<Activity, String> activityName = new TableColumn<>("activityName");
-        activityName.setCellValueFactory(new PropertyValueFactory<Activity, String>("activityName"));
+        TableColumn<Activity, String> activityName = new TableColumn<>("Aktivitet");
+        activityName.setCellValueFactory(new PropertyValueFactory<Activity, String>("Aktivitet"));
         activityName.setMinWidth(25);
 
-        TableColumn<Activity, String> activityInfo = new TableColumn<>("activityInfo");
-        activityInfo.setCellValueFactory(new PropertyValueFactory<Activity, String>("activityInfo"));
+        TableColumn<Activity, String> activityInfo = new TableColumn<>("Aktivitetsinfo");
+        activityInfo.setCellValueFactory(new PropertyValueFactory<Activity, String>("Aktivitetsinfo"));
         activityInfo.setMinWidth(25);
 
         activityTableView.getColumns().addAll(activityID, ageLimit, heightLimit, activityName, activityInfo);
