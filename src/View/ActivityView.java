@@ -1,9 +1,10 @@
 package View;
 
 import Model.Activity;
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -27,9 +28,6 @@ public class ActivityView extends BaseScene implements BaseLayout
 {
     private VBox layout;
     private GridPane subLayout;
-
-    private TableView<Activity> activityTableView;
-
     private TextField activityNameField;
     private TextField ageLimitField;
     private TextField heightLimitField;
@@ -39,78 +37,79 @@ public class ActivityView extends BaseScene implements BaseLayout
     private Button deleteActivity;
     private Button updateActivity;
 
-    public ActivityView()
+    private TableView<Activity> activityTableView;
+
+    private ImageView logo;
+
+    public ActivityView(int ID)
     {
+        setID(ID);
         createLayout();
         createTableColoumns();
         createLayoutSettings();
         attachLayoutToScene();
     }
 
-    // Creates the layout of the Activity View
+    //
     @Override
     public void createLayout()
     {
-        // Main layout for View (not really needed since VBox isn't used for anything)
+
         layout = new VBox();
-        layout.setAlignment(Pos.CENTER);
 
-        // Layout for Elements of ActivityView
         subLayout = new GridPane();
-        subLayout.setAlignment(Pos.CENTER);
 
-        // TableView for showing the list of activities
-        activityTableView = new TableView<>();
-
-        // TextFields for keying in info on new activity that'll be sent to the DB
         activityNameField = new TextField();
         ageLimitField = new TextField();
         heightLimitField = new TextField();
         acitivityInfoField = new TextField();
 
-        // Buttons adding, updating and deleting activities
         createActivity = new Button();
         updateActivity = new Button();
         deleteActivity = new Button();
 
-        // Adds elements to the GridPane
-        subLayout.add(activityTableView, 0 , 0, 3, 1);
+        activityTableView = new TableView<>();
 
-        subLayout.add(activityNameField, 0 , 1);
-        subLayout.add(acitivityInfoField, 0 , 2);
-        subLayout.add(ageLimitField, 1 , 1);
-        subLayout.add(heightLimitField, 1 , 2);
+        Image image = new Image(Main_GUI.class.getResourceAsStream("LOGO.png"));
 
-        subLayout.add(createActivity, 2, 1);
-        subLayout.add(updateActivity, 2, 2);
-        subLayout.add(deleteActivity, 2, 3);
+        logo = new ImageView(image);
 
-        // Adds GridPane to VBox
+        subLayout.add(logo, 0 , 0);
+        subLayout.add(activityTableView, 1 , 0);
+
+        subLayout.add(activityNameField, 1 , 1);
+        subLayout.add(acitivityInfoField, 1 , 2);
+        subLayout.add(ageLimitField, 2 , 1);
+        subLayout.add(heightLimitField, 2 , 2);
+
+        subLayout.add(createActivity, 3, 1);
+        subLayout.add(updateActivity, 3, 2);
+        subLayout.add(deleteActivity, 3, 3);
+
         layout.getChildren().add(subLayout);
     }
 
-    // Creates the columns for the TableView
-    private void createTableColoumns()
+    public void createTableColoumns()
     {
         TableColumn<Activity, Integer> activityID = new TableColumn<>("ID");
         activityID.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("ID"));
-        activityID.setMaxWidth(35);
+        activityID.setMinWidth(100);
 
-        TableColumn<Activity, Integer> ageLimit = new TableColumn<>("Alder");
-        ageLimit.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("Alder"));
-        ageLimit.setMinWidth(35);
+        TableColumn<Activity, Integer> ageLimit = new TableColumn<>("Alders begrænsning");
+        ageLimit.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("ageLimit"));
+        ageLimit.setMinWidth(150);
 
         TableColumn<Activity, Integer> heightLimit = new TableColumn<>("Minimum Højde");
-        heightLimit.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("Minimum Højde"));
-        heightLimit.setMinWidth(35);
+        heightLimit.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("heightLimit"));
+        heightLimit.setMinWidth(150);
 
         TableColumn<Activity, String> activityName = new TableColumn<>("Aktivitet");
-        activityName.setCellValueFactory(new PropertyValueFactory<Activity, String>("Aktivitet"));
-        activityName.setMinWidth(35);
+        activityName.setCellValueFactory(new PropertyValueFactory<Activity, String>("activityName"));
+        activityName.setMinWidth(150);
 
-        TableColumn<Activity, String> activityInfo = new TableColumn<>("Aktivitetsinfo");
-        activityInfo.setCellValueFactory(new PropertyValueFactory<Activity, String>("Aktivitetsinfo"));
-        activityInfo.setMinWidth(35);
+        TableColumn<Activity, String> activityInfo = new TableColumn<>("Aktivitet Beskrivelse");
+        activityInfo.setCellValueFactory(new PropertyValueFactory<Activity, String>("activityInfo"));
+        activityInfo.setMinWidth(150);
 
         activityTableView.getColumns().addAll(activityID, ageLimit, heightLimit, activityName, activityInfo);
         activityTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -148,8 +147,11 @@ public class ActivityView extends BaseScene implements BaseLayout
                 "            linear-gradient(#ffe657 0%, #f8c202 50%, #000000 100%),\n" + "" +
                 "            linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));");
 
-        subLayout.setHgap(25);
-        subLayout.setVgap(25);
+        activityTableView.setMinWidth(700);
+        activityTableView.setMinHeight(600);
+
+        subLayout.setHgap(50);
+        subLayout.setVgap(50);
     }
 
     @Override
