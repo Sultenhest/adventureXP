@@ -84,8 +84,8 @@ public class ActivityView extends BaseScene implements BaseLayout
         activityID.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("ID"));
         activityID.setMinWidth(25);
 
-        TableColumn<Activity, Integer> ageLimit = new TableColumn<>("Aldersgrænse");
-        ageLimit.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("Aldersgrænse"));
+        TableColumn<Activity, Integer> ageLimit = new TableColumn<>("Alder");
+        ageLimit.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("Alder"));
         ageLimit.setMinWidth(25);
 
         TableColumn<Activity, Integer> heightLimit = new TableColumn<>("Minimum Højde");
