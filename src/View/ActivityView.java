@@ -93,21 +93,21 @@ public class ActivityView extends BaseScene implements BaseLayout
         activityID.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("ID"));
         activityID.setMaxWidth(35);
 
-        TableColumn<Activity, Integer> ageLimit = new TableColumn<>("Aldersgrænse");
-        ageLimit.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("Aldersgrænse"));
-        ageLimit.setMinWidth(25);
+        TableColumn<Activity, Integer> ageLimit = new TableColumn<>("Alder");
+        ageLimit.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("Alder"));
+        ageLimit.setMinWidth(35);
 
         TableColumn<Activity, Integer> heightLimit = new TableColumn<>("Minimum Højde");
         heightLimit.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("Minimum Højde"));
-        heightLimit.setMinWidth(25);
+        heightLimit.setMinWidth(35);
 
         TableColumn<Activity, String> activityName = new TableColumn<>("Aktivitet");
         activityName.setCellValueFactory(new PropertyValueFactory<Activity, String>("Aktivitet"));
-        activityName.setMinWidth(25);
+        activityName.setMinWidth(35);
 
-        TableColumn<Activity, String> activityInfo = new TableColumn<>("Aktivitet Info");
-        activityInfo.setCellValueFactory(new PropertyValueFactory<Activity, String>("Aktivitet Info"));
-        activityInfo.setMinWidth(25);
+        TableColumn<Activity, String> activityInfo = new TableColumn<>("Aktivitetsinfo");
+        activityInfo.setCellValueFactory(new PropertyValueFactory<Activity, String>("Aktivitetsinfo"));
+        activityInfo.setMinWidth(35);
 
         activityTableView.getColumns().addAll(activityID, ageLimit, heightLimit, activityName, activityInfo);
         activityTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -116,10 +116,10 @@ public class ActivityView extends BaseScene implements BaseLayout
     @Override
     public void createLayoutSettings()
     {
-        String style = getClass().getResource("/View/StyleSheet.css").toExternalForm();
+//        String style = getClass().getResource("/View/StyleSheet.css").toExternalForm();
 
         activityNameField.setPromptText("Aktivitet Navn...");
-        ageLimitField.setPromptText("Aldersgrænse...");
+        ageLimitField.setPromptText("Aldersbegrænsning...");
         heightLimitField.setPromptText("Minimum Højde...");
         acitivityInfoField.setPromptText("Aktivitet Info...");
 
