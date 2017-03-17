@@ -8,21 +8,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
 
 /**
  * Created by Christian on 16-03-2017.
  */
-
-/*
-    Name: Christian Hvidkjær
-    Date: 16-03-2017
-    Class: Dat16v2
-    Book Excersise: ***
-    Handin-Excersise Titel: ***
-    Handin-Excersise: View.ActivityView
-    Question:
-    ***
-*/
 
 public class ActivityView extends BaseScene implements BaseLayout
 {
@@ -39,6 +29,8 @@ public class ActivityView extends BaseScene implements BaseLayout
 
     private TableView<Activity> activityTableView;
 
+    private Label status;
+
     private ImageView logo;
 
     public ActivityView(int ID)
@@ -50,11 +42,9 @@ public class ActivityView extends BaseScene implements BaseLayout
         attachLayoutToScene();
     }
 
-    //
     @Override
     public void createLayout()
     {
-
         layout = new VBox();
 
         subLayout = new GridPane();
@@ -69,6 +59,8 @@ public class ActivityView extends BaseScene implements BaseLayout
         deleteActivity = new Button();
 
         activityTableView = new TableView<>();
+
+        status = new Label();
 
         Image image = new Image(Main_GUI.class.getResourceAsStream("LOGO.png"));
 
@@ -85,6 +77,8 @@ public class ActivityView extends BaseScene implements BaseLayout
         subLayout.add(createActivity, 3, 1);
         subLayout.add(updateActivity, 3, 2);
         subLayout.add(deleteActivity, 3, 3);
+
+        subLayout.add(status, 1, 3);
 
         layout.getChildren().add(subLayout);
     }
@@ -132,6 +126,11 @@ public class ActivityView extends BaseScene implements BaseLayout
                 "            linear-gradient(#ffea6a, #000000),\n" + "" +
                 "            linear-gradient(#ffe657 0%, #f8c202 50%, #000000 100%),\n" + "" +
                 "            linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));");
+        createActivity.setOnAction(event ->
+        {
+            buttonClicked(0);
+        });
+
         updateActivity.setText("Opdatere Aktiviter");
         updateActivity.setStyle("-fx-background-color:\n" + "" +
                 "            linear-gradient(#ffd65b, #000000),\n" + "" +
@@ -139,6 +138,11 @@ public class ActivityView extends BaseScene implements BaseLayout
                 "            linear-gradient(#ffea6a, #000000),\n" + "" +
                 "            linear-gradient(#ffe657 0%, #f8c202 50%, #000000 100%),\n" + "" +
                 "            linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));");
+        updateActivity.setOnAction(event ->
+        {
+            buttonClicked(1);
+        });
+
         deleteActivity.setText("Slet Aktiviter");
         deleteActivity.setStyle("-fx-background-color:\n" + "" +
                 "            linear-gradient(#ffd65b, #000000),\n" + "" +
@@ -146,12 +150,111 @@ public class ActivityView extends BaseScene implements BaseLayout
                 "            linear-gradient(#ffea6a, #000000),\n" + "" +
                 "            linear-gradient(#ffe657 0%, #f8c202 50%, #000000 100%),\n" + "" +
                 "            linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));");
+        deleteActivity.setOnAction(event ->
+        {
+            buttonClicked(1);
+        });
 
         activityTableView.setMinWidth(700);
         activityTableView.setMinHeight(600);
 
+        hideStatus();
+
         subLayout.setHgap(50);
         subLayout.setVgap(50);
+    }
+
+    public void buttonClicked(int buttonID)
+    {
+        boolean succesfullAction = false;
+
+        switch (buttonID)
+        {
+            case 0:
+                //create
+                //succesfullAction = somemethod();
+                break;
+            case 1:
+                //updatere
+                //succesfullAction = somemethod();
+                break;
+            case 2:
+                //Delete
+                //succesfullAction = somemethod();
+                break;
+            default:
+                //nothing
+                break;
+        }
+
+        createStatusMessage(buttonID, succesfullAction);
+    }
+
+    public void createStatusMessage(int buttonID, boolean succesfullAction)
+    {
+        if (succesfullAction)
+        {
+            switch (buttonID)
+            {
+                case 0:
+                    //create Button
+                    showStatus("", true);
+                    break;
+                case 1:
+                    //update button
+                    showStatus("", true);
+                    break;
+                case 2:
+                    //Delete button
+                    showStatus("", true);
+                    break;
+                default:
+                    //nothing
+                    break;
+            }
+        }
+        else
+        {
+            switch (buttonID)
+            {
+                case 0:
+                    //create Button
+                    showStatus("", false);
+                    break;
+                case 1:
+                    //update button
+                    showStatus("", false);
+                    break;
+                case 2:
+                    //Delete button
+                    showStatus("", false);
+                    break;
+                default:
+                    //nothing
+                    break;
+            }
+        }
+    }
+
+    public void showStatus(String statusText, boolean succesfullAction)
+    {
+        status.setVisible(true);
+
+        status.setText(statusText);
+
+        if (succesfullAction)
+        {
+            status.setTextFill(Paint.valueOf("Green"));
+        }
+        else
+        {
+            status.setTextFill(Paint.valueOf("Red"));
+        }
+    }
+
+    public void hideStatus()
+    {
+        status.setVisible(false);
     }
 
     @Override
