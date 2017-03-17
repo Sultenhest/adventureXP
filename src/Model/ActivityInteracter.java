@@ -1,7 +1,5 @@
 package Model;
 
-import java.util.Scanner;
-
 /**
  * Created by Andreas on 17-03-2017.
  */
