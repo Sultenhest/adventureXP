@@ -29,7 +29,7 @@ public class ActivityScene extends BaseScene implements BaseLayout
     private TextField activityNameField;
     private TextField ageLimitField;
     private TextField heightLimitField;
-    private TextField acitivityInfoField;
+    private TextField activityInfoField;
 
     private Button createActivity;
     private Button deleteActivity;
@@ -40,7 +40,7 @@ public class ActivityScene extends BaseScene implements BaseLayout
     public ActivityScene()
     {
         createLayout();
-        createTableColoumns();
+        createTableColumns();
         createLayoutSettings();
         attachLayoutToScene();
     }
@@ -55,7 +55,7 @@ public class ActivityScene extends BaseScene implements BaseLayout
         activityNameField = new TextField();
         ageLimitField = new TextField();
         heightLimitField = new TextField();
-        acitivityInfoField = new TextField();
+        activityInfoField = new TextField();
 
         createActivity = new Button();
         updateActivity = new Button();
@@ -65,7 +65,7 @@ public class ActivityScene extends BaseScene implements BaseLayout
 
         subLayout.add(activityTableView, 0 , 0);
         subLayout.add(activityNameField, 0 , 1);
-        subLayout.add(acitivityInfoField, 0 , 2);
+        subLayout.add(activityInfoField, 0 , 2);
         subLayout.add(ageLimitField, 1 , 1);
         subLayout.add(heightLimitField, 1 , 2);
 
@@ -76,26 +76,26 @@ public class ActivityScene extends BaseScene implements BaseLayout
         layout.getChildren().add(subLayout);
     }
 
-    public void createTableColoumns()
+    public void createTableColumns()
     {
         TableColumn<Activity, Integer> activityID = new TableColumn<>("ID");
         activityID.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("ID"));
         activityID.setMinWidth(25);
 
-        TableColumn<Activity, Integer> ageLimit = new TableColumn<>("AgeLimit");
-        ageLimit.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("ageLimit"));
+        TableColumn<Activity, Integer> ageLimit = new TableColumn<>("Aldersgrænse");
+        ageLimit.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("Aldersgrænse"));
         ageLimit.setMinWidth(25);
 
-        TableColumn<Activity, Integer> heightLimit = new TableColumn<>("heightLimit");
-        heightLimit.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("heightLimit"));
+        TableColumn<Activity, Integer> heightLimit = new TableColumn<>("Minimum Højde");
+        heightLimit.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("Minimum Højde"));
         heightLimit.setMinWidth(25);
 
-        TableColumn<Activity, String> activityName = new TableColumn<>("activityName");
-        activityName.setCellValueFactory(new PropertyValueFactory<Activity, String>("activityName"));
+        TableColumn<Activity, String> activityName = new TableColumn<>("Aktivitet");
+        activityName.setCellValueFactory(new PropertyValueFactory<Activity, String>("Aktivitet"));
         activityName.setMinWidth(25);
 
-        TableColumn<Activity, String> activityInfo = new TableColumn<>("activityInfo");
-        activityInfo.setCellValueFactory(new PropertyValueFactory<Activity, String>("activityInfo"));
+        TableColumn<Activity, String> activityInfo = new TableColumn<>("Aktivitetsinfo");
+        activityInfo.setCellValueFactory(new PropertyValueFactory<Activity, String>("Aktivitetsinfo"));
         activityInfo.setMinWidth(25);
 
         activityTableView.getColumns().addAll(activityID, ageLimit, heightLimit, activityName, activityInfo);
@@ -105,12 +105,12 @@ public class ActivityScene extends BaseScene implements BaseLayout
     @Override
     public void createLayoutSettings()
     {
-        String style = getClass().getResource("View/StyleSheet.css").toExternalForm();
+        //String style = getClass().getResource("View/StyleSheet.css").toExternalForm();
 
         activityNameField.setPromptText("Aktivitet Navn...");
         ageLimitField.setPromptText("Aldersbegrænsning...");
         heightLimitField.setPromptText("Minimum Højde...");
-        acitivityInfoField.setPromptText("Aktivitet Info...");
+        activityInfoField.setPromptText("Aktivitet Info...");
 
         createActivity.setText("Skab ny Aktivitet");
         createActivity.setStyle("-fx-background-color:\n" + "" +
