@@ -5,14 +5,17 @@ package Controller;
  */
 public class BookingController
 {
-    private static BookingController instance = new BookingController();
+    private static BookingController instance = null;
 
     public static BookingController getInstance()
     {
+        if (instance == null)
+            instance = new BookingController();
         return instance;
     }
 
     private BookingController()
     {
+
     }
 }
