@@ -12,7 +12,7 @@ public class Main_GUI extends Application
     @Override
     public void start(Stage primaryStage) throws Exception
     {
-        ActivityScene activityScene = new ActivityScene();
+        ActivityView activityScene = new ActivityView();
 
         primaryStage.setTitle("Adventure Alley");
         primaryStage.setScene(activityScene.getScene());
