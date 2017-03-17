@@ -1,5 +1,6 @@
 package View;
 
+import Controller.SceneHandler;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -9,14 +10,22 @@ import javafx.stage.Stage;
 
 public class Main_GUI extends Application
 {
+    private static Stage window;
+
     @Override
     public void start(Stage primaryStage) throws Exception
     {
-        ActivityView activityScene = new ActivityView();
+        window = primaryStage;
 
-        primaryStage.setTitle("Adventure Alley");
-        primaryStage.setScene(activityScene.getScene());
-        primaryStage.show();
+        window.setTitle("Adventure Alley");
+        SceneHandler.getInstance().createScene(0);
+        SceneHandler.getInstance().applyScene(0);
+        window.show();
+    }
+
+    public static Stage getWindow()
+    {
+        return window;
     }
 
     public static void main(String[] args)

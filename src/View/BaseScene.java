@@ -10,6 +10,7 @@ import javafx.scene.layout.Pane;
 
 public abstract class BaseScene
 {
+    private int ID;
     private Scene scene;
 
     public Scene getScene()
@@ -22,5 +23,15 @@ public abstract class BaseScene
         Finals finals = Finals.getInstance();
 
         this.scene = new Scene(pane,finals.getMinWindowWitdh(), finals.getMinWindowHeight());
+    }
+
+    public void setID(int ID)
+    {
+        this.ID = ID;
+    }
+
+    public int getID()
+    {
+        return ID;
     }
 }

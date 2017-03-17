@@ -3,6 +3,8 @@ package View;
 import Model.Activity;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -37,8 +39,11 @@ public class ActivityView extends BaseScene implements BaseLayout
 
     private TableView<Activity> activityTableView;
 
-    public ActivityView()
+    private ImageView logo;
+
+    public ActivityView(int ID)
     {
+        setID(ID);
         createLayout();
         createTableColoumns();
         createLayoutSettings();
@@ -65,15 +70,21 @@ public class ActivityView extends BaseScene implements BaseLayout
 
         activityTableView = new TableView<>();
 
-        subLayout.add(activityTableView, 0 , 0);
-        subLayout.add(activityNameField, 0 , 1);
-        subLayout.add(acitivityInfoField, 0 , 2);
-        subLayout.add(ageLimitField, 1 , 1);
-        subLayout.add(heightLimitField, 1 , 2);
+        Image image = new Image(Main_GUI.class.getResourceAsStream("LOGO.png"));
 
-        subLayout.add(createActivity, 2, 1);
-        subLayout.add(updateActivity, 2, 2);
-        subLayout.add(deleteActivity, 2, 3);
+        logo = new ImageView(image);
+
+        subLayout.add(logo, 0 , 0);
+        subLayout.add(activityTableView, 1 , 0);
+
+        subLayout.add(activityNameField, 1 , 1);
+        subLayout.add(acitivityInfoField, 1 , 2);
+        subLayout.add(ageLimitField, 2 , 1);
+        subLayout.add(heightLimitField, 2 , 2);
+
+        subLayout.add(createActivity, 3, 1);
+        subLayout.add(updateActivity, 3, 2);
+        subLayout.add(deleteActivity, 3, 3);
 
         layout.getChildren().add(subLayout);
     }
@@ -82,23 +93,23 @@ public class ActivityView extends BaseScene implements BaseLayout
     {
         TableColumn<Activity, Integer> activityID = new TableColumn<>("ID");
         activityID.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("ID"));
-        activityID.setMinWidth(25);
+        activityID.setMinWidth(100);
 
-        TableColumn<Activity, Integer> ageLimit = new TableColumn<>("AgeLimit");
+        TableColumn<Activity, Integer> ageLimit = new TableColumn<>("Alders begrænsning");
         ageLimit.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("ageLimit"));
-        ageLimit.setMinWidth(25);
+        ageLimit.setMinWidth(150);
 
-        TableColumn<Activity, Integer> heightLimit = new TableColumn<>("heightLimit");
+        TableColumn<Activity, Integer> heightLimit = new TableColumn<>("Minimum Højde");
         heightLimit.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("heightLimit"));
-        heightLimit.setMinWidth(25);
+        heightLimit.setMinWidth(150);
 
-        TableColumn<Activity, String> activityName = new TableColumn<>("activityName");
+        TableColumn<Activity, String> activityName = new TableColumn<>("Aktivitet");
         activityName.setCellValueFactory(new PropertyValueFactory<Activity, String>("activityName"));
-        activityName.setMinWidth(25);
+        activityName.setMinWidth(150);
 
-        TableColumn<Activity, String> activityInfo = new TableColumn<>("activityInfo");
+        TableColumn<Activity, String> activityInfo = new TableColumn<>("Aktivitet Beskrivelse");
         activityInfo.setCellValueFactory(new PropertyValueFactory<Activity, String>("activityInfo"));
-        activityInfo.setMinWidth(25);
+        activityInfo.setMinWidth(150);
 
         activityTableView.getColumns().addAll(activityID, ageLimit, heightLimit, activityName, activityInfo);
         activityTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -136,8 +147,11 @@ public class ActivityView extends BaseScene implements BaseLayout
                 "            linear-gradient(#ffe657 0%, #f8c202 50%, #000000 100%),\n" + "" +
                 "            linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));");
 
-        subLayout.setHgap(25);
-        subLayout.setVgap(25);
+        activityTableView.setMinWidth(700);
+        activityTableView.setMinHeight(600);
+
+        subLayout.setHgap(50);
+        subLayout.setVgap(50);
     }
 
     @Override
