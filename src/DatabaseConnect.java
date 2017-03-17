@@ -1,3 +1,4 @@
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -12,7 +13,7 @@ public class DatabaseConnect {
 
     private DatabaseConnect() {
         db_url = "jdbc:mysql://localhost";
-        db_port = "8888";
+        db_port = "3306";
         db_name = "adventureXP";
         db_user = "root";
         db_password = "root";
@@ -22,7 +23,7 @@ public class DatabaseConnect {
     private static Statement setConnection() {
         try {
             String url = "" + db_url + ":" + db_port + "/" + db_name + "";
-            java.sql.Connection conn = DriverManager.getConnection( url, db_user, db_password );
+            Connection conn = DriverManager.getConnection( url, db_user, db_password );
 
             Statement state = conn.createStatement();
             return state;
