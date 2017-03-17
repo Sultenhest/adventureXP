@@ -7,6 +7,9 @@ public class ActivityViewController
 {
     // Fields
 
+    public void createActivity()
+    {
 
+    }
 
 }
