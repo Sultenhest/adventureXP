@@ -27,9 +27,6 @@ public class ActivityView extends BaseScene implements BaseLayout
 {
     private VBox layout;
     private GridPane subLayout;
-
-    private TableView<Activity> activityTableView;
-
     private TextField activityNameField;
     private TextField ageLimitField;
     private TextField heightLimitField;
@@ -38,6 +35,8 @@ public class ActivityView extends BaseScene implements BaseLayout
     private Button createActivity;
     private Button deleteActivity;
     private Button updateActivity;
+
+    private TableView<Activity> activityTableView;
 
     public ActivityView()
     {
@@ -75,7 +74,6 @@ public class ActivityView extends BaseScene implements BaseLayout
 
         // Adds elements to the GridPane
         subLayout.add(activityTableView, 0 , 0, 3, 1);
-
         subLayout.add(activityNameField, 0 , 1);
         subLayout.add(acitivityInfoField, 0 , 2);
         subLayout.add(ageLimitField, 1 , 1);
@@ -89,8 +87,7 @@ public class ActivityView extends BaseScene implements BaseLayout
         layout.getChildren().add(subLayout);
     }
 
-    // Creates the columns for the TableView
-    private void createTableColoumns()
+    public void createTableColoumns()
     {
         TableColumn<Activity, Integer> activityID = new TableColumn<>("ID");
         activityID.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("ID"));
