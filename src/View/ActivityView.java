@@ -17,12 +17,12 @@ import javafx.scene.layout.VBox;
     Class: Dat16v2
     Book Excersise: ***
     Handin-Excersise Titel: ***
-    Handin-Excersise: View.ActivityScene
+    Handin-Excersise: View.ActivityView
     Question:
     ***
 */
 
-public class ActivityScene extends BaseScene implements BaseLayout
+public class ActivityView extends BaseScene implements BaseLayout
 {
     private VBox layout;
     private GridPane subLayout;
@@ -37,7 +37,7 @@ public class ActivityScene extends BaseScene implements BaseLayout
 
     private TableView<Activity> activityTableView;
 
-    public ActivityScene()
+    public ActivityView()
     {
         createLayout();
         createTableColoumns();
@@ -45,9 +45,11 @@ public class ActivityScene extends BaseScene implements BaseLayout
         attachLayoutToScene();
     }
 
+    //
     @Override
     public void createLayout()
     {
+
         layout = new VBox();
 
         subLayout = new GridPane();
@@ -105,7 +107,7 @@ public class ActivityScene extends BaseScene implements BaseLayout
     @Override
     public void createLayoutSettings()
     {
-        String style = getClass().getResource("View/StyleSheet.css").toExternalForm();
+//        String style = getClass().getResource("/View/StyleSheet.css").toExternalForm();
 
         activityNameField.setPromptText("Aktivitet Navn...");
         ageLimitField.setPromptText("Aldersbegrænsning...");
