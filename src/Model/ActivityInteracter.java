@@ -15,11 +15,20 @@ public class ActivityInteracter
         return sqlStatement;
     }
 
-    public String edit(Activity activity)
+    public String editID(Activity activity)
     {
-        int a = activity.getID();
+        int a = 2;
 
-        String sqlStatement = "INSERT INTO activity (act_id) VALUES 1 WHERE activity.act_id = " + a;
+        String sqlStatement = "INSERT INTO activity (act_id) VALUES " + a + " WHERE activity.act_id = " + activity.getID();
+
+        return sqlStatement;
+    }
+
+    public String editName(Activity activity)
+    {
+        String newName = "Helicopter Driving";
+
+        String sqlStatement = "INSERT INTO activity (act_name) VALUES '" + newName + "' WHERE activity.act_id = " + activity.getID();
 
         return sqlStatement;
     }
