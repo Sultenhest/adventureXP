@@ -42,7 +42,7 @@ public class ActivityController
         }
         else
         {
-
+            // TODO call method in model that would add the activity to the DB
         }
 
 
