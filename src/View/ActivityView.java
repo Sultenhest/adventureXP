@@ -1,6 +1,7 @@
 package View;
 
 import Model.Activity;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
@@ -45,27 +46,34 @@ public class ActivityView extends BaseScene implements BaseLayout
         attachLayoutToScene();
     }
 
-    //
+    // Creates the layout of the Activity View
     @Override
     public void createLayout()
     {
-
+        // Main layout for View (not really needed since VBox isn't used for anything)
         layout = new VBox();
+        layout.setAlignment(Pos.CENTER);
 
+        // Layout for Elements of ActivityView
         subLayout = new GridPane();
+        subLayout.setAlignment(Pos.CENTER);
 
+        // TableView for showing the list of activities
+        activityTableView = new TableView<>();
+
+        // TextFields for keying in info on new activity that'll be sent to the DB
         activityNameField = new TextField();
         ageLimitField = new TextField();
         heightLimitField = new TextField();
         acitivityInfoField = new TextField();
 
+        // Buttons adding, updating and deleting activities
         createActivity = new Button();
         updateActivity = new Button();
         deleteActivity = new Button();
 
-        activityTableView = new TableView<>();
-
-        subLayout.add(activityTableView, 0 , 0);
+        // Adds elements to the GridPane
+        subLayout.add(activityTableView, 0 , 0, 3, 1);
         subLayout.add(activityNameField, 0 , 1);
         subLayout.add(acitivityInfoField, 0 , 2);
         subLayout.add(ageLimitField, 1 , 1);
@@ -75,6 +83,7 @@ public class ActivityView extends BaseScene implements BaseLayout
         subLayout.add(updateActivity, 2, 2);
         subLayout.add(deleteActivity, 2, 3);
 
+        // Adds GridPane to VBox
         layout.getChildren().add(subLayout);
     }
 
@@ -82,7 +91,7 @@ public class ActivityView extends BaseScene implements BaseLayout
     {
         TableColumn<Activity, Integer> activityID = new TableColumn<>("ID");
         activityID.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("ID"));
-        activityID.setMinWidth(25);
+        activityID.setMaxWidth(35);
 
         TableColumn<Activity, Integer> ageLimit = new TableColumn<>("Alder");
         ageLimit.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("Alder"));
