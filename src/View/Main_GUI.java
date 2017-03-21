@@ -38,13 +38,13 @@ public class Main_GUI extends Application
         if (args.length > 0)
         {
 
-            if (args.length == 1)
+            if (args.length >= 1)
                 DatabaseConnect.setUser(args[0]);
-            if (args.length == 2)
+            if (args.length >= 2)
             DatabaseConnect.setPass(args[1]);
-            if (args.length == 3)
+            if (args.length >= 3)
             DatabaseConnect.setPort(args[2]);
-            if (args.length == 4)
+            if (args.length >= 4)
 
                 DatabaseConnect.setDbName(args[3]);
 
