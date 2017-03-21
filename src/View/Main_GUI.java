@@ -1,6 +1,9 @@
 package View;
 
 import Controller.SceneHandler;
+import Model.SceneCollection;
+import Model.Database;
+import Model.DatabaseConnect;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
