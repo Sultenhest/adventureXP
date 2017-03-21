@@ -1,6 +1,9 @@
 package View;
 
+import Controller.ActivityController;
 import Model.Activity;
+import Model.SceneCollection;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -16,6 +19,9 @@ import javafx.scene.paint.Paint;
 
 public class ActivityView extends BaseScene implements BaseLayout
 {
+    // Controller
+
+
     private VBox layout;
     private GridPane subLayout;
     private TextField activityNameField;
@@ -33,6 +39,8 @@ public class ActivityView extends BaseScene implements BaseLayout
 
     private ImageView logo;
 
+    private ActivityController activityController;
+
     public ActivityView(int ID)
     {
         setID(ID);
@@ -40,6 +48,8 @@ public class ActivityView extends BaseScene implements BaseLayout
         createTableColoumns();
         createLayoutSettings();
         attachLayoutToScene();
+
+        activityController = new ActivityController(this);
     }
 
     @Override
@@ -140,7 +150,17 @@ public class ActivityView extends BaseScene implements BaseLayout
                 "            linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));");
         updateActivity.setOnAction(event ->
         {
-            buttonClicked(1);
+            Button button = new Button();
+            button.setOnAction(event1 ->
+            {
+                Main_GUI.getWindow().setScene(SceneCollection.getInstance().getSceneList().get(0).getScene());
+            });
+
+            VBox vBox = new VBox();
+            vBox.getChildren().addAll(button);
+
+            Main_GUI.getWindow().setScene(new Scene(vBox, 800, 800));
+            //buttonClicked(1);
         });
 
         deleteActivity.setText("Slet Aktiviter");
@@ -166,28 +186,24 @@ public class ActivityView extends BaseScene implements BaseLayout
 
     public void buttonClicked(int buttonID)
     {
-        boolean succesfullAction = false;
-
         switch (buttonID)
         {
             case 0:
                 //create
-                //succesfullAction = somemethod();
+                activityController.createActivity(buttonID, activityNameField.getText(), ageLimitField.getText(), heightLimitField.getText());
                 break;
             case 1:
                 //updatere
-                //succesfullAction = somemethod();
+                //somemethod();
                 break;
             case 2:
                 //Delete
-                //succesfullAction = somemethod();
+                //somemethod();
                 break;
             default:
                 //nothing
                 break;
         }
-
-        createStatusMessage(buttonID, succesfullAction);
     }
 
     public void createStatusMessage(int buttonID, boolean succesfullAction)
@@ -219,7 +235,7 @@ public class ActivityView extends BaseScene implements BaseLayout
             {
                 case 0:
                     //create Button
-                    showStatus("it no work", false);
+                    showStatus("Aktivitet blev ikke skabt", false);
                     break;
                 case 1:
                     //update button
