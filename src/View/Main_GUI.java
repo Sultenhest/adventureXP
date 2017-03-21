@@ -35,6 +35,18 @@ public class Main_GUI extends Application
 
     public static void main(String[] args)
     {
+        if (args.length > 0)
+        {
+            if (args[0] != null)
+                DatabaseConnect.setUser(args[0]);
+            if (args[1] != null)
+            DatabaseConnect.setPass(args[1]);
+            if (args[2] != null)
+            DatabaseConnect.setPort(args[2]);
+            if (args[3] != null)
+            DatabaseConnect.setDbName(args[3]);
+        }
+
         launch(args);
     }
 }
