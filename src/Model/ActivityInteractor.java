@@ -3,7 +3,7 @@ package Model;
 /**
  * Created by Andreas on 17-03-2017.
  */
-public class ActivityInteracter
+public class ActivityInteractor
 {
     public String save(Activity activity)
     {
