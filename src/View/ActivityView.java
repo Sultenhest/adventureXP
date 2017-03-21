@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -101,14 +102,21 @@ public class ActivityView extends BaseScene implements BaseLayout
 
         TableColumn<Activity, String> activityName = new TableColumn<>("Aktivitet");
         activityName.setCellValueFactory(new PropertyValueFactory<Activity, String>("activityName"));
+        activityName.setCellFactory(TextFieldTableCell.forTableColumn());
+        activityName.setOnEditCommit(cellEditEvent ->
+                updateCell(cellEditEvent, ActivityEditType.ACTIVITY_NAME));
         activityName.setMinWidth(150);
+        activityName.setEditable(true);
 
         /*TableColumn<Activity, String> activityInfo = new TableColumn<>("Aktivitet Beskrivelse");
         activityInfo.setCellValueFactory(new PropertyValueFactory<Activity, String>("activityInfo"));
         activityInfo.setMinWidth(150);*/
 
-        TableColumn<Activity, Integer> ageLimit = new TableColumn<>("Alders begrænsning");
-        ageLimit.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("ageLimit"));
+        TableColumn<Activity, String> ageLimit = new TableColumn<>("Alders begrænsning");
+        ageLimit.setCellValueFactory(new PropertyValueFactory<Activity, String>("ageLimit"));
+        ageLimit.setCellFactory(TextFieldTableCell.forTableColumn());
+        ageLimit.setOnEditCommit(cellEditEvent ->
+                updateCell(cellEditEvent, ActivityEditType.ACTIVITY_AGELIMIT));
         ageLimit.setMinWidth(150);
 
         TableColumn<Activity, Integer> heightLimit = new TableColumn<>("Minimum Højde");
@@ -118,6 +126,7 @@ public class ActivityView extends BaseScene implements BaseLayout
         //activityTableView.getColumns().addAll(activityID, ageLimit, heightLimit, activityName, activityInfo);
         activityTableView.getColumns().addAll(activityName, ageLimit, heightLimit);
         activityTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        activityTableView.setEditable(true);
     }
 
     @Override
@@ -149,6 +158,7 @@ public class ActivityView extends BaseScene implements BaseLayout
                 "            linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));");
         updateActivity.setOnAction(event ->
         {
+            activityTableView.getItems().add(new Activity("cookie", 0, 0));
             buttonClicked(1);
         });
 
@@ -267,6 +277,40 @@ public class ActivityView extends BaseScene implements BaseLayout
         ObservableList<Activity> observableList = FXCollections.observableList(activities);
 
         this.activityTableView.getItems().addAll(observableList);
+    }
+
+    public void addSingleToTable(Activity activity)
+    {
+        this.activityTableView.getItems().add(activity);
+    }
+
+    public static void updateCell(TableColumn.CellEditEvent<Activity, String> cellEditEvent, ActivityEditType activityEditType)
+    {
+        String oldValue;
+        String newValue;
+
+        oldValue = cellEditEvent.getOldValue();
+        newValue = cellEditEvent.getNewValue();
+
+        System.out.println(oldValue + ", " + newValue);
+
+        switch (activityEditType)
+        {
+            case ACTIVITY_NAME:
+                //client_database.updateEntry((Order)cellEditEvent.getTableView().getItems().get(cellEditEvent.getTablePosition().getRow()));
+                //((Activity) cellEditEvent.getTableView().getItems().get(cellEditEvent.getTablePosition().getRow())).setOrderIDCell(cellEditEvent.getNewValue());
+                //((Activity) cellEditEvent.getTableView().getItems().get(cellEditEvent.getTablePosition().getRow())).setOrderID(newValue);
+                break;
+            case ACTIVITY_AGELIMIT:
+                //client_database.updateEntry((Order)cellEditEvent.getTableView().getItems().get(cellEditEvent.getTablePosition().getRow()));
+                //((Activity) cellEditEvent.getTableView().getItems().get(cellEditEvent.getTablePosition().getRow())).setItemCell(cellEditEvent.getNewValue());
+                //((Activity) cellEditEvent.getTableView().getItems().get(cellEditEvent.getTablePosition().getRow())).setItem(newValue);
+                break;
+            case ACTIVITY_MINHEIGHT:
+                //client_database.updateEntry((Order)cellEditEvent.getTableView().getItems().get(cellEditEvent.getTablePosition().getRow()));
+                //((Activity) cellEditEvent.getTableView().getItems().get(cellEditEvent.getTablePosition().getRow())).setNumberOfItemsCell(cellEditEvent.getNewValue());
+                //((Activity) cellEditEvent.getTableView().getItems().get(cellEditEvent.getTablePosition().getRow())).setNumberOfItems(newValue);
+        }
     }
 
     @Override
