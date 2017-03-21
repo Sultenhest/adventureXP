@@ -23,12 +23,12 @@ public class Activity
         this.heightLimit = heightLimit;
     }
 
-    public Activity(int ID, int ageLimit, String activityName, String activityInfo)
+    public Activity(int ID, int ageLimit, int heightLimit, String activityName)
     {
         this.ID = ID;
         this.ageLimit = ageLimit;
         this.activityName = activityName;
-        this.activityInfo = activityInfo;
+        this.heightLimit = heightLimit;
     }
 
     public int getID()
