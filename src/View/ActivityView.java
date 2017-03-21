@@ -2,6 +2,7 @@ package View;
 
 import Controller.ActivityController;
 import Model.Activity;
+import Model.ActivityModel;
 import Model.Final_ErrorMessages;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -288,6 +289,15 @@ public class ActivityView extends BaseScene implements BaseLayout, TableInterfac
         this.activityTableView.getItems().addAll(observableList);
     }
 
+    public void overideAllToTable(ArrayList<Activity> activities)
+    {
+        this.activityTableView.getItems().clear();
+
+        ObservableList<Activity> observableList = FXCollections.observableList(activities);
+
+        this.activityTableView.getItems().addAll(observableList);
+    }
+
     public void updateCellString(TableColumn.CellEditEvent<Activity, String> cellEditEvent, CellEditType cellEditType)
     {
         String oldValue;
@@ -301,9 +311,7 @@ public class ActivityView extends BaseScene implements BaseLayout, TableInterfac
         switch (cellEditType)
         {
             case ACTIVITY_NAME:
-                //client_database.updateEntry((Order)cellEditEvent.getTableView().getItems().get(cellEditEvent.getTablePosition().getRow()));
-                //((Activity) cellEditEvent.getTableView().getItems().get(cellEditEvent.getTablePosition().getRow())).setOrderIDCell(cellEditEvent.getNewValue());
-                //((Activity) cellEditEvent.getTableView().getItems().get(cellEditEvent.getTablePosition().getRow())).setOrderID(newValue);
+                activityController.updateActivity((Activity) cellEditEvent.getTableView().getItems().get(cellEditEvent.getTablePosition().getRow()));
                 break;
             default:
                 break;
