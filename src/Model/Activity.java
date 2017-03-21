@@ -1,5 +1,9 @@
 package Model;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 /**
  * Created by Christian and Sose on 16-03-2017.
  */
@@ -11,6 +15,13 @@ public class Activity
     private int heightLimit;
     private String activityName;
     private String activityInfo;
+
+    public Activity(String name, int ageLimit, int heightLimit)
+    {
+        activityName = name;
+        this.ageLimit = ageLimit;
+        this.heightLimit = heightLimit;
+    }
 
     public Activity(int ID, int ageLimit, String activityName, String activityInfo)
     {
@@ -69,4 +80,29 @@ public class Activity
     {
         this.activityInfo = activityInfo;
     }
+
+
+    public boolean save()
+    {
+        try
+        {
+            String sqlStatement = "INSERT INTO activity (act_name, act_min_age, act_min_height) "  +
+                    "VALUES ('"+ activityName +"', " + ageLimit + ", " + heightLimit + ")";
+            
+            Connection conn = DatabaseConnect.getConnection();
+            Statement st = conn.createStatement();
+            int rowsAffected = st.executeUpdate(sqlStatement);
+
+            st.close();
+            conn.close();
+
+            return (rowsAffected == 1);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
 }
