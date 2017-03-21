@@ -14,6 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
+import javafx.util.converter.IntegerStringConverter;
 
 import java.util.ArrayList;
 
@@ -104,7 +105,7 @@ public class ActivityView extends BaseScene implements BaseLayout
         activityName.setCellValueFactory(new PropertyValueFactory<Activity, String>("activityName"));
         activityName.setCellFactory(TextFieldTableCell.forTableColumn());
         activityName.setOnEditCommit(cellEditEvent ->
-                updateCell(cellEditEvent, ActivityEditType.ACTIVITY_NAME));
+                updateCellString(cellEditEvent, ActivityEditType.ACTIVITY_NAME));
         activityName.setMinWidth(150);
         activityName.setEditable(true);
 
@@ -112,15 +113,18 @@ public class ActivityView extends BaseScene implements BaseLayout
         activityInfo.setCellValueFactory(new PropertyValueFactory<Activity, String>("activityInfo"));
         activityInfo.setMinWidth(150);*/
 
-        TableColumn<Activity, String> ageLimit = new TableColumn<>("Alders begrænsning");
-        ageLimit.setCellValueFactory(new PropertyValueFactory<Activity, String>("ageLimit"));
-        ageLimit.setCellFactory(TextFieldTableCell.forTableColumn());
+        TableColumn<Activity, Integer> ageLimit = new TableColumn<>("Alders begrænsning");
+        ageLimit.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("ageLimit"));
+        ageLimit.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         ageLimit.setOnEditCommit(cellEditEvent ->
-                updateCell(cellEditEvent, ActivityEditType.ACTIVITY_AGELIMIT));
+                updateCellInteger(cellEditEvent, ActivityEditType.ACTIVITY_AGELIMIT));
         ageLimit.setMinWidth(150);
 
         TableColumn<Activity, Integer> heightLimit = new TableColumn<>("Minimum Højde");
         heightLimit.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("heightLimit"));
+        heightLimit.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        heightLimit.setOnEditCommit(cellEditEvent ->
+                updateCellInteger(cellEditEvent, ActivityEditType.ACTIVITY_AGELIMIT));
         heightLimit.setMinWidth(150);
 
         //activityTableView.getColumns().addAll(activityID, ageLimit, heightLimit, activityName, activityInfo);
@@ -272,6 +276,11 @@ public class ActivityView extends BaseScene implements BaseLayout
         status.setVisible(false);
     }
 
+    public void addSingleToTable(Activity activity)
+    {
+        this.activityTableView.getItems().add(activity);
+    }
+
     public void addMultiToTable(ArrayList<Activity> activities)
     {
         ObservableList<Activity> observableList = FXCollections.observableList(activities);
@@ -279,12 +288,7 @@ public class ActivityView extends BaseScene implements BaseLayout
         this.activityTableView.getItems().addAll(observableList);
     }
 
-    public void addSingleToTable(Activity activity)
-    {
-        this.activityTableView.getItems().add(activity);
-    }
-
-    public static void updateCell(TableColumn.CellEditEvent<Activity, String> cellEditEvent, ActivityEditType activityEditType)
+    public static void updateCellString(TableColumn.CellEditEvent<Activity, String> cellEditEvent, ActivityEditType activityEditType)
     {
         String oldValue;
         String newValue;
@@ -301,6 +305,23 @@ public class ActivityView extends BaseScene implements BaseLayout
                 //((Activity) cellEditEvent.getTableView().getItems().get(cellEditEvent.getTablePosition().getRow())).setOrderIDCell(cellEditEvent.getNewValue());
                 //((Activity) cellEditEvent.getTableView().getItems().get(cellEditEvent.getTablePosition().getRow())).setOrderID(newValue);
                 break;
+            default:
+                break;
+        }
+    }
+
+    public static void updateCellInteger(TableColumn.CellEditEvent<Activity, Integer> cellEditEvent, ActivityEditType activityEditType)
+    {
+        String oldValue;
+        String newValue;
+
+        oldValue = String.valueOf(cellEditEvent.getOldValue());
+        newValue = String.valueOf(cellEditEvent.getNewValue());
+
+        System.out.println(oldValue + ", " + newValue);
+
+        switch (activityEditType)
+        {
             case ACTIVITY_AGELIMIT:
                 //client_database.updateEntry((Order)cellEditEvent.getTableView().getItems().get(cellEditEvent.getTablePosition().getRow()));
                 //((Activity) cellEditEvent.getTableView().getItems().get(cellEditEvent.getTablePosition().getRow())).setItemCell(cellEditEvent.getNewValue());
@@ -310,6 +331,9 @@ public class ActivityView extends BaseScene implements BaseLayout
                 //client_database.updateEntry((Order)cellEditEvent.getTableView().getItems().get(cellEditEvent.getTablePosition().getRow()));
                 //((Activity) cellEditEvent.getTableView().getItems().get(cellEditEvent.getTablePosition().getRow())).setNumberOfItemsCell(cellEditEvent.getNewValue());
                 //((Activity) cellEditEvent.getTableView().getItems().get(cellEditEvent.getTablePosition().getRow())).setNumberOfItems(newValue);
+                break;
+            default:
+                break;
         }
     }
 
