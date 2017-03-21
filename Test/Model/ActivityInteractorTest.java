@@ -2,6 +2,9 @@ package Model;
 
 import org.junit.Test;
 
+import java.sql.Connection;
+import java.sql.Statement;
+
 import static org.junit.Assert.*;
 
 /**
@@ -17,12 +20,16 @@ public class ActivityInteractorTest {
 
     @Test
     public void saveTestCorrectSQLStatement() throws Exception {
-        ActivityInteractor AI = new ActivityInteractor();
+        ActivityInteractor AI = ActivityInteractor.getInstance();
         Activity activity = new Activity(1, 18, "Helicopter Flying", "The name LITERALLY says it all: You fly a fucking helicopter!");
 
         assertEquals("INSERT INTO activity VALUES 1, 'Helicopter Flying', 18, 0", AI.save(activity));
 
-        /*DatabaseConnect.getStatement().executeQuery(AI.save(activity));
+        /*Connection conn = DatabaseConnect.getConnection();
+
+        Statement stmt = conn.createStatement();
+
+        stmt.executeQuery(AI.save(activity));
 
         saveTestCorrectDatabaseRead(activity, AI);
     }
@@ -37,12 +44,16 @@ public class ActivityInteractorTest {
 
     @Test
     public void editIDTestCorrectSQLStatement() throws Exception {
-        ActivityInteractor AI = new ActivityInteractor();
+        ActivityInteractor AI = ActivityInteractor.getInstance();
         Activity activity = new Activity(1, 18, "Helicopter Flying", "The name LITERALLY says it all: You fly a fucking helicopter!");
 
         assertEquals("UPDATE activity SET act_id = 2 WHERE activity.act_id = " + activity.getID(), AI.editID(activity));
 
-        /*DatabaseConnect.getStatement().executeQuery(AI.editID(activity));
+        /*Connection conn = DatabaseConnect.getConnection();
+
+        Statement stmt = conn.createStatement();
+
+        stmt.executeQuery(AI.save(activity));
 
         editIDTestCorrectDatabaseRead(activity, AI);
     }
@@ -57,12 +68,16 @@ public class ActivityInteractorTest {
 
     @Test
     public void editNameTestCorrectSQLStatement() throws Exception {
-        ActivityInteractor AI = new ActivityInteractor();
+        ActivityInteractor AI = ActivityInteractor.getInstance();
         Activity activity = new Activity(1, 18, "Helicopter Flying", "The name LITERALLY says it all: You fly a fucking helicopter!");
 
         assertEquals("UPDATE activity SET act_name = 'Helicopter Driving' WHERE activity.act_id = " + activity.getID(), AI.editName(activity));
 
-        /*DatabaseConnect.getStatement().executeQuery(AI.editName(activity));
+        /*Connection conn = DatabaseConnect.getConnection();
+
+        Statement stmt = conn.createStatement();
+
+        stmt.executeQuery(AI.save(activity));
 
         editNameTestCorrectDatabaseRead(activity, AI);
     }
@@ -78,12 +93,16 @@ public class ActivityInteractorTest {
     @Test
     public void editAgeTestCorrectSQLStatement() throws Exception {
 
-        ActivityInteractor AI = new ActivityInteractor();
+        ActivityInteractor AI = ActivityInteractor.getInstance();
         Activity activity = new Activity(1, 18, "Helicopter Flying", "The name LITERALLY says it all: You fly a fucking helicopter!");
 
         assertEquals("UPDATE activity SET act_min_age = 7 WHERE act_id = 1", AI.editAge(activity));
 
-        /*DatabaseConnect.getStatement().executeQuery(AI.editAge(activity));
+        /*Connection conn = DatabaseConnect.getConnection();
+
+        Statement stmt = conn.createStatement();
+
+        stmt.executeQuery(AI.save(activity));
 
         editAgeTestCorrectDatabaseRead(activity, AI);
     }
@@ -98,10 +117,9 @@ public class ActivityInteractorTest {
     @Test
     public void editDescriptionTestCorrectSQLStatement() throws Exception
     {
-        ActivityInteractor AI = new ActivityInteractor();
+        ActivityInteractor AI = ActivityInteractor.getInstance();
         Activity activity = new Activity(1, 18, "Helicopter Flying", "The name LITERALLY says it all: You fly a fucking helicopter!");
 
         assertEquals("UPDATE activity SET act_description WHERE act_id = 1", AI.editDescription(activity));
-
     }
 }

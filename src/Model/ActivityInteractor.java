@@ -5,6 +5,18 @@ package Model;
  */
 public class ActivityInteractor
 {
+    private static ActivityInteractor instance = null;
+
+    private ActivityInteractor() {}
+
+    public static ActivityInteractor getInstance()
+    {
+        if (instance == null)
+            instance = new ActivityInteractor();
+
+        return instance;
+    }
+
     public String save(Activity activity)
     {
         String sqlStatement;
