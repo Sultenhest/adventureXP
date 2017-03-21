@@ -15,7 +15,6 @@ public class ActivityController
     {
         // View
         this.activityView = activityView;
-
     }
 
     // Adds a new activity to the DB and displays it in the TableView upon succesfull creation
