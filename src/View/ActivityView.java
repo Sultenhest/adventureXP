@@ -22,7 +22,7 @@ import java.util.ArrayList;
  * Created by Christian on 16-03-2017.
  */
 
-public class ActivityView extends BaseScene implements BaseLayout
+public class ActivityView extends BaseScene implements BaseLayout, TableInterface
 {
     private VBox layout;
     private GridPane subLayout;
@@ -105,7 +105,7 @@ public class ActivityView extends BaseScene implements BaseLayout
         activityName.setCellValueFactory(new PropertyValueFactory<Activity, String>("activityName"));
         activityName.setCellFactory(TextFieldTableCell.forTableColumn());
         activityName.setOnEditCommit(cellEditEvent ->
-                updateCellString(cellEditEvent, ActivityEditType.ACTIVITY_NAME));
+                updateCellString(cellEditEvent, CellEditType.ACTIVITY_NAME));
         activityName.setMinWidth(150);
         activityName.setEditable(true);
 
@@ -117,14 +117,14 @@ public class ActivityView extends BaseScene implements BaseLayout
         ageLimit.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("ageLimit"));
         ageLimit.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         ageLimit.setOnEditCommit(cellEditEvent ->
-                updateCellInteger(cellEditEvent, ActivityEditType.ACTIVITY_AGELIMIT));
+                updateCellInteger(cellEditEvent, CellEditType.ACTIVITY_AGELIMIT));
         ageLimit.setMinWidth(150);
 
         TableColumn<Activity, Integer> heightLimit = new TableColumn<>("Minimum Højde");
         heightLimit.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("heightLimit"));
         heightLimit.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         heightLimit.setOnEditCommit(cellEditEvent ->
-                updateCellInteger(cellEditEvent, ActivityEditType.ACTIVITY_AGELIMIT));
+                updateCellInteger(cellEditEvent, CellEditType.ACTIVITY_AGELIMIT));
         heightLimit.setMinWidth(150);
 
         //activityTableView.getColumns().addAll(activityID, ageLimit, heightLimit, activityName, activityInfo);
@@ -288,7 +288,7 @@ public class ActivityView extends BaseScene implements BaseLayout
         this.activityTableView.getItems().addAll(observableList);
     }
 
-    public static void updateCellString(TableColumn.CellEditEvent<Activity, String> cellEditEvent, ActivityEditType activityEditType)
+    public void updateCellString(TableColumn.CellEditEvent<Activity, String> cellEditEvent, CellEditType cellEditType)
     {
         String oldValue;
         String newValue;
@@ -298,7 +298,7 @@ public class ActivityView extends BaseScene implements BaseLayout
 
         System.out.println(oldValue + ", " + newValue);
 
-        switch (activityEditType)
+        switch (cellEditType)
         {
             case ACTIVITY_NAME:
                 //client_database.updateEntry((Order)cellEditEvent.getTableView().getItems().get(cellEditEvent.getTablePosition().getRow()));
@@ -310,7 +310,7 @@ public class ActivityView extends BaseScene implements BaseLayout
         }
     }
 
-    public static void updateCellInteger(TableColumn.CellEditEvent<Activity, Integer> cellEditEvent, ActivityEditType activityEditType)
+    public void updateCellInteger(TableColumn.CellEditEvent<Activity, Integer> cellEditEvent, CellEditType cellEditType)
     {
         String oldValue;
         String newValue;
@@ -320,7 +320,7 @@ public class ActivityView extends BaseScene implements BaseLayout
 
         System.out.println(oldValue + ", " + newValue);
 
-        switch (activityEditType)
+        switch (cellEditType)
         {
             case ACTIVITY_AGELIMIT:
                 //client_database.updateEntry((Order)cellEditEvent.getTableView().getItems().get(cellEditEvent.getTablePosition().getRow()));
