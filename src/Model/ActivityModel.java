@@ -1,10 +1,49 @@
 package Model;
 
+import java.sql.Connection;
+import java.sql.Statement;
+
 /**
  * Created by Andreas on 17-03-2017.
  */
-public class ActivityInteractor
+public class ActivityModel
 {
+
+    public boolean insert(Activity activity)
+    {
+        try
+        {
+            String sqlStatement = "INSERT INTO activity (act_name, act_min_age, act_min_height) "  +
+                    "VALUES ('"+ activity.getActivityName() +"', " + activity.getAgeLimit() + ", " + activity.getHeightLimit() + ")";
+
+            Connection conn = DatabaseConnect.getConnection();
+            Statement st = conn.createStatement();
+            int rowsAffected = st.executeUpdate(sqlStatement);
+
+            st.close();
+            conn.close();
+
+            return (rowsAffected == 1);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    public Activity read(int id)
+    {
+        //
+        return null;
+    }
+
+    public boolean update(Activity activity)
+    {
+        //
+        return false;
+    }
+
     public String save(Activity activity)
     {
         String sqlStatement;

@@ -82,27 +82,27 @@ public class Activity
     }
 
 
-    public boolean save()
-    {
-        try
-        {
-            String sqlStatement = "INSERT INTO activity (act_name, act_min_age, act_min_height) "  +
-                    "VALUES ('"+ activityName +"', " + ageLimit + ", " + heightLimit + ")";
-            
-            Connection conn = DatabaseConnect.getConnection();
-            Statement st = conn.createStatement();
-            int rowsAffected = st.executeUpdate(sqlStatement);
-
-            st.close();
-            conn.close();
-
-            return (rowsAffected == 1);
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-            return false;
-        }
-    }
+//    public boolean save()
+//    {
+//        try
+//        {
+//            String sqlStatement = "INSERT INTO activity (act_name, act_min_age, act_min_height) "  +
+//                    "VALUES ('"+ activityName +"', " + ageLimit + ", " + heightLimit + ")";
+//
+//            Connection conn = DatabaseConnect.getConnection();
+//            Statement st = conn.createStatement();
+//            int rowsAffected = st.executeUpdate(sqlStatement);
+//
+//            st.close();
+//            conn.close();
+//
+//            return (rowsAffected == 1);
+//        }
+//        catch (Exception ex)
+//        {
+//            ex.printStackTrace();
+//            return false;
+//        }
+//    }
 
 }
