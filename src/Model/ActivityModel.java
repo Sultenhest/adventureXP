@@ -3,6 +3,7 @@ package Model;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  * Created by Andreas on 17-03-2017.
@@ -70,6 +71,35 @@ public class ActivityModel
         {
             ex.printStackTrace();
             return new Activity(-1, -1, -1, "Error during Database Read");
+        }
+    }
+
+    public ArrayList<Activity> readAll()
+    {
+        try
+        {
+            String sqlStatement = "SELECT * FROM activity";
+
+            Connection conn = DatabaseConnect.getConnection();
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sqlStatement);
+
+            ArrayList<Activity> listOfActivities = new ArrayList<>();
+
+            while(rs.next())
+            {
+                listOfActivities.add(new Activity(rs.getInt(1), rs.getInt(3), rs.getInt(4), rs.getString(2)));
+            }
+
+            st.close();
+            conn.close();
+
+            return listOfActivities;
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+            return null;
         }
     }
 
