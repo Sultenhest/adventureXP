@@ -27,7 +27,8 @@ public class ActivityModel
         try
         {
             String sqlStatement = "INSERT INTO activity (act_name, act_min_age, act_min_height) "  +
-                    "VALUES ('"+ activity.getActivityName() +"', " + activity.getAgeLimit() + ", " + activity.getHeightLimit() + ")";
+                    "VALUES ('"+ activity.getActivityName() +"', " + activity.getAgeLimit() + ", "
+                    + activity.getHeightLimit() + ")";
 
             Connection conn = DatabaseConnect.getConnection();
             Statement st = conn.createStatement();
@@ -57,7 +58,8 @@ public class ActivityModel
 
             Activity act;
 
-            act = new Activity(rs.getInt(1), rs.getInt(3), rs.getString(2), "");
+            act = new Activity(rs.getInt(1), rs.getInt(3),
+                    rs.getInt(4), rs.getString(2));
 
             st.close();
             conn.close();
@@ -67,59 +69,28 @@ public class ActivityModel
         catch (Exception ex)
         {
             ex.printStackTrace();
-            return new Activity(-1, -1, "", "");
+            return new Activity(-1, -1, -1, "Error during Database Read");
         }
     }
 
     public boolean update(Activity activity)
     {
+        try {
+            String sql = "UPDATE activity SET act_name = '" + activity.getActivityName() +
+                    "', act_min_age = " + activity.getAgeLimit() +
+                    ", act_min_height = " + activity.getHeightLimit() +
+                    " WHERE act_id = " + activity.getID();
 
-        return false;
-    }
+            Connection conn = DatabaseConnect.getConnection();
+            Statement st = conn.createStatement();
+            int rowsAffected = st.executeUpdate(sql);
 
-    public String save(Activity activity)
-    {
-        String sqlStatement;
-
-        sqlStatement = "UPDATE activity SET " + activity.getID() + ", '" +
-                activity.getActivityName() + "', " + activity.getAgeLimit() + ", " + activity.getHeightLimit();
-
-        return sqlStatement;
-    }
-
-    public String editID(Activity activity)
-    {
-        int a = 2;
-
-        String sqlStatement = "INSERT INTO activity (act_id) VALUES " + a + " WHERE activity.act_id = " + activity.getID();
-
-        return sqlStatement;
-    }
-
-    public String editName(Activity activity)
-    {
-        String newName = "Helicopter Driving";
-
-        String sqlStatement = "INSERT INTO activity (act_name) VALUES '" + newName + "' WHERE activity.act_id = " + activity.getID();
-
-        return sqlStatement;
-    }
-
-    public String editAge(Activity activity)
-    {
-        int a = 7;
-
-        String sql = "UPDATE activity SET act_min_age = " + a + " WHERE act_id = " + activity.getID();
-
-        return sql;
-    }
-
-    public String editDescription(Activity activity)
-    {
-        String desc = "Whacha fuckin' think this be aboot?";
-
-        String sql = "UPDATE activity SET act_description = " + desc + " WHERE act_id = " + activity.getID();
-
-        return sql;
+            return (rowsAffected == 1);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+            return false;
+        }
     }
 }
