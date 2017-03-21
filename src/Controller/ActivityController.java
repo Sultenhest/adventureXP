@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Activity;
+import Model.ActivityModel;
 import View.ActivityView;
 
 /**
@@ -10,6 +11,7 @@ public class ActivityController
 {
     // Fields
     private ActivityView activityView;
+    private ActivityModel activityModel = ActivityModel.getInstance();
 
     // Constructors
     public ActivityController(ActivityView activityView)
@@ -38,7 +40,7 @@ public class ActivityController
 
                 Activity activity = new Activity(activityName, age, height);
 
-                activityView.createStatusMessage(buttonId, activity.save());
+                activityView.createStatusMessage(buttonId, activityModel.insert(activity));
 
             }
             else
