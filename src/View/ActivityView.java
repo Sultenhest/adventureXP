@@ -186,28 +186,24 @@ public class ActivityView extends BaseScene implements BaseLayout
 
     public void buttonClicked(int buttonID)
     {
-        boolean succesfullAction = false;
-
         switch (buttonID)
         {
             case 0:
                 //create
-                activityController.doSHit();
+                activityController.createActivity(buttonID, activityNameField.getText(), ageLimitField.getText(), heightLimitField.getText());
                 break;
             case 1:
                 //updatere
-                //succesfullAction = somemethod();
+                //somemethod();
                 break;
             case 2:
                 //Delete
-                activityController.doSHit2();
+                //somemethod();
                 break;
             default:
                 //nothing
                 break;
         }
-
-        //createStatusMessage(buttonID, succesfullAction);
     }
 
     public void createStatusMessage(int buttonID, boolean succesfullAction)
@@ -239,7 +235,7 @@ public class ActivityView extends BaseScene implements BaseLayout
             {
                 case 0:
                     //create Button
-                    showStatus("it no work", false);
+                    showStatus("Aktivitet blev ikke skabt", false);
                     break;
                 case 1:
                     //update button
