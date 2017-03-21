@@ -1,6 +1,8 @@
 package View;
 
+import Controller.ActivityController;
 import Controller.SceneHandler;
+import Model.SceneCollection;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -18,8 +20,15 @@ public class Main_GUI extends Application
         window = primaryStage;
 
         window.setTitle("Adventure Alley");
+
+        // Creates the ActivityView
         SceneHandler.getInstance().createScene(0);
+
+
         SceneHandler.getInstance().applyScene(0);
+
+        ActivityController activityController = new ActivityController((ActivityView) SceneCollection.getInstance().getSceneList().get(0));
+
         window.show();
     }
 

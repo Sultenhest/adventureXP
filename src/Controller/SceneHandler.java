@@ -23,6 +23,7 @@ public class SceneHandler
 
     }
 
+    // Creates
     public void createScene(int ID)
     {
         switch (ID)

@@ -18,10 +18,10 @@ public class ActivityController
     }
 
     // Adds a new activity to the DB and displays it in the TableView upon succesfull creation
-    public void addActivity(String... parameters)
+    public boolean createActivity(int buttonId, String activityName, String ageLimit, String minHeight)
     {
         // Boolean flag to check if either of the Strings coming from the ActivityView is empty
-        // If either of them are, then send error message to user that information is missing
+        // If either of them is, then send error message to user that information is missing
         boolean emptyTextFields = false;
 
         // Runs through the parameters coming from the AcitivtyView and checks whether one or more of them is empty
@@ -45,16 +45,6 @@ public class ActivityController
         }
 
 
-    }
-
-    public void doSHit()
-    {
-        activityView.createStatusMessage(0, true);
-    }
-
-    public void doSHit2()
-    {
-        activityView.createStatusMessage(0, false);
     }
 
 }

@@ -19,6 +19,9 @@ import javafx.scene.paint.Paint;
 
 public class ActivityView extends BaseScene implements BaseLayout
 {
+    // Controller
+
+
     private VBox layout;
     private GridPane subLayout;
     private TextField activityNameField;
