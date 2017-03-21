@@ -32,4 +32,13 @@ public class ActivityInteractor
 
         return sqlStatement;
     }
+
+    public String editAge(Activity activity)
+    {
+        int a = 7;
+
+        String sql = "UPDATE activity SET act_min_age = " + a + " WHERE act_id = " + activity.getID();
+
+        return sql;
+    }
 }
