@@ -40,7 +40,7 @@ public class ActivityInteractorTest {
         ActivityInteractor AI = new ActivityInteractor();
         Activity activity = new Activity(1, 18, "Helicopter Flying", "The name LITERALLY says it all: You fly a fucking helicopter!");
 
-        assertEquals("INSERT INTO activity (act_id) VALUES 2 WHERE activity.act_id = " + activity.getID(), AI.editID(activity));
+        assertEquals("UPDATE activity SET act_id = 2 WHERE activity.act_id = " + activity.getID(), AI.editID(activity));
 
         /*DatabaseConnect.getStatement().executeQuery(AI.editID(activity));
 
@@ -60,7 +60,7 @@ public class ActivityInteractorTest {
         ActivityInteractor AI = new ActivityInteractor();
         Activity activity = new Activity(1, 18, "Helicopter Flying", "The name LITERALLY says it all: You fly a fucking helicopter!");
 
-        assertEquals("INSERT INTO activity (act_name) VALUES 'Helicopter Driving' WHERE activity.act_id = " + activity.getID(), AI.editName(activity));
+        assertEquals("UPDATE activity SET act_name = 'Helicopter Driving' WHERE activity.act_id = " + activity.getID(), AI.editName(activity));
 
         /*DatabaseConnect.getStatement().executeQuery(AI.editName(activity));
 
@@ -93,5 +93,15 @@ public class ActivityInteractorTest {
     {
         assertEquals("1, Helicopter Driving, 7, 0", "" + DatabaseConnect.getStatement().executeQuery("SELECT * FROM activity WHERE activity.act_id = " + activity.getID()));
     */
+    }
+
+    @Test
+    public void editDescriptionTestCorrectSQLStatement() throws Exception
+    {
+        ActivityInteractor AI = new ActivityInteractor();
+        Activity activity = new Activity(1, 18, "Helicopter Flying", "The name LITERALLY says it all: You fly a fucking helicopter!");
+
+        assertEquals("UPDATE activity SET act_description WHERE act_id = 1", AI.editDescription(activity));
+
     }
 }

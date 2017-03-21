@@ -9,7 +9,7 @@ public class ActivityInteractor
     {
         String sqlStatement;
 
-        sqlStatement = "INSERT INTO activity VALUES " + activity.getID() + ", '" +
+        sqlStatement = "UPDATE activity SET " + activity.getID() + ", '" +
         activity.getActivityName() + "', " + activity.getAgeLimit() + ", " + activity.getHeightLimit();
 
         return sqlStatement;
@@ -19,7 +19,7 @@ public class ActivityInteractor
     {
         int a = 2;
 
-        String sqlStatement = "INSERT INTO activity (act_id) VALUES " + a + " WHERE activity.act_id = " + activity.getID();
+        String sqlStatement = "UPDATE activity SET act_id = " + a + " WHERE activity.act_id = " + activity.getID();
 
         return sqlStatement;
     }
@@ -28,7 +28,7 @@ public class ActivityInteractor
     {
         String newName = "Helicopter Driving";
 
-        String sqlStatement = "INSERT INTO activity (act_name) VALUES '" + newName + "' WHERE activity.act_id = " + activity.getID();
+        String sqlStatement = "UPDATE activity SET act_name = " + newName + " WHERE activity.act_id = " + activity.getID();
 
         return sqlStatement;
     }
@@ -40,5 +40,10 @@ public class ActivityInteractor
         String sql = "UPDATE activity SET act_min_age = " + a + " WHERE act_id = " + activity.getID();
 
         return sql;
+    }
+
+    public String editDescription(Activity activity)
+    {
+        return "";
     }
 }
