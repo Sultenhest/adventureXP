@@ -3,8 +3,8 @@ package View;
 import Controller.ActivityController;
 import Model.Activity;
 import Model.Final_ErrorMessages;
-import Model.SceneCollection;
-import javafx.scene.Scene;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -13,6 +13,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
+
+import java.util.ArrayList;
 
 /**
  * Created by Christian on 16-03-2017.
@@ -93,9 +95,17 @@ public class ActivityView extends BaseScene implements BaseLayout
 
     public void createTableColoumns()
     {
-        TableColumn<Activity, Integer> activityID = new TableColumn<>("ID");
+       /* TableColumn<Activity, Integer> activityID = new TableColumn<>("ID");
         activityID.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("ID"));
-        activityID.setMinWidth(100);
+        activityID.setMinWidth(100);*/
+
+        TableColumn<Activity, String> activityName = new TableColumn<>("Aktivitet");
+        activityName.setCellValueFactory(new PropertyValueFactory<Activity, String>("activityName"));
+        activityName.setMinWidth(150);
+
+        /*TableColumn<Activity, String> activityInfo = new TableColumn<>("Aktivitet Beskrivelse");
+        activityInfo.setCellValueFactory(new PropertyValueFactory<Activity, String>("activityInfo"));
+        activityInfo.setMinWidth(150);*/
 
         TableColumn<Activity, Integer> ageLimit = new TableColumn<>("Alders begrænsning");
         ageLimit.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("ageLimit"));
@@ -105,15 +115,8 @@ public class ActivityView extends BaseScene implements BaseLayout
         heightLimit.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("heightLimit"));
         heightLimit.setMinWidth(150);
 
-        TableColumn<Activity, String> activityName = new TableColumn<>("Aktivitet");
-        activityName.setCellValueFactory(new PropertyValueFactory<Activity, String>("activityName"));
-        activityName.setMinWidth(150);
-
-        TableColumn<Activity, String> activityInfo = new TableColumn<>("Aktivitet Beskrivelse");
-        activityInfo.setCellValueFactory(new PropertyValueFactory<Activity, String>("activityInfo"));
-        activityInfo.setMinWidth(150);
-
-        activityTableView.getColumns().addAll(activityID, ageLimit, heightLimit, activityName, activityInfo);
+        //activityTableView.getColumns().addAll(activityID, ageLimit, heightLimit, activityName, activityInfo);
+        activityTableView.getColumns().addAll(activityName, ageLimit, heightLimit);
         activityTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
@@ -146,17 +149,7 @@ public class ActivityView extends BaseScene implements BaseLayout
                 "            linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));");
         updateActivity.setOnAction(event ->
         {
-            Button button = new Button();
-            button.setOnAction(event1 ->
-            {
-                Main_GUI.getWindow().setScene(SceneCollection.getInstance().getSceneList().get(0).getScene());
-            });
-
-            VBox vBox = new VBox();
-            vBox.getChildren().addAll(button);
-
-            Main_GUI.getWindow().setScene(new Scene(vBox, 800, 800));
-            //buttonClicked(1);
+            buttonClicked(1);
         });
 
         deleteActivity.setText("Slet Aktiviter");
@@ -267,6 +260,13 @@ public class ActivityView extends BaseScene implements BaseLayout
     public void hideStatus()
     {
         status.setVisible(false);
+    }
+
+    public void addMultiToTable(ArrayList<Activity> activities)
+    {
+        ObservableList<Activity> observableList = FXCollections.observableList(activities);
+
+        this.activityTableView.getItems().addAll(observableList);
     }
 
     @Override
