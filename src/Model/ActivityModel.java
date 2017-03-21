@@ -6,16 +6,16 @@ import java.sql.Statement;
 /**
  * Created by Andreas on 17-03-2017.
  */
-public class ActivityInteractor
+public class ActivityModel
 {
-    private static ActivityInteractor instance = null;
+    private static ActivityModel instance = null;
 
-    private ActivityInteractor() {}
+    private ActivityModel() {}
 
-    public static ActivityInteractor getInstance()
+    public static ActivityModel getInstance()
     {
         if (instance == null)
-            instance = new ActivityInteractor();
+            instance = new ActivityModel();
 
         return instance;
     }
