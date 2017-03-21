@@ -2,6 +2,7 @@ package View;
 
 import Controller.ActivityController;
 import Model.Activity;
+import Model.Final_ErrorMessages;
 import Model.SceneCollection;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -19,13 +20,10 @@ import javafx.scene.paint.Paint;
 
 public class ActivityView extends BaseScene implements BaseLayout
 {
-    // Controller
-
-
     private VBox layout;
     private GridPane subLayout;
     private TextField activityNameField;
-    private TextField acitivityInfoField;
+    //private TextField acitivityInfoField;
     private TextField ageLimitField;
     private TextField heightLimitField;
 
@@ -60,7 +58,7 @@ public class ActivityView extends BaseScene implements BaseLayout
         subLayout = new GridPane();
 
         activityNameField = new TextField();
-        acitivityInfoField = new TextField();
+        //acitivityInfoField = new TextField();
         ageLimitField = new TextField();
         heightLimitField = new TextField();
 
@@ -80,7 +78,7 @@ public class ActivityView extends BaseScene implements BaseLayout
         subLayout.add(activityTableView, 1 , 0);
 
         subLayout.add(activityNameField, 1 , 1);
-        subLayout.add(acitivityInfoField, 1 , 2);
+        //subLayout.add(acitivityInfoField, 1 , 2);
         subLayout.add(ageLimitField, 2 , 1);
         subLayout.add(heightLimitField, 2 , 2);
 
@@ -122,10 +120,8 @@ public class ActivityView extends BaseScene implements BaseLayout
     @Override
     public void createLayoutSettings()
     {
-//        String style = getClass().getResource("/View/StyleSheet.css").toExternalForm();
-
         activityNameField.setPromptText("Aktivitet Navn...");
-        acitivityInfoField.setPromptText("Aktivitet Info...");
+        //acitivityInfoField.setPromptText("Aktivitet Info...");
         ageLimitField.setPromptText("Aldersbegrænsning...");
         heightLimitField.setPromptText("Minimum Højde...");
 
@@ -190,7 +186,7 @@ public class ActivityView extends BaseScene implements BaseLayout
         {
             case 0:
                 //create
-                activityController.createActivity(buttonID, activityNameField.getText(), ageLimitField.getText(), heightLimitField.getText());
+                activityController.createActivity(buttonID, activityNameField.getText().trim(), ageLimitField.getText().trim(), heightLimitField.getText().trim());
                 break;
             case 1:
                 //updatere
@@ -214,15 +210,15 @@ public class ActivityView extends BaseScene implements BaseLayout
             {
                 case 0:
                     //create Button
-                    showStatus("Aktivitet er skabt", true);
+                    showStatus(Final_ErrorMessages.getInstance().getACTIVITY_CREATED_SUCCESFULL(), true);
                     break;
                 case 1:
                     //update button
-                    showStatus("", true);
+                    showStatus(Final_ErrorMessages.getInstance().getACTIVITY_UPDATED_SUCCESFULL(), true);
                     break;
                 case 2:
                     //Delete button
-                    showStatus("", true);
+                    showStatus(Final_ErrorMessages.getInstance().getACTIVITY_DELETE_SUCCESFULL(), true);
                     break;
                 default:
                     //nothing
@@ -235,15 +231,15 @@ public class ActivityView extends BaseScene implements BaseLayout
             {
                 case 0:
                     //create Button
-                    showStatus("Aktivitet blev ikke skabt", false);
+                    showStatus(Final_ErrorMessages.getInstance().getACTIVITY_CREATED_UNSUCCESFULL(), false);
                     break;
                 case 1:
                     //update button
-                    showStatus("", false);
+                    showStatus(Final_ErrorMessages.getInstance().getACTIVITY_UPDATED_UNSUCCESFULL(), false);
                     break;
                 case 2:
                     //Delete button
-                    showStatus("", false);
+                    showStatus(Final_ErrorMessages.getInstance().getACTIVITY_DELETE_UNSUCCESFULL(), false);
                     break;
                 default:
                     //nothing
