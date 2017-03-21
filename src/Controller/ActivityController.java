@@ -18,6 +18,7 @@ public class ActivityController
     {
         // View
         this.activityView = activityView;
+        this.activityView.overideAllToTable(activityModel.readAll());
 
     }
 
@@ -49,7 +50,13 @@ public class ActivityController
             }
         }
 
+        activityView.overideAllToTable(activityModel.readAll());
+    }
 
+    public void updateActivity(Activity activity)
+    {
+        activityModel.update(activity);
+        activityView.overideAllToTable(activityModel.readAll());
     }
 
 }

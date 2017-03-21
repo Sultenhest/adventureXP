@@ -2,7 +2,6 @@ package View;
 
 import Controller.ActivityController;
 import Model.Activity;
-import Model.ActivityModel;
 import Model.Final_ErrorMessages;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -311,7 +310,7 @@ public class ActivityView extends BaseScene implements BaseLayout, TableInterfac
         switch (cellEditType)
         {
             case ACTIVITY_NAME:
-                activityController.updateActivity((Activity) cellEditEvent.getTableView().getItems().get(cellEditEvent.getTablePosition().getRow()));
+                activityController.updateActivity(cellEditEvent.getTableView().getItems().get(cellEditEvent.getTablePosition().getRow()));
                 break;
             default:
                 break;
