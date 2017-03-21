@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Activity;
 import View.ActivityView;
 
 /**
@@ -15,33 +16,35 @@ public class ActivityController
     {
         // View
         this.activityView = activityView;
+
     }
 
     // Adds a new activity to the DB and displays it in the TableView upon succesfull creation
-    public boolean createActivity(int buttonId, String activityName, String ageLimit, String minHeight)
+    public void createActivity(int buttonId, String activityName, String ageLimit, String minHeight)
     {
-        // Boolean flag to check if either of the Strings coming from the ActivityView is empty
-        // If either of them is, then send error message to user that information is missing
-        boolean emptyTextFields = false;
-
-        // Runs through the parameters coming from the AcitivtyView and checks whether one or more of them is empty
-        for (String parameter : parameters)
+        if (activityName.equals(""))
         {
-            if (parameter.equals(""))
-            {
-                emptyTextFields = true;
-                // a "break" keyword here??
-            }
-        }
-
-        // If either of the parameters is empty then send an error message to the user
-        if (emptyTextFields)
-        {
-            // TODO call a method in the View that sets an error message on the ActivityView
+            activityView.createStatusMessage(buttonId, false);
         }
         else
         {
-            // TODO call method in model that would add the activity to the DB
+            boolean ageAsInt = InputParser.parseInt(ageLimit, 0, 99);
+            boolean heightAsInt = InputParser.parseInt(minHeight, 0, 250);
+
+            if ( ageAsInt && heightAsInt)
+            {
+                int age = Integer.parseInt(ageLimit);
+                int height = Integer.parseInt(minHeight);
+
+                Activity activity = new Activity(activityName, age, height);
+
+                activityView.createStatusMessage(buttonId, activity.save());
+
+            }
+            else
+            {
+                activityView.createStatusMessage(buttonId, false);
+            }
         }
 
 
