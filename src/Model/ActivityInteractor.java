@@ -44,6 +44,10 @@ public class ActivityInteractor
 
     public String editDescription(Activity activity)
     {
-        return "";
+        String desc = "Whacha fuckin' think this be aboot?";
+
+        String sql = "UPDATE activity SET act_description = " + desc + " WHERE act_id = " + activity.getID();
+
+        return sql;
     }
 }
