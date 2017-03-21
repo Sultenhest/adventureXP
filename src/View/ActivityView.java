@@ -1,6 +1,9 @@
 package View;
 
+import Controller.ActivityController;
 import Model.Activity;
+import Model.SceneCollection;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -33,6 +36,8 @@ public class ActivityView extends BaseScene implements BaseLayout
 
     private ImageView logo;
 
+    private ActivityController activityController;
+
     public ActivityView(int ID)
     {
         setID(ID);
@@ -40,6 +45,8 @@ public class ActivityView extends BaseScene implements BaseLayout
         createTableColoumns();
         createLayoutSettings();
         attachLayoutToScene();
+
+        activityController = new ActivityController(this);
     }
 
     @Override
@@ -140,7 +147,17 @@ public class ActivityView extends BaseScene implements BaseLayout
                 "            linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));");
         updateActivity.setOnAction(event ->
         {
-            buttonClicked(1);
+            Button button = new Button();
+            button.setOnAction(event1 ->
+            {
+                Main_GUI.getWindow().setScene(SceneCollection.getInstance().getSceneList().get(0).getScene());
+            });
+
+            VBox vBox = new VBox();
+            vBox.getChildren().addAll(button);
+
+            Main_GUI.getWindow().setScene(new Scene(vBox, 800, 800));
+            //buttonClicked(1);
         });
 
         deleteActivity.setText("Slet Aktiviter");
@@ -172,7 +189,7 @@ public class ActivityView extends BaseScene implements BaseLayout
         {
             case 0:
                 //create
-                //succesfullAction = somemethod();
+                activityController.doSHit();
                 break;
             case 1:
                 //updatere
@@ -180,14 +197,14 @@ public class ActivityView extends BaseScene implements BaseLayout
                 break;
             case 2:
                 //Delete
-                //succesfullAction = somemethod();
+                activityController.doSHit2();
                 break;
             default:
                 //nothing
                 break;
         }
 
-        createStatusMessage(buttonID, succesfullAction);
+        //createStatusMessage(buttonID, succesfullAction);
     }
 
     public void createStatusMessage(int buttonID, boolean succesfullAction)

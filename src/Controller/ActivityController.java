@@ -47,4 +47,14 @@ public class ActivityController
 
     }
 
+    public void doSHit()
+    {
+        activityView.createStatusMessage(0, true);
+    }
+
+    public void doSHit2()
+    {
+        activityView.createStatusMessage(0, false);
+    }
+
 }
