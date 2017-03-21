@@ -3,7 +3,6 @@ package Controller;
 import Model.SceneCollection;
 import View.ActivityView;
 import View.Main_GUI;
-import javafx.scene.Scene;
 
 /**
  * Created by Christian on 17-03-2017.
@@ -31,24 +30,24 @@ public class SceneHandler
             case 0:
                 ActivityView activityScene = new ActivityView(0);
 
-                addScene(activityScene.getScene());
+                addScene(activityScene);
                 break;
             default:
                 break;
         }
     }
 
-    public void addScene(Scene scene)
+    public void addScene(ActivityView activityView)
     {
         SceneCollection sceneCollection = SceneCollection.getInstance();
 
-        sceneCollection.getSceneList().add(scene);
+        sceneCollection.getSceneList().add(activityView);
     }
 
     public void applyScene(int ID)
     {
         SceneCollection sceneCollection = SceneCollection.getInstance();
 
-        Main_GUI.getWindow().setScene(sceneCollection.getSceneList().get(ID));
+        Main_GUI.getWindow().setScene(sceneCollection.getSceneList().get(ID).getScene());
     }
 }

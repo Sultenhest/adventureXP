@@ -1,6 +1,6 @@
 package Model;
 
-import javafx.scene.Scene;
+import View.BaseScene;
 
 import java.util.ArrayList;
 
@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class SceneCollection
 {
-    private ArrayList<Scene> sceneList = new ArrayList<>();
+    private ArrayList<BaseScene> sceneList = new ArrayList<>();
     private static SceneCollection instance = new SceneCollection();
 
     public static SceneCollection getInstance()
@@ -21,7 +21,7 @@ public class SceneCollection
     {
     }
 
-    public ArrayList<Scene> getSceneList()
+    public ArrayList<BaseScene> getSceneList()
     {
         return sceneList;
     }

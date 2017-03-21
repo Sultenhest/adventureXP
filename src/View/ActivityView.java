@@ -19,9 +19,9 @@ public class ActivityView extends BaseScene implements BaseLayout
     private VBox layout;
     private GridPane subLayout;
     private TextField activityNameField;
+    private TextField acitivityInfoField;
     private TextField ageLimitField;
     private TextField heightLimitField;
-    private TextField acitivityInfoField;
 
     private Button createActivity;
     private Button deleteActivity;
@@ -50,9 +50,9 @@ public class ActivityView extends BaseScene implements BaseLayout
         subLayout = new GridPane();
 
         activityNameField = new TextField();
+        acitivityInfoField = new TextField();
         ageLimitField = new TextField();
         heightLimitField = new TextField();
-        acitivityInfoField = new TextField();
 
         createActivity = new Button();
         updateActivity = new Button();
@@ -115,9 +115,9 @@ public class ActivityView extends BaseScene implements BaseLayout
 //        String style = getClass().getResource("/View/StyleSheet.css").toExternalForm();
 
         activityNameField.setPromptText("Aktivitet Navn...");
+        acitivityInfoField.setPromptText("Aktivitet Info...");
         ageLimitField.setPromptText("Aldersbegrænsning...");
         heightLimitField.setPromptText("Minimum Højde...");
-        acitivityInfoField.setPromptText("Aktivitet Info...");
 
         createActivity.setText("Skab ny Aktivitet");
         createActivity.setStyle("-fx-background-color:\n" + "" +
@@ -152,7 +152,7 @@ public class ActivityView extends BaseScene implements BaseLayout
                 "            linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));");
         deleteActivity.setOnAction(event ->
         {
-            buttonClicked(1);
+            buttonClicked(2);
         });
 
         activityTableView.setMinWidth(700);
@@ -198,7 +198,7 @@ public class ActivityView extends BaseScene implements BaseLayout
             {
                 case 0:
                     //create Button
-                    showStatus("", true);
+                    showStatus("Aktivitet er skabt", true);
                     break;
                 case 1:
                     //update button
@@ -219,7 +219,7 @@ public class ActivityView extends BaseScene implements BaseLayout
             {
                 case 0:
                     //create Button
-                    showStatus("", false);
+                    showStatus("it no work", false);
                     break;
                 case 1:
                     //update button
