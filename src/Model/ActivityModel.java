@@ -1,6 +1,7 @@
 package Model;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
 
 /**
@@ -46,8 +47,28 @@ public class ActivityModel
 
     public Activity read(int id)
     {
-        //
-        return null;
+        try
+        {
+            String sqlStatement = "SELECT * FROM activity WHERE act_id = " + id;
+
+            Connection conn = DatabaseConnect.getConnection();
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sqlStatement);
+
+            Activity act;
+
+            act = new Activity(rs.getInt(1), rs.getInt(3), rs.getString(2), "");
+
+            st.close();
+            conn.close();
+
+            return act;
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+            return new Activity(-1, -1, "", "");
+        }
     }
 
     public boolean update(Activity activity)
