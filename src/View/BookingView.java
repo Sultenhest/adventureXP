@@ -1,6 +1,6 @@
 package View;
 
-import Controller.BookingController;
+import Controller.ReservationController;
 import Model.Activity;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class BookingView extends BaseScene implements BaseLayout, TableInterface
 {
     // Controller
-    private BookingController bookingController;
+    private ReservationController reservationController;
 
     private VBox layout;
 
@@ -31,7 +31,7 @@ public class BookingView extends BaseScene implements BaseLayout, TableInterface
         createLayoutSettings();
         attachLayoutToScene();
 
-        bookingController = new BookingController();
+        reservationController = new ReservationController();
 
     }
 

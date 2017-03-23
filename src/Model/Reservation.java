@@ -12,7 +12,7 @@ public class Reservation
     private String employeeName;
     private Activity activity;
 
-    public Reservation(int startTime, int stopTime, String customerName, String employeeName, String activityName)
+    public Reservation(int startTime, int stopTime, String customerName, String employeeName)
     {
         this.startTime = startTime;
         this.stopTime = stopTime;
