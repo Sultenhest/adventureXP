@@ -22,8 +22,14 @@ public class ActivityController
 
     }
 
+    private boolean validateLimits(int ageLimit, int heightLimit)
+    {
+        return (ageLimit >= 0 && ageLimit <= 99 && heightLimit >= 0 && heightLimit <= 250);
+    }
+
+
     // Adds a new activity to the DB and displays it in the TableView upon succesfull creation
-    public void createActivity(int buttonId, String activityName, String ageLimit, String minHeight)
+    public void createActivity(int buttonId, String activityName, String minAge, String minHeight)
     {
         // If activityName is empty then send error message to View
         // Else check if "Age" and "Height" is within limits
@@ -31,20 +37,21 @@ public class ActivityController
         // If not, display error message on View
         if (activityName.equals(""))
         {
-            activityView.createStatusMessage(buttonId, false);
+            activityView.createStatusMessage(0, false);
         }
         else
         {
-            boolean ageAsInt = InputParser.parseInt(ageLimit, 0, 99);
+            int age = Integer.parseInt(minAge);
+            int height = Integer.parseInt(minHeight);
+
+         /*   boolean ageAsInt = InputParser.parseInt(ageLimit, 0, 99);
             boolean heightAsInt = InputParser.parseInt(minHeight, 0, 250);
-
-            if ( ageAsInt && heightAsInt)
+*/
+            if (validateLimits(age, height))
             {
-                int age = Integer.parseInt(ageLimit);
-                int height = Integer.parseInt(minHeight);
-
                 Activity activity = new Activity(activityName, age, height);
 
+                // Inserts activity to db, and creates succes message
                 activityView.createStatusMessage(buttonId, activityModel.insert(activity));
 
                 activityView.overideAllToTable(activityModel.readAll());
@@ -58,9 +65,31 @@ public class ActivityController
 
     }
 
-    public void updateActivity(Activity activity)
+    public void updateActivity(int id, String name, String minAge, String minHeight)
     {
-        activityModel.update(activity);
+
+        if (name.equals(""))
+        {
+            activityView.createStatusMessage(1, false);
+        }
+        else
+        {
+            int age = Integer.parseInt(minAge);
+            int height = Integer.parseInt(minHeight);
+
+            if (validateLimits(age, height))
+            {
+                Activity activity = new Activity(id, age, height, name);
+
+                // Updates activity to db, and creates success message
+                activityView.createStatusMessage( 1, activityModel.update(activity));
+            }
+            else
+            {
+                activityView.createStatusMessage(1, false);
+            }
+        }
+
         activityView.overideAllToTable(activityModel.readAll());
     }
 

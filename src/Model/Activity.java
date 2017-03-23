@@ -16,6 +16,10 @@ public class Activity
     private String activityName;
     private String activityInfo;
 
+    public Activity()
+    {
+    }
+
     public Activity(String name, int ageLimit, int heightLimit)
     {
         activityName = name;

@@ -3,6 +3,7 @@ package View;
 import Controller.ActivityController;
 import Model.Activity;
 import Model.Final_ErrorMessages;
+import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
@@ -18,6 +19,7 @@ import javafx.scene.paint.Paint;
 import javafx.util.converter.IntegerStringConverter;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
 /**
  * Created by Christian on 16-03-2017.
@@ -105,17 +107,14 @@ public class ActivityView extends BaseScene implements BaseLayout, TableInterfac
         {
             case 0:
                 //create
-                callActivityModal( buttonID, "Opret aktivitet", "Udfyld felterne for at oprette en aktivitet", new String[3] );
+                callActivityModal( buttonID, "Opret aktivitet", "Udfyld felterne for at oprette en aktivitet", new Activity() );
                 break;
             case 1:
                 //updatere
                 if ( activityTableView.getSelectionModel().selectedItemProperty().get() != null ) {
-                    String[] str = {
-                            activityTableView.getSelectionModel().selectedItemProperty().get().getActivityName(),
-                            Integer.toString(activityTableView.getSelectionModel().selectedItemProperty().get().getAgeLimit()),
-                            Integer.toString(activityTableView.getSelectionModel().selectedItemProperty().get().getHeightLimit())
-                    };
-                    callActivityModal(buttonID, "Ret aktivitet", "Udfyld felterne for at ændre i aktiviteten", str);
+                  Activity act = activityTableView.getSelectionModel().selectedItemProperty().get();
+
+                    callActivityModal(buttonID, "Ret aktivitet", "Udfyld felterne for at ændre i aktiviteten", act);
                 } else {
                     doAlert( Alert.AlertType.ERROR, "Fejl", "Vælg en aktivitet du vil ændre.", null );
                 }
@@ -130,17 +129,29 @@ public class ActivityView extends BaseScene implements BaseLayout, TableInterfac
         }
     }
 
-    private void callActivityModal(int buttonID ,String title, String message, String[] input ) {
+    private void callActivityModal(int buttonID ,String title, String message, Activity activity) //String[] input )
+    {
         ActivityModal am = new ActivityModal();
-        String[] str = am.display( title, message, input );
+        String[] str = am.display( title, message, activity);
 
-        if( input[0] == null && str[0] != null ) {
-            String name = str[0];
-            String age = str[1];
-            String height = str[2];
+        // If Insert
+        if (buttonID == 0)
+        {
+            if(str[0] != null ) {
+                String name = str[0];
+                String age = str[1];
+                String height = str[2];
 
-            activityController.createActivity(buttonID, name, age, height);
+                activityController.createActivity(buttonID, name, age, height);
+            }
         }
+        // If Update
+        else if (buttonID ==  1)
+        {
+            if (str.length == 3 && str[0] != null)
+                activityController.updateActivity(activity.getID(), str[0], str[1], str[2]);
+        }
+
     }
 
     private void doAlert(Alert.AlertType alertType, String title, String header, String content){
@@ -218,7 +229,7 @@ public class ActivityView extends BaseScene implements BaseLayout, TableInterfac
         switch (cellEditType)
         {
             case ACTIVITY_NAME:
-                activityController.updateActivity(cellEditEvent.getTableView().getItems().get(cellEditEvent.getTablePosition().getRow()));
+                //activityController.updateActivity(cellEditEvent.getTableView().getItems().get(cellEditEvent.getTablePosition().getRow()));
                 break;
             default:
                 break;

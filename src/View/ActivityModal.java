@@ -1,5 +1,6 @@
 package View;
 
+import Model.Activity;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -11,6 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.omg.PortableInterceptor.ACTIVE;
 
 public class ActivityModal {
     private String[] output = new String[3];
@@ -19,7 +21,8 @@ public class ActivityModal {
     private GridPane grid = new GridPane();
     private Button closeButton = new Button("Annuller");
 
-    public String[] display( String title, String message, String[] input) {
+    public String[] display( String title, String message, Activity activity)// String[] input)
+    {
         window.setTitle( title );
         window.initModality(Modality.APPLICATION_MODAL);
         window.setMinWidth(250);
@@ -42,10 +45,11 @@ public class ActivityModal {
         TextField tf2 = new TextField();
         TextField tf3 = new TextField();
 
-        if( input[0] != null ) {
-            tf1.setText(input[0]);
-            tf2.setText(input[1]);
-            tf3.setText(input[2]);
+        if( activity != null )
+        {
+            tf1.setText(activity.getActivityName());
+            tf2.setText("" + activity.getAgeLimit());
+            tf3.setText("" + activity.getHeightLimit());
         }
 
         grid.add(tf1, 1, 0);
