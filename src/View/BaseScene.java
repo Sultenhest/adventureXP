@@ -2,6 +2,11 @@ package View;
 
 import Model.Finals;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 /**
@@ -18,11 +23,35 @@ public abstract class BaseScene
         return scene;
     }
 
-    public void setScene(Pane pane)
+    public void setScene( Pane pane )
     {
         Finals finals = Finals.getInstance();
 
-        this.scene = new Scene(pane,finals.getMinWindowWitdh(), finals.getMinWindowHeight());
+        BorderPane borderPane = new BorderPane();
+
+        borderPane.setTop( generateHeader() );
+        borderPane.setCenter( pane );
+
+        scene = new Scene( borderPane, finals.getMinWindowWitdh(), finals.getMinWindowHeight() );
+        //this.scene = new Scene(pane,finals.getMinWindowWitdh(), finals.getMinWindowHeight());
+
+        scene.getStylesheets().add("file:Assets/Stylesheet.css");
+    }
+
+    private HBox generateHeader(){
+        HBox header = new HBox();
+
+        ImageView imv = new ImageView();
+
+        imv.setImage( new Image("file:Assets/Logo.png", true) );
+        Button activityButton = new Button("Activities");
+        Button bookingButton = new Button("Bookings");
+
+        header.getChildren().addAll(imv, activityButton, bookingButton);
+
+        header.getStyleClass().add("menu");
+
+        return header;
     }
 
     public void setID(int ID)

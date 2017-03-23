@@ -5,8 +5,8 @@ package Model;
  */
 public class Finals
 {
-    private final int minWindowWitdh = 800;
-    private final int minWindowHeight = 800;
+    private final int minWindowWitdh = 500;
+    private final int minWindowHeight = 500;
 
     private static Finals instance = new Finals();
 
