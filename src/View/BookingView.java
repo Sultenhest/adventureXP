@@ -2,10 +2,7 @@ package View;
 
 import Controller.ReservationController;
 import Model.Activity;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -40,6 +37,10 @@ public class BookingView extends BaseScene implements BaseLayout, TableInterface
     public void createLayout()
     {
         layout = new VBox();
+        VBox searchFunction = new VBox();
+
+        TextField searchField = new TextField();
+        searchFunction.getChildren().addAll( searchField );
 
         bookingTableView = new TableView<>();
 
@@ -52,7 +53,7 @@ public class BookingView extends BaseScene implements BaseLayout, TableInterface
 
         bottomMenu.getStyleClass().add("menu");
 
-        layout.getChildren().addAll(bookingTableView, bottomMenu );
+        layout.getChildren().addAll(searchFunction, bookingTableView, bottomMenu );
     }
 
     @Override
@@ -116,7 +117,7 @@ public class BookingView extends BaseScene implements BaseLayout, TableInterface
 
     private void callActivityModal(int buttonID ,String title, String message, String[] input ) {
         ActivityModal am = new ActivityModal();
-        String[] str = am.display( title, message, input );
+        String[] str = am.display( title, message, null );
 
         if( input[0] == null && str[0] != null ) {
             String name = str[0];
