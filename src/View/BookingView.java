@@ -2,6 +2,10 @@ package View;
 
 import Controller.ReservationController;
 import Model.Activity;
+import Model.Reservation;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -20,7 +24,11 @@ public class BookingView extends BaseScene implements BaseLayout, TableInterface
     private Button deleteBooking;
     private Button updateBooking;
 
-    private TableView<Activity> bookingTableView;
+    private TextField searchField;
+
+    private TableView<Reservation> bookingTableView;
+
+    private ObservableList<Reservation> reservations;
 
     public BookingView(int ID)
     {
@@ -28,6 +36,7 @@ public class BookingView extends BaseScene implements BaseLayout, TableInterface
         createLayout();
         createLayoutSettings();
         attachLayoutToScene();
+        bindTable();
 
         reservationController = new ReservationController();
 
@@ -39,8 +48,10 @@ public class BookingView extends BaseScene implements BaseLayout, TableInterface
         layout = new VBox();
         VBox searchFunction = new VBox();
 
-        TextField searchField = new TextField();
+        searchField = new TextField();
         searchFunction.getChildren().addAll( searchField );
+
+        //reservations = new FXCollections.observableArrayList();
 
         bookingTableView = new TableView<>();
 
@@ -151,5 +162,43 @@ public class BookingView extends BaseScene implements BaseLayout, TableInterface
     public void attachLayoutToScene()
     {
         setScene(this.layout);
+    }
+
+    private void bindTable()
+    {
+        FilteredList<Reservation> filteredData = new FilteredList<>(reservations, p -> true);
+
+        searchField.textProperty().addListener((observable, oldValue, newValue) ->
+        {
+            filteredData.setPredicate(product -> {
+                if (newValue == null || newValue.isEmpty())
+                {
+                    return true;
+                }
+
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                /*if (reservations.getName().toLowerCase().indexOf(lowerCaseFilter) != -1)
+                {
+                    return true; // Filter matches first name.
+                }
+                else if (reservations.getName().toLowerCase().indexOf(lowerCaseFilter) != -1)
+                {
+                    return true; // Filter matches last name.
+                }
+                else if (reservations.getName().toLowerCase().indexOf(lowerCaseFilter) != -1)
+                {
+                    return true; // Filter matches last name.
+                }*/
+
+                return false; // Does not match.
+            });
+        });
+
+        SortedList<Reservation> sortedData = new SortedList<>(filteredData);
+
+        sortedData.comparatorProperty().bind(bookingTableView.comparatorProperty());
+
+        bookingTableView.setItems(sortedData);
     }
 }
