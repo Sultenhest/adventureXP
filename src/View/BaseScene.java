@@ -33,7 +33,6 @@ public abstract class BaseScene
         borderPane.setCenter( pane );
 
         scene = new Scene( borderPane, finals.getMinWindowWitdh(), finals.getMinWindowHeight() );
-        //this.scene = new Scene(pane,finals.getMinWindowWitdh(), finals.getMinWindowHeight());
 
         scene.getStylesheets().add("file:Assets/Stylesheet.css");
     }
