@@ -123,4 +123,22 @@ public class ActivityModel
             return false;
         }
     }
+
+    public boolean delete(int id)
+    {
+        try {
+            String sql = "DELETE FROM activity WHERE act_id = " + id;
+
+            Connection conn = DatabaseConnect.getConnection();
+            Statement st = conn.createStatement();
+            int rowsAffected = st.executeUpdate(sql);
+
+            return (rowsAffected == 1);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+            return false;
+        }
+    }
 }
