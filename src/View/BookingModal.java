@@ -1,6 +1,5 @@
 package View;
 
-import Model.Activity;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -12,16 +11,31 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.omg.PortableInterceptor.ACTIVE;
 
-public class ActivityModal {
+/**
+ * Created by Christian on 23-03-2017.
+ */
+
+/*
+    Name: Christian Hvidkjær
+    Date: 23-03-2017
+    Class: Dat16v2
+    Book Excersise: ***
+    Handin-Excersise Titel: ***
+    Handin-Excersise: BookingModal
+    Question:
+    ***
+*/
+
+public class BookingModal
+{
     private String[] output = new String[3];
     private Stage window = new Stage();
     private VBox layout = new VBox(10);
     private GridPane grid = new GridPane();
     private Button closeButton = new Button("Annuller");
 
-    public String[] display( String title, String message, Activity activity)// String[] input)
+    public String[] display( String title, String message, String[] input)
     {
         window.setTitle( title );
         window.initModality(Modality.APPLICATION_MODAL);
@@ -33,9 +47,9 @@ public class ActivityModal {
         grid.setVgap(8);
         grid.setHgap(10);
 
-        Label l1 = new Label("Aktivitetsnavn:");
-        Label l2 = new Label("Minimum alder:");
-        Label l3 = new Label("Minimum højde:");
+        Label l1 = new Label("Dato:");
+        Label l2 = new Label("Start Tid:");
+        Label l3 = new Label("Slut Tid:");
 
         grid.add(l1, 0, 0);
         grid.add(l2, 0, 1);
@@ -45,11 +59,10 @@ public class ActivityModal {
         TextField tf2 = new TextField();
         TextField tf3 = new TextField();
 
-        if( activity != null )
-        {
-            tf1.setText(activity.getActivityName());
-            tf2.setText("" + activity.getAgeLimit());
-            tf3.setText("" + activity.getHeightLimit());
+        if( input[0] != null ) {
+            tf1.setText(input[0]);
+            tf2.setText(input[1]);
+            tf3.setText(input[2]);
         }
 
         grid.add(tf1, 1, 0);
