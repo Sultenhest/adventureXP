@@ -35,7 +35,7 @@ public class BookingModal
     private GridPane grid = new GridPane();
     private Button closeButton = new Button("Annuller");
 
-    public String[] display( String title, String message, String[] input)
+    public String[] display( String title, String message )
     {
         window.setTitle( title );
         window.initModality(Modality.APPLICATION_MODAL);
@@ -58,12 +58,6 @@ public class BookingModal
         TextField tf1 = new TextField();
         TextField tf2 = new TextField();
         TextField tf3 = new TextField();
-
-        if( input[0] != null ) {
-            tf1.setText(input[0]);
-            tf2.setText(input[1]);
-            tf3.setText(input[2]);
-        }
 
         grid.add(tf1, 1, 0);
         grid.add(tf2, 1, 1);

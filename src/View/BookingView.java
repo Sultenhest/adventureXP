@@ -81,20 +81,11 @@ public class BookingView extends BaseScene implements BaseLayout, TableInterface
         {
             case 0:
                 //create
-                callActivityModal( buttonID, "Opret Booking", "Udfyld felterne for at oprette en Booking", new String[3] );
+                callBookingModal( buttonID, "Opret Booking", "Udfyld felterne for at oprette en Booking");
                 break;
             case 1:
                 //updatere
-                if ( bookingTableView.getSelectionModel().selectedItemProperty().get() != null ) {
-                    String[] str = {
-                            bookingTableView.getSelectionModel().selectedItemProperty().get().getActivityName(),
-                            Integer.toString(bookingTableView.getSelectionModel().selectedItemProperty().get().getAgeLimit()),
-                            Integer.toString(bookingTableView.getSelectionModel().selectedItemProperty().get().getHeightLimit())
-                    };
-                    callActivityModal(buttonID, "Ret Booking", "Udfyld felterne for at ændre i Bookingen", str);
-                } else {
-                    doAlert( Alert.AlertType.ERROR, "Fejl", "Vælg en Booking du vil ændre.", null );
-                }
+                callBookingModal(buttonID, "Ret Booking", "Udfyld felterne for at ændre i Bookingen");
                 break;
             case 2:
                 //Delete
@@ -115,17 +106,9 @@ public class BookingView extends BaseScene implements BaseLayout, TableInterface
         alert.showAndWait();
     }
 
-    private void callActivityModal(int buttonID ,String title, String message, String[] input ) {
-        ActivityModal am = new ActivityModal();
-        String[] str = am.display( title, message, null );
-
-        if( input[0] == null && str[0] != null ) {
-            String name = str[0];
-            String age = str[1];
-            String height = str[2];
-
-            //activityController.createActivity(buttonID, name, age, height);
-        }
+    private void callBookingModal(int buttonID ,String title, String message ) {
+        BookingModal bm = new BookingModal();
+        String[] str = bm.display( title, message );
     }
 
     public void overideAllToTable()
