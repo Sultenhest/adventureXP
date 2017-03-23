@@ -1,5 +1,6 @@
 package View;
 
+import Controller.BookingController;
 import Model.Activity;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -13,6 +14,9 @@ import java.util.ArrayList;
 
 public class BookingView extends BaseScene implements BaseLayout, TableInterface
 {
+    // Controller
+    private BookingController bookingController;
+
     private VBox layout;
 
     private Button createBooking;
@@ -28,7 +32,8 @@ public class BookingView extends BaseScene implements BaseLayout, TableInterface
         createLayoutSettings();
         attachLayoutToScene();
 
-        //activityController = new ActivityController(this);
+        bookingController = new BookingController();
+
     }
 
     @Override
@@ -39,6 +44,7 @@ public class BookingView extends BaseScene implements BaseLayout, TableInterface
         bookingTableView = new TableView<>();
 
         HBox bottomMenu = new HBox();
+
         createBooking = new Button("Opret ny");
         updateBooking = new Button("Opdater");
         deleteBooking = new Button("Slet");
