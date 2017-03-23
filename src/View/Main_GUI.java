@@ -25,6 +25,8 @@ public class Main_GUI extends Application
         // Creates the ActivityView
         SceneHandler.getInstance().createScene(0);
         SceneHandler.getInstance().applyScene(0);
+
+        SceneHandler.getInstance().createScene(1);
         window.show();
     }
 
