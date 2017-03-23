@@ -26,11 +26,6 @@ import java.util.ArrayList;
 public class ActivityView extends BaseScene implements BaseLayout, TableInterface
 {
     private VBox layout;
-    private GridPane subLayout;
-    private TextField activityNameField;
-    //private TextField acitivityInfoField;
-    private TextField ageLimitField;
-    private TextField heightLimitField;
 
     private Button createActivity;
     private Button deleteActivity;
@@ -39,8 +34,6 @@ public class ActivityView extends BaseScene implements BaseLayout, TableInterfac
     private TableView<Activity> activityTableView;
 
     private Label status;
-
-    private ImageView logo;
 
     private ActivityController activityController;
 
