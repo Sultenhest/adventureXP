@@ -25,6 +25,10 @@ public class ActivityController
     // Adds a new activity to the DB and displays it in the TableView upon succesfull creation
     public void createActivity(int buttonId, String activityName, String ageLimit, String minHeight)
     {
+        // If activityName is empty then send error message to View
+        // Else check if "Age" and "Height" is within limits
+        // If so, insert activity in DB and update TableView
+        // If not, display error message on View
         if (activityName.equals(""))
         {
             activityView.createStatusMessage(buttonId, false);
@@ -43,6 +47,8 @@ public class ActivityController
 
                 activityView.createStatusMessage(buttonId, activityModel.insert(activity));
 
+                activityView.overideAllToTable(activityModel.readAll());
+
             }
             else
             {
@@ -50,7 +56,6 @@ public class ActivityController
             }
         }
 
-        activityView.overideAllToTable(activityModel.readAll());
     }
 
     public void updateActivity(Activity activity)
