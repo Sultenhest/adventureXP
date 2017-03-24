@@ -106,13 +106,16 @@ public class BookingView extends BaseScene implements BaseLayout
 
                     callBookingModal(buttonID, "Ret Booking", "Udfyld felterne for at ændre i Bookingen", r);
                 } else {
-                    doAlert( Alert.AlertType.ERROR, "Fejl", "Vælg en booking du vil ændre.", null );
+                    Alerts.doErrorBox( "Fejl", "Vælg en booking du vil ændre.", null );
                 }
 
                 break;
             case 2:
                 //Delete
-                //somemethod();
+                if ( Alerts.doConfirmBox( "Er du sikker?", "Er du sikker på du vil slette det her?", null ) )
+                {
+                    //delete here
+                }
                 break;
             default:
                 //nothing
@@ -120,23 +123,14 @@ public class BookingView extends BaseScene implements BaseLayout
         }
     }
 
-    private void doAlert(Alert.AlertType alertType, String title, String header, String content){
-        Alert alert = new Alert( alertType );
-        alert.setTitle(title);
-        alert.setHeaderText(header);
-        alert.setContentText(content);
-
-        alert.showAndWait();
-    }
-
     public void createStatusMessage(int buttonID, boolean succesfullAction)
     {
         String[] updateStatus = { "oprettet", "opdateret", "slettet" };
 
         if ( succesfullAction ) {
-            doAlert( Alert.AlertType.INFORMATION, "Succes", "Reservationen blev " + updateStatus[buttonID] + ".", null );
+            Alerts.doInformationBox( "Succes", "Reservationen blev " + updateStatus[buttonID] + ".", null );
         } else {
-            doAlert( Alert.AlertType.ERROR, "Fejl", "Reservationen blev ikke " + updateStatus[buttonID] + ".", null );
+            Alerts.doErrorBox( "Fejl", "Reservationen blev ikke " + updateStatus[buttonID] + ".", null );
         }
     }
 
