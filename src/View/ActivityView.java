@@ -121,7 +121,7 @@ public class ActivityView extends BaseScene implements BaseLayout, TableInterfac
                 break;
             case 2:
                 //Delete
-                //somemethod();
+                doAlert( Alert.AlertType.CONFIRMATION, "Er du sikker?", "Er du sikker på du vil slette det her?", null );
                 break;
             default:
                 //nothing

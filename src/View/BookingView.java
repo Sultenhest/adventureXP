@@ -25,6 +25,7 @@ public class BookingView extends BaseScene implements BaseLayout, TableInterface
     private Button updateBooking;
 
     private TextField searchField;
+    private Label searchLabel = new Label("Søg: ");
 
     private TableView<Reservation> bookingTableView;
 
@@ -36,7 +37,7 @@ public class BookingView extends BaseScene implements BaseLayout, TableInterface
         createLayout();
         createLayoutSettings();
         attachLayoutToScene();
-        bindTable();
+        //bindTable();
 
         reservationController = new ReservationController();
 
@@ -46,10 +47,11 @@ public class BookingView extends BaseScene implements BaseLayout, TableInterface
     public void createLayout()
     {
         layout = new VBox();
-        VBox searchFunction = new VBox();
+        HBox searchFunction = new HBox();
 
         searchField = new TextField();
-        searchFunction.getChildren().addAll( searchField );
+
+        searchFunction.getChildren().addAll( searchLabel, searchField );
 
         //reservations = new FXCollections.observableArrayList();
 
@@ -164,6 +166,7 @@ public class BookingView extends BaseScene implements BaseLayout, TableInterface
         setScene(this.layout);
     }
 
+    /*
     private void bindTable()
     {
         FilteredList<Reservation> filteredData = new FilteredList<>(reservations, p -> true);
@@ -189,7 +192,7 @@ public class BookingView extends BaseScene implements BaseLayout, TableInterface
                 else if (reservations.getName().toLowerCase().indexOf(lowerCaseFilter) != -1)
                 {
                     return true; // Filter matches last name.
-                }*/
+                }
 
                 return false; // Does not match.
             });
@@ -201,4 +204,5 @@ public class BookingView extends BaseScene implements BaseLayout, TableInterface
 
         bookingTableView.setItems(sortedData);
     }
+    */
 }
