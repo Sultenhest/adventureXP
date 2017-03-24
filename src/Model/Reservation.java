@@ -15,6 +15,17 @@ public class Reservation
     private String customerName;
     private String Instructor;
     private Activity activity;
+    private Date timestamp;
+
+    public Reservation(long date, int durationInMinutes, String customerName, String Instructor, Activity activity, long timestamp)
+    {
+        this.durationInMinutes = durationInMinutes;
+        this.customerName = customerName;
+        this.Instructor = Instructor;
+        this.activity = activity;
+        this.timestamp = new Date(timestamp);
+        this.startTime = new Date(date);
+    }
 
     public Reservation(long date, int durationInMinutes, String customerName, String Instructor, Activity activity)
     {
@@ -22,7 +33,7 @@ public class Reservation
         this.customerName = customerName;
         this.Instructor = Instructor;
         this.activity = activity;
-
+        this.timestamp = new Date();
         this.startTime = new Date(date);
     }
 
