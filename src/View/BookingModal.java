@@ -1,11 +1,13 @@
 package View;
 
+import Model.Activity;
+import Model.ActivityModel;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -35,11 +37,32 @@ public class BookingModal
     private GridPane grid = new GridPane();
     private Button closeButton = new Button("Annuller");
 
+    private ObservableList<String> activities;
+
+    private ComboBox<String> createComboBox(){
+        ComboBox<String> comboBox = new ComboBox<>();
+
+        activities = FXCollections.observableArrayList();
+
+        for (Object o : ActivityModel.getInstance().readAll()) {
+            if ( o instanceof Activity ) {
+                activities.add( ((Activity) o).getID() + ": " + ((Activity) o).getActivityName() );
+            }
+        }
+
+        comboBox.setItems( activities );
+
+        comboBox.getSelectionModel().selectFirst();
+
+        return comboBox;
+    }
+
     public String[] display( String title, String message )
     {
         window.setTitle( title );
         window.initModality(Modality.APPLICATION_MODAL);
         window.setMinWidth(250);
+        window.setHeight(350);
 
         Label messageLabel = new Label( message );
 
@@ -47,29 +70,41 @@ public class BookingModal
         grid.setVgap(8);
         grid.setHgap(10);
 
-        Label l1 = new Label("Dato:");
-        Label l2 = new Label("Start Tid:");
-        Label l3 = new Label("Slut Tid:");
+        Label activityLabel = new Label("Aktivitet:");
+        Label instructorLabel = new Label("Instruktør:");
+        Label customerLabel = new Label("Kunde:");
+        Label startDateLabel = new Label("Dato:");
+        Label startTimeLabel = new Label("Tidspunkt:");
+        Label durationLabel = new Label("Varighed:");
+        Label participantsLabel = new Label("Antal Deltagere:");
 
-        grid.add(l1, 0, 0);
-        grid.add(l2, 0, 1);
-        grid.add(l3, 0, 2);
+        grid.add(activityLabel, 0, 0);
+        grid.add(instructorLabel, 0, 1);
+        grid.add(customerLabel, 0, 2);
+        grid.add(startDateLabel, 0, 3);
+        grid.add(startTimeLabel, 0, 4);
+        grid.add(durationLabel, 0, 5);
+        grid.add(participantsLabel, 0, 6);
 
-        TextField tf1 = new TextField();
-        TextField tf2 = new TextField();
-        TextField tf3 = new TextField();
+        //Activity field
+        TextField instructorField = new TextField();
+        TextField clientField = new TextField();
+        DatePicker date = new DatePicker();
+        TextField startTimeField = new TextField();
+        TextField durationField = new TextField();
+        TextField participantsField = new TextField();
 
-        grid.add(tf1, 1, 0);
-        grid.add(tf2, 1, 1);
-        grid.add(tf3, 1, 2);
+        grid.add(createComboBox(), 1, 0);
+        grid.add(instructorField, 1, 1);
+        grid.add(clientField, 1, 2);
+        grid.add(date, 1, 3);
+        grid.add(startTimeField, 1, 4);
+        grid.add(durationField, 1, 5);
+        grid.add(participantsField, 1, 6);
 
         Button submitButton = new Button(title);
 
         submitButton.setOnAction(e -> {
-            output[0] = tf1.getText().trim();
-            output[1] = tf2.getText().trim();
-            output[2] = tf3.getText().trim();
-
             window.close();
         });
 
