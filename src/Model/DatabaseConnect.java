@@ -9,7 +9,7 @@ public class DatabaseConnect
 {
     private static String db_url = "jdbc:mysql://localhost";
     private static String db_port = "3306";
-    private static String db_name = "adventure_xp";
+    private static String db_name = "adventurexp";
     private static String db_user = "root";
     private static String db_password = "root";
 

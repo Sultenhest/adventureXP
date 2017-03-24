@@ -20,16 +20,38 @@ public class ReservationModel
         this.reservationController = reservationController;
     }
 
-    public void insertReservationInDB(Reservation reservation)
+    public boolean insertReservationInDB(Reservation reservation)
     {
         try (Connection connection = DatabaseConnect.getConnection();
              Statement statement = connection.createStatement())
         {
             // TODO Create query to insert reservation in DB - create Reservation table first ...
+
+            return true;
         }
         catch (SQLException sqlEx)
         {
             sqlEx.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean updateReservation(Reservation reservation)
+    {
+        try (Connection connection = DatabaseConnect.getConnection();
+             Statement statement = connection.createStatement();)
+        {
+            String sql = "UPDATE activity SET act_name = '" + booking.getActivityName() +
+                    "', act_min_age = " + booking.getAgeLimit() +
+                    ", act_min_height = " + booking.getHeightLimit() +
+                    " WHERE act_id = " + booking.getID();
+
+            return true;
+        }
+        catch (SQLException sqlEx)
+        {
+            sqlEx.printStackTrace();
+            return false;
         }
     }
 
