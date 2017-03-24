@@ -45,10 +45,8 @@ public class BookingModal
 
         activities = FXCollections.observableArrayList();
 
-        for (Object o : ActivityModel.getInstance().readAll()) {
-            if ( o instanceof Activity ) {
-                activities.add( ((Activity) o).getID() + ": " + ((Activity) o).getActivityName() );
-            }
+        for (Activity a : ActivityModel.getInstance().readAll()) {
+            activities.add( a.getID() + ": " + a.getActivityName() );
         }
 
         comboBox.setItems( activities );
