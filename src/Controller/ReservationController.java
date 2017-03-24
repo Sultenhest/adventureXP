@@ -29,13 +29,13 @@ public class ReservationController
 
         if (oneBookingFieldIsEmpty)
         {
-            //bookingView.createStatusMessage(0, false);
+            bookingView.createStatusMessage(0, false);
         }
         else //Creates reservation object & calls method in ReservationModel that insert "Reservation" object in DB
         {
             Reservation reservation = new Reservation(date, durationInMinutes, customerName, instructor, activity);
             reservationModel.insertReservationInDB(reservation);
-            //bookingView.createStatusMessage(0, true);
+            bookingView.createStatusMessage(0, true);
         }
     }
 
