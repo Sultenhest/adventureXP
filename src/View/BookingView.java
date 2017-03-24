@@ -3,6 +3,7 @@ package View;
 import Controller.ReservationController;
 import Model.Activity;
 import Model.Reservation;
+import Model.ReservationModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -188,14 +189,17 @@ public class BookingView extends BaseScene implements BaseLayout
 
         bookingTableView.getColumns().addAll(date, customerName, amountOfParticipants, instructor, activityName);
 
-        //Test
+//        Test
+//
+//        ArrayList<Reservation> reservations = new ArrayList<>();
+//        reservations.add(new Reservation(new Date(), 200, "Morten", "Torben", new Activity("goCart", 0, 0)));
+//        reservations.add(new Reservation(new Date(), 300, "Tim", "Simon", new Activity("Sumo", 0, 0)));
+//
+//        this.reservations = FXCollections.observableList(reservations);
+//
+        ReservationController resCon = new ReservationController();
 
-        ArrayList<Reservation> reservations = new ArrayList<>();
-        reservations.add(new Reservation(new Date(), 200, "Morten", "Torben", new Activity("goCart", 0, 0)));
-        reservations.add(new Reservation(new Date(), 300, "Tim", "Simon", new Activity("Sumo", 0, 0)));
-
-        this.reservations = FXCollections.observableList(reservations);
-        addMultiToTableOb(this.reservations);
+        addMultiToTableOb(FXCollections.observableList(resCon.getReservationModel().readAllReservations()));
     }
 
     public void addSingleToTable(Reservation reservation)

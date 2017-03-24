@@ -12,7 +12,6 @@ import java.util.Date;
  */
 public class ReservationController
 {
-    // Model
     private ReservationModel reservationModel;
     private BookingView bookingView;
 
@@ -63,5 +62,15 @@ public class ReservationController
                 bookingView.createStatusMessage(1, false);
             }
         }
+    }
+
+    public ReservationModel getReservationModel()
+    {
+        return reservationModel;
+    }
+
+    public void setReservationModel(ReservationModel reservationModel)
+    {
+        this.reservationModel = reservationModel;
     }
 }
