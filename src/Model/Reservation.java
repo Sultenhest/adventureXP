@@ -30,14 +30,14 @@ public class Reservation
         this.startTime = new Date(date);
     }
 
-    public Reservation(long date, int durationInMinutes, String customerName, String Instructor, Activity activity)
+    public Reservation(Date date, int durationInMinutes, String customerName, String Instructor, Activity activity)
     {
         this.durationInMinutes = durationInMinutes;
         this.customerName = customerName;
         this.Instructor = Instructor;
         this.activity = activity;
         this.timestamp = new Date();
-        this.startTime = new Date(date);
+        this.startTime = date;
     }
 
     public Date getStartDate()

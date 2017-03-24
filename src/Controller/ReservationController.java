@@ -5,6 +5,8 @@ import Model.Reservation;
 import Model.ReservationModel;
 import View.BookingView;
 
+import java.util.Date;
+
 /**
  * Created by JonasBak on 23-03-2017.
  */
@@ -20,11 +22,11 @@ public class ReservationController
         reservationModel = new ReservationModel(this);
     }
 
-    private void submitBooking(long date, int durationInMinutes, String customerName, String instructor, Activity activity)
+    public void submitBooking(Date date, String durationInMinutes, String customerName, String instructor, Activity activity)
     {
         boolean oneBookingFieldIsEmpty = true;
 
-        if (date == 0 || durationInMinutes == 0 || customerName.equals("") || instructor.equals("") || activity == null)
+        if (date == null || Integer.parseInt(durationInMinutes) == 0 || customerName.equals("") || instructor.equals("") || activity == null)
             oneBookingFieldIsEmpty = false;
 
         if (oneBookingFieldIsEmpty)
@@ -33,10 +35,42 @@ public class ReservationController
         }
         else //Creates reservation object & calls method in ReservationModel that insert "Reservation" object in DB
         {
-            Reservation reservation = new Reservation(date, durationInMinutes, customerName, instructor, activity);
+            Reservation reservation = new Reservation(date, Integer.parseInt(durationInMinutes), customerName, instructor, activity);
             reservationModel.insertReservationInDB(reservation);
             bookingView.createStatusMessage(0, true);
         }
+    }
+
+    private boolean validateInput()
+    {
+
+        return
+    }
+
+    public void updateActivity(Reservation reservation)
+    {
+
+        if ()
+            bookingView.createStatusMessage(1, false);
+        else
+        {
+            int age = Integer.parseInt();
+            int height = Integer.parseInt();
+
+            if (validateInput())
+            {
+                Reservation reservation = new Reservation()
+
+                // Updates activity to db, and creates success message
+                bookingView.createStatusMessage( 1, reservationModel.updateReservation(reservation));
+            }
+            else
+            {
+                bookingView.createStatusMessage(1, false);
+            }
+        }
+
+        bookingView.overideAllToTable(reservationModel.readAllReservations());
     }
 
 }
