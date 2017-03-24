@@ -66,9 +66,7 @@ public class ActivityModal {
             window.close();
         });
 
-        closeButton.setOnAction(
-                e-> window.close()
-        );
+        closeButton.setOnAction( e-> window.close() );
 
         HBox bottom = new HBox(10, submitButton, closeButton);
 

@@ -31,16 +31,17 @@ import javafx.stage.Stage;
 
 public class BookingModal
 {
-    private String[] output = new String[3];
+    private String[] output = new String[7];
     private Stage window = new Stage();
     private VBox layout = new VBox(10);
     private GridPane grid = new GridPane();
     private Button closeButton = new Button("Annuller");
 
     private ObservableList<String> activities;
+    private ComboBox<String> comboBox;
 
     private ComboBox<String> createComboBox(){
-        ComboBox<String> comboBox = new ComboBox<>();
+        comboBox = new ComboBox<>();
 
         activities = FXCollections.observableArrayList();
 
@@ -105,12 +106,18 @@ public class BookingModal
         Button submitButton = new Button(title);
 
         submitButton.setOnAction(e -> {
+            output[0] = comboBox.getValue();
+            output[1] = instructorField.getText().trim();
+            output[2] = clientField.getText().trim();
+            output[3] = date.getValue().toString();
+            output[4] = startTimeField.getText().trim();
+            output[5] = durationField.getText().trim();
+            output[6] = participantsField.getText().trim();
+
             window.close();
         });
 
-        closeButton.setOnAction(
-                e-> window.close()
-        );
+        closeButton.setOnAction( e-> window.close() );
 
         HBox bottom = new HBox(10, submitButton, closeButton);
 
