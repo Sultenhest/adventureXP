@@ -106,12 +106,15 @@ public class ActivityView extends BaseScene implements BaseLayout
 
                     callActivityModal(buttonID, "Ret aktivitet", "Udfyld felterne for at ændre i aktiviteten", act);
                 } else {
-                    doAlert( Alert.AlertType.ERROR, "Fejl", "Vælg en aktivitet du vil ændre.", null );
+                    Alerts.doErrorBox( "Fejl", "Vælg en aktivitet du vil ændre.", null );
                 }
                 break;
             case 2:
                 //Delete
-                doAlert( Alert.AlertType.CONFIRMATION, "Er du sikker?", "Er du sikker på du vil slette det her?", null );
+                if ( Alerts.doConfirmBox( "Er du sikker?", "Er du sikker på du vil slette det her?", null ) )
+                {
+                    //delete here
+                }
                 break;
             default:
                 //nothing
@@ -144,23 +147,14 @@ public class ActivityView extends BaseScene implements BaseLayout
 
     }
 
-    private void doAlert(Alert.AlertType alertType, String title, String header, String content){
-        Alert alert = new Alert( alertType );
-        alert.setTitle(title);
-        alert.setHeaderText(header);
-        alert.setContentText(content);
-
-        alert.showAndWait();
-    }
-
     public void createStatusMessage(int buttonID, boolean succesfullAction)
     {
         String[] updateStatus = { "oprettet", "opdateret", "slettet" };
 
         if ( succesfullAction ) {
-            doAlert( Alert.AlertType.INFORMATION, "Succes", "Aktiviteten blev " + updateStatus[buttonID] + ".", null );
+            Alerts.doConfirmBox( "Succes", "Aktiviteten blev " + updateStatus[buttonID] + ".", null );
         } else {
-            doAlert( Alert.AlertType.ERROR, "Fejl", "Aktiviteten blev ikke " + updateStatus[buttonID] + ".", null );
+            Alerts.doErrorBox( "Fejl", "Aktiviteten blev ikke " + updateStatus[buttonID] + ".", null );
         }
     }
 
@@ -183,53 +177,6 @@ public class ActivityView extends BaseScene implements BaseLayout
         ObservableList<Activity> observableList = FXCollections.observableList(activities);
 
         this.activityTableView.getItems().addAll(observableList);
-    }
-
-    public void updateCellString(TableColumn.CellEditEvent<Activity, String> cellEditEvent, CellEditType cellEditType)
-    {
-        String oldValue;
-        String newValue;
-
-        oldValue = cellEditEvent.getOldValue();
-        newValue = cellEditEvent.getNewValue();
-
-        System.out.println(oldValue + ", " + newValue);
-
-        switch (cellEditType)
-        {
-            case ACTIVITY_NAME:
-                //activityController.updateActivity(cellEditEvent.getTableView().getItems().get(cellEditEvent.getTablePosition().getRow()));
-                break;
-            default:
-                break;
-        }
-    }
-
-    public void updateCellInteger(TableColumn.CellEditEvent<Activity, Integer> cellEditEvent, CellEditType cellEditType)
-    {
-        String oldValue;
-        String newValue;
-
-        oldValue = String.valueOf(cellEditEvent.getOldValue());
-        newValue = String.valueOf(cellEditEvent.getNewValue());
-
-        System.out.println(oldValue + ", " + newValue);
-
-        switch (cellEditType)
-        {
-            case ACTIVITY_AGELIMIT:
-                //client_database.updateEntry((Order)cellEditEvent.getTableView().getItems().get(cellEditEvent.getTablePosition().getRow()));
-                //((Activity) cellEditEvent.getTableView().getItems().get(cellEditEvent.getTablePosition().getRow())).setItemCell(cellEditEvent.getNewValue());
-                //((Activity) cellEditEvent.getTableView().getItems().get(cellEditEvent.getTablePosition().getRow())).setItem(newValue);
-                break;
-            case ACTIVITY_MINHEIGHT:
-                //client_database.updateEntry((Order)cellEditEvent.getTableView().getItems().get(cellEditEvent.getTablePosition().getRow()));
-                //((Activity) cellEditEvent.getTableView().getItems().get(cellEditEvent.getTablePosition().getRow())).setNumberOfItemsCell(cellEditEvent.getNewValue());
-                //((Activity) cellEditEvent.getTableView().getItems().get(cellEditEvent.getTablePosition().getRow())).setNumberOfItems(newValue);
-                break;
-            default:
-                break;
-        }
     }
 
     @Override
