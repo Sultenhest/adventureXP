@@ -1,44 +1,49 @@
 package Model;
 
+import java.time.OffsetDateTime;
+import java.util.Date;
+
 /**
  * Created by Christian and Sose on 16-03-2017.
  */
 
 public class Reservation
 {
-    private int startTime;
-    private int stopTime;
+    private Date startTime;
+    private int durationInMinutes;
+    private int amountOfParticipants;
     private String customerName;
-    private String employeeName;
+    private String Instructor;
     private Activity activity;
 
-    public Reservation(int startTime, int stopTime, String customerName, String employeeName)
+    public Reservation(long date, int durationInMinutes, String customerName, String Instructor, Activity activity)
     {
-        this.startTime = startTime;
-        this.stopTime = stopTime;
+        this.durationInMinutes = durationInMinutes;
         this.customerName = customerName;
-        this.employeeName = employeeName;
-        //this.activity = new Model.Activity();
+        this.Instructor = Instructor;
+        this.activity = activity;
+
+        this.startTime = new Date(date);
     }
 
-    public int getStartTime()
+    public Date getStartDate()
     {
         return startTime;
     }
 
-    public void setStartTime(int startTime)
+    public void setStartTime(Date startTime)
     {
         this.startTime = startTime;
     }
 
-    public int getStopTime()
+    public int getDurationInMinutes()
     {
-        return stopTime;
+        return durationInMinutes;
     }
 
-    public void setStopTime(int stopTime)
+    public void setDurationInMinutes(int durationInMinutes)
     {
-        this.stopTime = stopTime;
+        this.durationInMinutes = durationInMinutes;
     }
 
     public String getCustomerName()
@@ -51,14 +56,14 @@ public class Reservation
         this.customerName = customerName;
     }
 
-    public String getEmployeeName()
+    public String getInstructor()
     {
-        return employeeName;
+        return Instructor;
     }
 
-    public void setEmployeeName(String employeeName)
+    public void setInstructor(String instructor)
     {
-        this.employeeName = employeeName;
+        this.Instructor = instructor;
     }
 
     public Activity getActivity()
@@ -69,5 +74,15 @@ public class Reservation
     public void setActivity(Activity activity)
     {
         this.activity = activity;
+    }
+
+    public int getAmountOfParticipants()
+    {
+        return amountOfParticipants;
+    }
+
+    public void setAmountOfParticipants(int amountOfParticipants)
+    {
+        this.amountOfParticipants = amountOfParticipants;
     }
 }
