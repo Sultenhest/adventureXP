@@ -191,16 +191,11 @@ public class BookingView extends BaseScene implements BaseLayout
         //Test
 
         ArrayList<Reservation> reservations = new ArrayList<>();
-        reservations.add(new Reservation(1000, 200, "Morten", "Torben", new Activity("goCart", 0, 0)));
-        reservations.add(new Reservation(4000, 300, "Tim", "Simon", new Activity("Sumo", 0, 0)));
+        reservations.add(new Reservation(new Date(), 200, "Morten", "Torben", new Activity("goCart", 0, 0)));
+        reservations.add(new Reservation(new Date(), 300, "Tim", "Simon", new Activity("Sumo", 0, 0)));
 
         this.reservations = FXCollections.observableList(reservations);
         addMultiToTableOb(this.reservations);
-    }
-
-    public void overideAllToTable()
-    {
-
     }
 
     public void addSingleToTable(Reservation reservation)
@@ -210,9 +205,11 @@ public class BookingView extends BaseScene implements BaseLayout
 
     public void addMultiToTable(ArrayList<Reservation> reservations)
     {
-        ObservableList<Reservation> observableList = FXCollections.observableList(reservations);
+        this.bookingTableView.getItems().clear();
 
-        this.bookingTableView.getItems().addAll(observableList);
+        this.reservations.addAll(reservations);
+
+        this.bookingTableView.getItems().addAll(reservations);
     }
 
     public void addMultiToTableOb(ObservableList<Reservation> reservations)
@@ -224,17 +221,9 @@ public class BookingView extends BaseScene implements BaseLayout
     {
         this.bookingTableView.getItems().clear();
 
-        ObservableList<Reservation> observableList = FXCollections.observableList(reservations);
+        this.reservations.addAll(reservations);
 
-        this.bookingTableView.getItems().addAll(observableList);
-    }
-
-    public void updateCellString(TableColumn.CellEditEvent<Reservation, String> cellEditEvent, CellEditType cellEditType) {
-
-    }
-
-    public void updateCellInteger(TableColumn.CellEditEvent<Activity, Integer> cellEditEvent, CellEditType cellEditType) {
-
+        this.bookingTableView.getItems().addAll(reservations);
     }
 
     @Override
