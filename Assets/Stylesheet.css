@@ -1,0 +1,18 @@
+.root Button{
+    -fx-border-width: 5px;
+    -fx-background-color: #f1c40f;
+    -fx-text-fill: #34495e;
+    -fx-border-insets: 10px;
+    -fx-padding: 7px 14px;
+    -fx-spacing: 50% 0;
+}
+
+.root .menu{
+    -fx-padding: 14px;
+    -fx-spacing: 10px;
+}
+
+.root .menu Label{
+    -fx-font-size: 30px;
+    -fx-padding: 14px 0 0 0;
+}
