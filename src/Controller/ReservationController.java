@@ -41,36 +41,27 @@ public class ReservationController
         }
     }
 
-    private boolean validateInput()
+    private boolean validateInput(Reservation res)
     {
-
-        return
+        return !res.getCustomerName().equals("") || !res.getInstructor().equals("") || res.getActivity() != null || res.getDurationInMinutes() == 0 || res.getStartDate() != null;
     }
 
     public void updateActivity(Reservation reservation)
     {
-
-        if ()
+        if (reservation == null)
             bookingView.createStatusMessage(1, false);
         else
         {
-            int age = Integer.parseInt();
-            int height = Integer.parseInt();
-
-            if (validateInput())
+            if (validateInput(reservation))
             {
-                Reservation reservation = new Reservation()
-
-                // Updates activity to db, and creates success message
+                // Updates booking to db, and creates success message
                 bookingView.createStatusMessage( 1, reservationModel.updateReservation(reservation));
+                bookingView.overideAllToTable(reservationModel.readAllReservations());
             }
             else
             {
                 bookingView.createStatusMessage(1, false);
             }
         }
-
-        bookingView.overideAllToTable(reservationModel.readAllReservations());
     }
-
 }
