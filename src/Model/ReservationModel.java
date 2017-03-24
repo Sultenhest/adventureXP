@@ -117,5 +117,20 @@ public class ReservationModel
         }
     }
 
+    public boolean deleteReservation(int id)
+    {
+        try (Connection connection = DatabaseConnect.getConnection();
+            Statement statement = connection.createStatement())
+        {
+            String sql = "DELETE FROM booking WHERE bk_id = " + id;
+            int rowsAffected = statement.executeUpdate(sql);
 
+            return rowsAffected == 1;
+        }
+        catch (SQLException sqlEx)
+        {
+            sqlEx.printStackTrace();
+            return false;
+        }
+    }
 }
