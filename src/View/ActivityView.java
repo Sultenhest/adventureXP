@@ -35,8 +35,6 @@ public class ActivityView extends BaseScene implements BaseLayout, TableInterfac
 
     private TableView<Activity> activityTableView;
 
-    private Label status;
-
     private ActivityController activityController;
 
     public ActivityView(int ID)
@@ -172,27 +170,6 @@ public class ActivityView extends BaseScene implements BaseLayout, TableInterfac
         } else {
             doAlert( Alert.AlertType.ERROR, "Fejl", "Aktiviteten blev ikke " + updateStatus[buttonID] + ".", null );
         }
-    }
-
-    public void showStatus(String statusText, boolean succesfullAction)
-    {
-        status.setVisible(true);
-
-        status.setText(statusText);
-
-        if (succesfullAction)
-        {
-            status.setTextFill(Paint.valueOf("Green"));
-        }
-        else
-        {
-            status.setTextFill(Paint.valueOf("Red"));
-        }
-    }
-
-    public void hideStatus()
-    {
-        status.setVisible(false);
     }
 
     public void addSingleToTable(Activity activity)
