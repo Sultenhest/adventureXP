@@ -27,8 +27,15 @@ public class ReservationModel
              Statement statement = connection.createStatement())
         {
             String sql = "INSERT INTO booking (bk_act_id, bk_instructor, bk_customer, bk_startDate, bk_duration, bk_participants, bk_timestamp) " +
-                    "VALUES ('" + reservation.getActivity().getID() + ", " +  reservation.getInstructor() + ", " + reservation.getCustomerName() + ", " +
-                    reservation.getStartDate() + ", " + reservation
+                    "VALUES ('" + reservation.getActivity().getID() + ", " +
+                    reservation.getInstructor() + ", " +
+                    reservation.getCustomerName() + ", " +
+                    reservation.getStartDate() + ", " +
+                    reservation.getDurationInMinutes() + ", " +
+                    reservation.getAmountOfParticipants() + ", " +
+                    new Date();
+
+            int rowsAffected = statement.executeUpdate(sql);
 
             return true;
         }
@@ -50,7 +57,7 @@ public class ReservationModel
                     "', bk_startDate = " + reservation.getStartDate() +
                     ", bk_duration = " + reservation.getDurationInMinutes() +
                     ", bk_participants = " + reservation.getAmountOfParticipants() +
-                    ", bk_timestamp = " + new Date(System.currentTimeMillis());
+                    ", bk_timestamp = " + new Date();
 
             int rowsAffected = statement.executeUpdate(sql);
 
