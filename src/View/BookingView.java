@@ -94,11 +94,18 @@ public class BookingView extends BaseScene implements BaseLayout, TableInterface
         {
             case 0:
                 //create
-                callBookingModal( buttonID, "Opret Booking", "Udfyld felterne for at oprette en Booking");
+                callBookingModal( buttonID, "Opret Booking", "Udfyld felterne for at oprette en Booking", new Reservation());
                 break;
             case 1:
                 //updatere
-                callBookingModal(buttonID, "Ret Booking", "Udfyld felterne for at ændre i Bookingen");
+                if ( bookingTableView.getSelectionModel().selectedItemProperty().get() != null ) {
+                    Reservation r = bookingTableView.getSelectionModel().selectedItemProperty().get();
+
+                    callBookingModal(buttonID, "Ret Booking", "Udfyld felterne for at ændre i Bookingen", r);
+                } else {
+                    doAlert( Alert.AlertType.ERROR, "Fejl", "Vælg en booking du vil ændre.", null );
+                }
+
                 break;
             case 2:
                 //Delete
@@ -119,9 +126,34 @@ public class BookingView extends BaseScene implements BaseLayout, TableInterface
         alert.showAndWait();
     }
 
-    private void callBookingModal(int buttonID ,String title, String message ) {
+    private void callBookingModal(int buttonID ,String title, String message, Reservation reservation ) {
         BookingModal bm = new BookingModal();
-        String[] str = bm.display( title, message );
+        String[] str = bm.display( title, message, reservation );
+
+        // If Insert
+        if (buttonID == 0)
+        {
+            if(str[0] != null )
+            {
+                String activity = str[0];
+                String instructor = str[1];
+                String clientname = str[2];
+                String date = str[3];
+                String startTime = str[4];
+                String duration = str[5];
+                String participants = str[6];
+
+                //create reservation in reservationModel
+            }
+        }
+        // If Update
+        else if (buttonID ==  1)
+        {
+            if (str.length == 3 && str[0] != null)
+            {
+                //update in reservationController
+            }
+        }
     }
 
     public void overideAllToTable()

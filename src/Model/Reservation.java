@@ -17,6 +17,8 @@ public class Reservation
     private Activity activity;
     private Date timestamp;
 
+    public Reservation(){}
+
     public Reservation(long date, int durationInMinutes, String customerName, String Instructor, Activity activity, long timestamp)
     {
         this.durationInMinutes = durationInMinutes;

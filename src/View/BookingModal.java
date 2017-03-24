@@ -2,6 +2,7 @@ package View;
 
 import Model.Activity;
 import Model.ActivityModel;
+import Model.Reservation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -56,7 +57,7 @@ public class BookingModal
         return comboBox;
     }
 
-    public String[] display( String title, String message )
+    public String[] display(String title, String message, Reservation reservation)
     {
         window.setTitle( title );
         window.initModality(Modality.APPLICATION_MODAL);
