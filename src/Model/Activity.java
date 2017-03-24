@@ -1,9 +1,5 @@
 package Model;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-
 /**
  * Created by Christian and Sose on 16-03-2017.
  */

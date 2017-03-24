@@ -1,6 +1,7 @@
 package Model;
 
-import java.time.OffsetDateTime;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -44,6 +45,14 @@ public class Reservation
         return startTime;
     }
 
+    public String getStartDateAsString()
+    {
+        DateFormat dateFormat = new SimpleDateFormat("d/M/y - k:m");
+
+
+        return dateFormat.format(startTime);
+    }
+
     public void setStartTime(Date startTime)
     {
         this.startTime = startTime;
@@ -77,6 +86,11 @@ public class Reservation
     public void setInstructor(String instructor)
     {
         this.Instructor = instructor;
+    }
+
+    public String getActivityName()
+    {
+        return activity.getActivityName();
     }
 
     public Activity getActivity()

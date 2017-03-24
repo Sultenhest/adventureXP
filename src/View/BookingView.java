@@ -3,17 +3,20 @@ package View;
 import Controller.ReservationController;
 import Model.Activity;
 import Model.Reservation;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
+import java.util.Date;
 
-public class BookingView extends BaseScene implements BaseLayout, TableInterface
+public class BookingView extends BaseScene implements BaseLayout
 {
     // Controller
     private ReservationController reservationController;
@@ -37,7 +40,8 @@ public class BookingView extends BaseScene implements BaseLayout, TableInterface
         createLayout();
         createLayoutSettings();
         attachLayoutToScene();
-        //bindTable();
+        createTableColoumns();
+        bindTable();
 
         reservationController = new ReservationController();
 
@@ -52,8 +56,6 @@ public class BookingView extends BaseScene implements BaseLayout, TableInterface
         searchField = new TextField();
 
         searchFunction.getChildren().addAll( searchLabel, searchField );
-
-        //reservations = new FXCollections.observableArrayList();
 
         bookingTableView = new TableView<>();
 
@@ -167,32 +169,70 @@ public class BookingView extends BaseScene implements BaseLayout, TableInterface
         }
     }
 
+    public void createTableColoumns()
+    {
+        TableColumn<Reservation, String> date = new TableColumn<>("Dato");
+        date.setCellValueFactory(new PropertyValueFactory<Reservation, String>("startDateAsString"));
+
+        TableColumn<Reservation, String> customerName = new TableColumn<>("Customer Name");
+        customerName.setCellValueFactory(new PropertyValueFactory<Reservation, String>("customerName"));
+
+        TableColumn<Reservation, Integer> amountOfParticipants = new TableColumn<>("Amount Of Participants");
+        amountOfParticipants.setCellValueFactory(new PropertyValueFactory<Reservation, Integer>("amountOfParticipants"));
+
+        TableColumn<Reservation, String> instructor = new TableColumn<>("Instructor");
+        instructor.setCellValueFactory(new PropertyValueFactory<Reservation, String>("Instructor"));
+
+        TableColumn<Reservation, String> activityName = new TableColumn<>("Activity");
+        activityName.setCellValueFactory(new PropertyValueFactory<Reservation, String>("activityName"));
+
+        bookingTableView.getColumns().addAll(date, customerName, amountOfParticipants, instructor, activityName);
+
+        //Test
+
+        ArrayList<Reservation> reservations = new ArrayList<>();
+        reservations.add(new Reservation(1000, 200, "Morten", "Torben", new Activity("goCart", 0, 0)));
+        reservations.add(new Reservation(4000, 300, "Tim", "Simon", new Activity("Sumo", 0, 0)));
+
+        this.reservations = FXCollections.observableList(reservations);
+        addMultiToTableOb(this.reservations);
+    }
+
     public void overideAllToTable()
     {
 
     }
 
-    @Override
-    public void addSingleToTable(Activity activity) {
+    public void addSingleToTable(Reservation reservation)
+    {
+        bookingTableView.getItems().add(reservation);
+    }
+
+    public void addMultiToTable(ArrayList<Reservation> reservations)
+    {
+        ObservableList<Reservation> observableList = FXCollections.observableList(reservations);
+
+        this.bookingTableView.getItems().addAll(observableList);
+    }
+
+    public void addMultiToTableOb(ObservableList<Reservation> reservations)
+    {
+        this.bookingTableView.getItems().addAll(reservations);
+    }
+
+    public void overideAllToTable(ArrayList<Reservation> reservations)
+    {
+        this.bookingTableView.getItems().clear();
+
+        ObservableList<Reservation> observableList = FXCollections.observableList(reservations);
+
+        this.bookingTableView.getItems().addAll(observableList);
+    }
+
+    public void updateCellString(TableColumn.CellEditEvent<Reservation, String> cellEditEvent, CellEditType cellEditType) {
 
     }
 
-    @Override
-    public void addMultiToTable(ArrayList<Activity> activities) {
-
-    }
-
-    @Override
-    public void overideAllToTable(ArrayList<Activity> activities) {
-
-    }
-
-    @Override
-    public void updateCellString(TableColumn.CellEditEvent<Activity, String> cellEditEvent, CellEditType cellEditType) {
-
-    }
-
-    @Override
     public void updateCellInteger(TableColumn.CellEditEvent<Activity, Integer> cellEditEvent, CellEditType cellEditType) {
 
     }
@@ -209,14 +249,14 @@ public class BookingView extends BaseScene implements BaseLayout, TableInterface
         setScene(this.layout);
     }
 
-    /*
+
     private void bindTable()
     {
         FilteredList<Reservation> filteredData = new FilteredList<>(reservations, p -> true);
 
         searchField.textProperty().addListener((observable, oldValue, newValue) ->
         {
-            filteredData.setPredicate(product -> {
+            filteredData.setPredicate(reservation -> {
                 if (newValue == null || newValue.isEmpty())
                 {
                     return true;
@@ -224,15 +264,23 @@ public class BookingView extends BaseScene implements BaseLayout, TableInterface
 
                 String lowerCaseFilter = newValue.toLowerCase();
 
-                /*if (reservations.getName().toLowerCase().indexOf(lowerCaseFilter) != -1)
+                if (reservation.getStartDate().toString().toLowerCase().indexOf(lowerCaseFilter) != -1)
                 {
                     return true; // Filter matches first name.
                 }
-                else if (reservations.getName().toLowerCase().indexOf(lowerCaseFilter) != -1)
+                else if (reservation.getCustomerName().toLowerCase().indexOf(lowerCaseFilter) != -1)
                 {
                     return true; // Filter matches last name.
                 }
-                else if (reservations.getName().toLowerCase().indexOf(lowerCaseFilter) != -1)
+                else if (String.valueOf(reservation.getAmountOfParticipants()).toLowerCase().indexOf(lowerCaseFilter) != -1)
+                {
+                    return true; // Filter matches last name.
+                }
+                else if (reservation.getActivityName().toLowerCase().indexOf(lowerCaseFilter) != -1)
+                {
+                    return true; // Filter matches last name.
+                }
+                else if (reservation.getInstructor().toLowerCase().indexOf(lowerCaseFilter) != -1)
                 {
                     return true; // Filter matches last name.
                 }
@@ -247,5 +295,4 @@ public class BookingView extends BaseScene implements BaseLayout, TableInterface
 
         bookingTableView.setItems(sortedData);
     }
-    */
 }

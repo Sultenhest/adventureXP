@@ -2,30 +2,22 @@ package View;
 
 import Controller.ActivityController;
 import Model.Activity;
-import Model.Final_ErrorMessages;
-import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
-import javafx.util.converter.IntegerStringConverter;
 
 import java.util.ArrayList;
-import java.util.Observable;
 
 /**
  * Created by Christian on 16-03-2017.
  */
 
-public class ActivityView extends BaseScene implements BaseLayout, TableInterface
+public class ActivityView extends BaseScene implements BaseLayout
 {
     private VBox layout;
 
