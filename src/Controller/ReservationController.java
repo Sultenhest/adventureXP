@@ -3,6 +3,7 @@ package Controller;
 import Model.Activity;
 import Model.Reservation;
 import Model.ReservationModel;
+import View.BookingView;
 
 /**
  * Created by JonasBak on 23-03-2017.
@@ -11,6 +12,7 @@ public class ReservationController
 {
     // Model
     private ReservationModel reservationModel;
+    private BookingView bookingView;
 
     // Constructor
     public ReservationController()
@@ -27,15 +29,14 @@ public class ReservationController
 
         if (oneBookingFieldIsEmpty)
         {
-            // Send/Set error message to View
+            //bookingView.createStatusMessage(0, false);
         }
         else //Creates reservation object & calls method in ReservationModel that insert "Reservation" object in DB
         {
             Reservation reservation = new Reservation(date, durationInMinutes, customerName, instructor, activity);
             reservationModel.insertReservationInDB(reservation);
+            //bookingView.createStatusMessage(0, true);
         }
-
-
     }
 
 }
