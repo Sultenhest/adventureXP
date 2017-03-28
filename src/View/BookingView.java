@@ -149,7 +149,7 @@ public class BookingView extends BaseScene implements BaseLayout
                 String duration = str[5];
                 String participants = str[6];
 
-                //create reservation in reservationModel
+                reservationController.submitBooking(str);
             }
         }
         // If Update
