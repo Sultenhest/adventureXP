@@ -40,10 +40,10 @@ public class ReservationModel
             String sql = "INSERT INTO booking (bk_act_id, bk_instructor, bk_customer, bk_date, bk_startTime, bk_endTime, bk_participants) " +
                     "VALUES (" + reservation.getActivity().getID() + ", '" +
                     reservation.getInstructor() + "', '" +
-                    reservation.getCustomerName() + "', " +
-                    reservation.getDate() + ", " +
-                    reservation.getEndTime() + ", " +
-                    reservation.getStartTime() + ", " +
+                    reservation.getCustomerName() + "', '" +
+                    reservation.getDate() + "', '" +
+                    reservation.getEndTime() + "', '" +
+                    reservation.getStartTime() + "', " +
                     reservation.getAmountOfParticipants() + ")";
 
             int rowsAffected = statement.executeUpdate(sql);
@@ -66,10 +66,9 @@ public class ReservationModel
                     ", bk_instructor = '" + reservation.getInstructor() +
                     "', bk_customer = '" + reservation.getCustomerName() +
                     "', bk_date = '" + reservation.getDate() +
-                    "', bk_startTime = " + reservation.getStartTime() +
-                    ", bk_endTime = " + reservation.getEndTime() +
-                    ", bk_participants = " + reservation.getAmountOfParticipants();
-            System.out.println(sql);
+                    "', bk_startTime = '" + reservation.getStartTime() +
+                    "', bk_endTime = '" + reservation.getEndTime() +
+                    "', bk_participants = " + reservation.getAmountOfParticipants();
 
             int rowsAffected = statement.executeUpdate(sql);
 
