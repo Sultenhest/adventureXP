@@ -88,16 +88,16 @@ public class ReservationController
 
     private Date splitTheDate(String s)
     {
-        String[] stringDate = s.split("/");
-
-        if (stringDate[0].length() != 2)
-            stringDate[0] = "0" + stringDate[0];
+        String[] stringDate = s.split("-");
 
         if (stringDate[1].length() != 2)
             stringDate[1] = "0" + stringDate[1];
 
+        if (stringDate[2].length() != 2)
+            stringDate[2] = "0" + stringDate[2];
+
         Date date = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/d/YYYY");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/YYYY");
         try
         {
             date = dateFormat.parse(s);
