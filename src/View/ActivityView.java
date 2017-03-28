@@ -113,7 +113,7 @@ public class ActivityView extends BaseScene implements BaseLayout
                 //Delete
                 if ( Alerts.doConfirmBox( "Er du sikker?", "Er du sikker på du vil slette det her?", null ) )
                 {
-                    //delete here
+                    activityController.deleteActivity(activityTableView.getSelectionModel().selectedItemProperty().get());
                 }
                 break;
             default:
