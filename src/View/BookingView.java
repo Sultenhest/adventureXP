@@ -1,6 +1,7 @@
 package View;
 
 import Controller.ReservationController;
+import Model.Activity;
 import Model.Reservation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,7 +13,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class BookingView extends BaseScene implements BaseLayout
 {
@@ -29,6 +34,7 @@ public class BookingView extends BaseScene implements BaseLayout
     private Label searchLabel = new Label("Søg: ");
 
     private TableView<Reservation> bookingTableView;
+    private TableView<Reservation> bookingCalendarTableView;
 
     private ObservableList<Reservation> reservations;
 
@@ -279,5 +285,57 @@ public class BookingView extends BaseScene implements BaseLayout
         sortedData.comparatorProperty().bind(bookingTableView.comparatorProperty());
 
         bookingTableView.setItems(sortedData);
+    }
+
+    public void createCalendarTable()
+    {
+        bookingCalendarTableView = new TableView<>();
+
+        TableColumn<Reservation, String> time = new TableColumn<>("Tid");
+        time.setCellValueFactory(new PropertyValueFactory<Reservation, String>("startTimeAsString"));
+
+        TableColumn<Reservation, String> customerName = new TableColumn<>("Customer Name");
+        customerName.setCellValueFactory(new PropertyValueFactory<Reservation, String>("customerName"));
+
+        TableColumn<Reservation, Integer> amountOfParticipants = new TableColumn<>("Amount Of Participants");
+        amountOfParticipants.setCellValueFactory(new PropertyValueFactory<Reservation, Integer>("amountOfParticipants"));
+
+        TableColumn<Reservation, String> instructor = new TableColumn<>("Instructor");
+        instructor.setCellValueFactory(new PropertyValueFactory<Reservation, String>("Instructor"));
+
+        TableColumn<Reservation, String> activityName = new TableColumn<>("Activity");
+        activityName.setCellValueFactory(new PropertyValueFactory<Reservation, String>("activityName"));
+
+        bookingCalendarTableView.getColumns().addAll(time, customerName, amountOfParticipants, instructor, activityName);
+    }
+
+    public void fillCalendarTable()
+    {
+        Calendar calendar = new GregorianCalendar();
+        calendar.set(2017, 03, 28, 0, 0);
+
+        DateFormat dateFormat = new SimpleDateFormat("k:m");
+
+        this.bookingCalendarTableView.getItems().clear();
+
+        int count = 30;
+        int hour = 0;
+
+        for (int i = 1; i <= 48; i++)
+        {
+            if (count != 60)
+            {
+                count += 30;
+            }
+            else
+            {
+                count = 0;
+                hour++;
+            }
+
+            calendar.set(2017, 03, 28, hour, count);
+            bookingCalendarTableView.getItems().add(new Reservation(dateFormat.format(calendar.getTime()), "Morten", "Torben", new Activity("", 0, 0)));
+
+        }
     }
 }
