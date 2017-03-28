@@ -19,9 +19,10 @@ public class ReservationController
     private BookingView bookingView;
 
     // Constructor
-    public ReservationController()
+    public ReservationController(BookingView bookingView)
     {
         reservationModel = new ReservationModel(this);
+        this.bookingView = bookingView;
     }
 
     public void submitBooking(String[] informations)

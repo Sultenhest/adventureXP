@@ -48,7 +48,7 @@ public class BookingView extends BaseScene implements BaseLayout
         createCalendarTable();
         fillCalendarTable();
 
-        reservationController = new ReservationController();
+        reservationController = new ReservationController(this);
 
     }
 
@@ -150,14 +150,6 @@ public class BookingView extends BaseScene implements BaseLayout
         {
             if(str[0] != null )
             {
-                String activity = str[0];
-                String instructor = str[1];
-                String clientname = str[2];
-                String date = str[3];
-                String startTime = str[4];
-                String duration = str[5];
-                String participants = str[6];
-
                 reservationController.submitBooking(str);
             }
         }
@@ -190,9 +182,7 @@ public class BookingView extends BaseScene implements BaseLayout
 
         bookingTableView.getColumns().addAll(date, customerName, amountOfParticipants, instructor, activityName);
 
-        ReservationController resCon = new ReservationController();
-
-        addMultiToTableOb(FXCollections.observableList(resCon.getReservationModel().readAllReservations()));
+        addMultiToTableOb(FXCollections.observableList(reservationController.getReservationModel().readAllReservations()));
     }
 
     public void addSingleToTable(Reservation reservation)
