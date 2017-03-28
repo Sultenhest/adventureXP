@@ -7,10 +7,6 @@ import Model.DatabaseConnect;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-/**
- * Created by Christian and Sose on 16-03-2017.
- */
-
 public class Main_GUI extends Application
 {
     private static Stage window;

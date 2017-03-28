@@ -5,9 +5,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-/**
- * Created by Andreas on 17-03-2017.
- */
 public class ActivityModel
 {
     private static ActivityModel instance = null;

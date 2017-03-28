@@ -4,10 +4,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by Christian and Sose on 16-03-2017.
- */
-
 public class Reservation
 {
     private int ID;

@@ -1,9 +1,5 @@
 package Model;
 
-/**
- * Created by Christian and Sose on 16-03-2017.
- */
-
 public class Database
 {
     private static Database instance = new Database();

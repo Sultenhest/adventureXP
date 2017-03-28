@@ -1,8 +1,5 @@
 package Controller;
 
-/**
- * Created by JonasBak on 21-03-2017.
- */
 public class InputParser
 {
     public static boolean parseInt(String text, int min, int max)

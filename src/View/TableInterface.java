@@ -5,9 +5,6 @@ import javafx.scene.control.TableColumn;
 
 import java.util.ArrayList;
 
-/**
- * Created by Christian on 21-03-2017.
- */
 public interface TableInterface
 {
     void addSingleToTable(Activity activity);

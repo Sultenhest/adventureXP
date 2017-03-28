@@ -9,10 +9,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 
-
-/**
- * Created by JonasBak on 23-03-2017.
- */
 public class ReservationModel
 {
     private static ReservationModel instance = null;

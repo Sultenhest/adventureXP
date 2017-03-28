@@ -11,21 +11,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-/**
- * Created by Christian on 23-03-2017.
- */
-
-/*
-    Name: Christian Hvidkjær
-    Date: 23-03-2017
-    Class: Dat16v2
-    Book Excersise: ***
-    Handin-Excersise Titel: ***
-    Handin-Excersise: BaseModal
-    Question:
-    ***
-*/
-
 public abstract class BaseModal
 {
     private String[] output;

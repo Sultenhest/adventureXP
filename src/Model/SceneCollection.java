@@ -4,9 +4,6 @@ import View.BaseScene;
 
 import java.util.ArrayList;
 
-/**
- * Created by Christian on 17-03-2017.
- */
 public class SceneCollection
 {
     private ArrayList<BaseScene> sceneList = new ArrayList<>();

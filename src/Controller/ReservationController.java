@@ -10,9 +10,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by JonasBak on 23-03-2017.
- */
 public class ReservationController
 {
     private BookingView bookingView;

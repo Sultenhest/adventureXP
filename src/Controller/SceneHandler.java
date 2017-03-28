@@ -6,10 +6,6 @@ import View.BaseScene;
 import View.BookingView;
 import View.Main_GUI;
 
-/**
- * Created by Christian on 17-03-2017.
- */
-
 //Handles creating scenes, Storing them, and changing the stage scene
 public class SceneHandler
 {

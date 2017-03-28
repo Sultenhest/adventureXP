@@ -13,10 +13,6 @@ import javafx.scene.paint.Paint;
 
 import java.util.ArrayList;
 
-/**
- * Created by Christian on 16-03-2017.
- */
-
 public class ActivityView extends BaseScene implements BaseLayout
 {
     private VBox layout;

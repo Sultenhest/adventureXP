@@ -1,8 +1,5 @@
 package Model;
 
-/**
- * Created by Christian on 16-03-2017.
- */
 public class Finals
 {
     private final int minWindowWitdh = 600;

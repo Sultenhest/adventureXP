@@ -12,10 +12,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-/**
- * Created by Christian and Sose on 16-03-2017.
- */
-
 public abstract class BaseScene
 {
     private int ID;
