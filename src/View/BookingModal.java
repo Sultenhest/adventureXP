@@ -65,7 +65,7 @@ public class BookingModal
         String str  = "Aktiviteten har følgende aldersbegrænsning: " + a.getAgeLimit() + "\n";
                str += "Aktiviteten har følgende højdebegrænsning:  " + a.getHeightLimit();
 
-        Alerts.doInformationBox( "Aktivitetsbegrænsninger", "Vær opmærksom på følgende:", str );
+        Alerts.doInformationBox( "Aktivitetsbegrænsninger", "Vær opmærksom på følgende vdr. " + a.getActivityName(), str );
     }
 
     public String[] display(String title, String message, Reservation reservation)
