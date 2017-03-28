@@ -57,6 +57,9 @@ CREATE TABLE `booking` (
   `bk_timestamp` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- new addition
+insert into booking values(1, 1, 'Test_Ins', 'Test_cust', now(), now(), 123, 10, now());
+
 -- --------------------------------------------------------
 
 --

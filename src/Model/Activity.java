@@ -82,8 +82,32 @@ public class Activity
         this.activityInfo = activityInfo;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-//    public boolean save()
+        Activity activity = (Activity) o;
+
+        if (getID() != activity.getID()) return false;
+        if (getAgeLimit() != activity.getAgeLimit()) return false;
+        if (getHeightLimit() != activity.getHeightLimit()) return false;
+        if (getActivityName() != null ? !getActivityName().equals(activity.getActivityName()) : activity.getActivityName() != null)
+            return false;
+        return getActivityInfo() != null ? getActivityInfo().equals(activity.getActivityInfo()) : activity.getActivityInfo() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getID();
+        result = 31 * result + getAgeLimit();
+        result = 31 * result + getHeightLimit();
+        result = 31 * result + (getActivityName() != null ? getActivityName().hashCode() : 0);
+        result = 31 * result + (getActivityInfo() != null ? getActivityInfo().hashCode() : 0);
+        return result;
+    }
+
+    //    public boolean save()
 //    {
 //        try
 //        {
