@@ -65,11 +65,11 @@ public class ReservationModel
             String sql = "UPDATE booking SET bk_act_id = " + reservation.getActivity().getID() +
                     ", bk_instructor = '" + reservation.getInstructor() +
                     "', bk_customer = '" + reservation.getCustomerName() +
-                    "', bk_date = " + reservation.getDate() +
-                    ", bk_startTime = " + reservation.getStartTime() +
+                    "', bk_date = '" + reservation.getDate() +
+                    "', bk_startTime = " + reservation.getStartTime() +
                     ", bk_endTime = " + reservation.getEndTime() +
-                    ", bk_participants = " + reservation.getAmountOfParticipants() +
-                    ", bk_timestamp = " + new Date();
+                    ", bk_participants = " + reservation.getAmountOfParticipants();
+            System.out.println(sql);
 
             int rowsAffected = statement.executeUpdate(sql);
 
