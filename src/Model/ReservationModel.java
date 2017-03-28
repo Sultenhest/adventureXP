@@ -36,7 +36,7 @@ public class ReservationModel
                     reservation.getStartDate() + ", " +
                     reservation.getDurationInMinutes() + ", " +
                     reservation.getAmountOfParticipants() + ", " +
-                    new Date();
+                    new Date() + ")";
 
             int rowsAffected = statement.executeUpdate(sql);
 
