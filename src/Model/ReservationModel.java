@@ -33,10 +33,12 @@ public class ReservationModel
                     "VALUES (" + reservation.getActivity().getID() + ", '" +
                     reservation.getInstructor() + "', '" +
                     reservation.getCustomerName() + "', " +
-                    reservation.getStartDate() + ", " +
+                    new java.sql.Date(reservation.getStartDate().getTime()) + ", " +
                     reservation.getDurationInMinutes() + ", " +
                     reservation.getAmountOfParticipants() + ", " +
-                    new Date() + ")";
+                    new java.sql.Date(System.currentTimeMillis()) + ")";
+
+            System.out.println(sql);
 
             int rowsAffected = statement.executeUpdate(sql);
 
