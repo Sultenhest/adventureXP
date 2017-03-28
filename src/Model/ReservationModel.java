@@ -41,12 +41,9 @@ public class ReservationModel
                     "VALUES (" + reservation.getActivity().getID() + ", '" +
                     reservation.getInstructor() + "', '" +
                     reservation.getCustomerName() + "', " +
-                    new java.sql.Date(reservation.getStartDate().getTime()) + ", " +
-                    reservation.getDurationInMinutes() + ", " +
-                    reservation.getAmountOfParticipants() + ", " +
-                    new java.sql.Date(System.currentTimeMillis()) + ")";
-
-            System.out.println(sql);
+                    reservation.getDate() + ", " +
+                    reservation.getEndTime() + ", " +
+                    reservation.getAmountOfParticipants() + ")";
 
             int rowsAffected = statement.executeUpdate(sql);
 
@@ -67,8 +64,8 @@ public class ReservationModel
             String sql = "UPDATE booking SET bk_act_id = " + reservation.getActivity().getID() +
                     ", bk_instructor = '" + reservation.getInstructor() +
                     "', bk_customer = '" + reservation.getCustomerName() +
-                    "', bk_startDate = " + reservation.getStartDate() +
-                    ", bk_duration = " + reservation.getDurationInMinutes() +
+                    "', bk_startDate = " + reservation.getDate() +
+                    ", bk_duration = " + reservation.getEndTime() +
                     ", bk_participants = " + reservation.getAmountOfParticipants() +
                     ", bk_timestamp = " + new Date();
 
@@ -93,7 +90,9 @@ public class ReservationModel
 
             ResultSet rs = statement.executeQuery(sql);
 
-            return new Reservation(rs.getInt("bk_id"), rs.getLong("bk_startDate"), rs.getInt("bk_duration"), rs.getString("bk_customer"), rs.getString("bk_instructor"), rs.getInt("bk_participants"), am.read(rs.getInt("bk_act_id")), rs.getLong("bk_timestamp"));
+            return new Reservation(rs.getInt("bk_id"), rs.getDate("bk_startDate").toLocalDate(),
+                    rs.getString("bk_startTime"), rs.getString("bk_duration"), rs.getString("bk_customer"),
+                    rs.getString("bk_instructor"), rs.getInt("bk_participants"), am.read(rs.getInt("bk_act_id")));
         }
         catch (SQLException sqlEx)
         {
@@ -115,7 +114,9 @@ public class ReservationModel
 
             while (rs.next())
             {
-                listOfReservations.add(new Reservation(rs.getInt("bk_id"), rs.getLong(5), rs.getInt(6), rs.getString(4), rs.getString(3), rs.getInt("bk_participants"), am.read(rs.getInt(1)), rs.getLong(8)));
+                listOfReservations.add(new Reservation(rs.getInt("bk_id"), rs.getDate("bk_startDate").toLocalDate(),
+                        rs.getString("bk_startTime"), rs.getString("bk_duration"), rs.getString("bk_customer"),
+                        rs.getString("bk_instructor"), rs.getInt("bk_participants"), am.read(rs.getInt("bk_act_id"))));
             }
 
             return listOfReservations;

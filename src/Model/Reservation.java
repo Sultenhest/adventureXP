@@ -2,53 +2,43 @@ package Model;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Reservation
 {
     private int ID;
-    private Date startTime;
-    private int durationInMinutes;
+    private LocalDate date;
+    private String startTime;
+    private String endTime;
     private int amountOfParticipants;
     private String customerName;
     private String Instructor;
     private Activity activity;
-    private Date timestamp;
 
     public Reservation(){}
 
-    public Reservation(int ID, long date, int durationInMinutes, String customerName, String Instructor, int amountOfParticipants, Activity activity, long timestamp)
+    public Reservation(int ID, LocalDate date, String startTime, String endTime, String customerName, String Instructor, int amountOfParticipants, Activity activity)
     {
         this.ID = ID;
-        this.durationInMinutes = durationInMinutes;
+        this.endTime = endTime;
         this.customerName = customerName;
         this.Instructor = Instructor;
         this.activity = activity;
-        this.timestamp = new Date(timestamp);
-        this.startTime = new Date(date);
+        this.startTime = startTime;
+        this.date = date;
         this.amountOfParticipants = amountOfParticipants;
     }
 
-    public Reservation(int ID, Date date, int durationInMinutes, int amountOfParticipants, String customerName, String Instructor, Activity activity, Date timestamp)
+    public Reservation(LocalDate date, String startTime, String endTime, String customerName, String Instructor, int amountOfParticipants, Activity activity)
     {
-        this.ID = ID;
-        this.durationInMinutes = durationInMinutes;
-        this.amountOfParticipants = amountOfParticipants;
+        this.endTime = endTime;
+        this.startTime = startTime;
         this.customerName = customerName;
         this.Instructor = Instructor;
         this.activity = activity;
-        this.timestamp = timestamp;
-        this.startTime = date;
-    }
-
-    public Reservation(Date date, int durationInMinutes, String customerName, String Instructor, int amountOfParticipants, Activity activity)
-    {
-        this.durationInMinutes = durationInMinutes;
-        this.customerName = customerName;
-        this.Instructor = Instructor;
-        this.activity = activity;
-        this.timestamp = new Date();
-        this.startTime = date;
+        this.date = date;
         this.amountOfParticipants = amountOfParticipants;
     }
 
@@ -62,40 +52,36 @@ public class Reservation
         this.ID = ID;
     }
 
-    public Date getStartDate()
+    public LocalDate getDate()
+    {
+        return date;
+    }
+
+    public String getDateAsString()
+    {
+        DateFormat dateFormat = new SimpleDateFormat("d/M/y - k:m");
+
+        return dateFormat.format(date);
+    }
+
+    public String getStartTime()
     {
         return startTime;
     }
 
-    public String getStartDateAsString()
-    {
-        DateFormat dateFormat = new SimpleDateFormat("d/M/y - k:m");
-
-
-        return dateFormat.format(startTime);
-    }
-
-    public String getStartTimeAsString()
-    {
-        DateFormat dateFormat = new SimpleDateFormat("kk:mm");
-
-
-        return dateFormat.format(startTime);
-    }
-
-    public void setStartTime(Date startTime)
+    public void setStartTime(String startTime)
     {
         this.startTime = startTime;
     }
 
-    public int getDurationInMinutes()
+    public String getEndTime()
     {
-        return durationInMinutes;
+        return endTime;
     }
 
-    public void setDurationInMinutes(int durationInMinutes)
+    public void setEndTime(String endTime)
     {
-        this.durationInMinutes = durationInMinutes;
+        this.endTime = endTime;
     }
 
     public String getCustomerName()

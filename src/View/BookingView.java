@@ -20,6 +20,9 @@ import java.util.GregorianCalendar;
 
 public class BookingView extends BaseScene implements BaseLayout
 {
+    // Controller
+    private ReservationController reservationController;
+
     private VBox layout;
 
     private Button createBooking;
@@ -34,18 +37,15 @@ public class BookingView extends BaseScene implements BaseLayout
 
     private ObservableList<Reservation> reservations;
 
-    private ReservationController reservationController;
-
     public BookingView(int ID)
     {
+        reservationController = new ReservationController(this);
+
         setID(ID);
         createLayout();
-        createTableColoumns();
         createLayoutSettings();
         attachLayoutToScene();
-
-        reservationController = new ReservationController( this );
-
+        createTableColoumns();
         bindTable();
         createCalendarTable();
         fillCalendarTable();
@@ -149,25 +149,31 @@ public class BookingView extends BaseScene implements BaseLayout
     }
 
     private void callBookingModal(int buttonID ,String title, String message, Reservation reservation ) {
+    public void createStatusMessage(int buttonID, boolean succesfullAction)
+    {
+        String[] updateStatus = { "oprettet", "opdateret", "slettet" };
+
+        if ( succesfullAction ) {
+            Alerts.doInformationBox( "Succes", "Reservationen blev " + updateStatus[buttonID] + ".", null );
+        } else {
+            Alerts.doErrorBox( "Fejl", "Reservationen blev ikke " + updateStatus[buttonID] + ".", null );
+        }
+    }
+
+    private void callBookingModal(int buttonID ,String title, String message,Reservation reservation) {
         BookingModal bm = new BookingModal();
-        String[] str = bm.display( title, message, reservation );
+        Reservation res = bm.display( title, message, reservation);
 
         // If Insert
         if (buttonID == 0)
-        {
-            if(str[0] != null )
-            {
-                reservationController.submitBooking(str);
-            }
-        }
+            if(res != null )
+                reservationController.submitBooking(res);
         // If Update
         else if (buttonID ==  1)
-        {
-            if (str.length == 3 && str[0] != null)
+            if (res != null)
             {
                 //update in reservationController
             }
-        }
     }
 
     public void createStatusMessage(int buttonID, boolean succesfullAction)
@@ -218,7 +224,7 @@ public class BookingView extends BaseScene implements BaseLayout
 
                 String lowerCaseFilter = newValue.toLowerCase();
 
-                if (reservation.getStartDate().toString().toLowerCase().indexOf(lowerCaseFilter) != -1)
+                if (reservation.getDate().toString().toLowerCase().indexOf(lowerCaseFilter) != -1)
                 {
                     return true; // Filter matches first name.
                 }
@@ -287,7 +293,7 @@ public class BookingView extends BaseScene implements BaseLayout
             Date date = new Date();
             date.setTime(calendar.getTimeInMillis());
 
-            bookingCalendarTableView.getItems().add(new Reservation(date, 0, "", "", 0, new Activity("", 0, 0)));
+            //bookingCalendarTableView.getItems().add(new Reservation(date, 0, "", "", 0, new Activity("", 0, 0)));
 
         }
     }

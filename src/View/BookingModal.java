@@ -24,6 +24,7 @@ public class BookingModal
     private VBox layout = new VBox(10);
     private GridPane grid = new GridPane();
     private Button closeButton = new Button("Annuller");
+    private Reservation res;
 
     private ObservableList<String> activities;
     private ComboBox<String> comboBox;
@@ -53,7 +54,7 @@ public class BookingModal
         Alerts.doInformationBox( "Aktivitetsbegrænsninger", "Vær opmærksom på følgende vdr. " + a.getActivityName(), str );
     }
 
-    public String[] display(String title, String message, Reservation reservation)
+    public Reservation display(String title, String message, Reservation reservation)
     {
         window.setTitle( title );
         window.initModality(Modality.APPLICATION_MODAL);
@@ -101,6 +102,13 @@ public class BookingModal
         Button submitButton = new Button(title);
 
         submitButton.setOnAction(e -> {
+
+            int actID = Integer.parseInt(comboBox.getValue().substring(0, comboBox.getValue().indexOf(":")));
+
+            this.res = new Reservation(date.getValue(), startTimeField.getText(), durationField.getText(),
+                    clientField.getText(), instructorField.getText(), Integer.parseInt(participantsField.getText()),
+                    ActivityModel.getInstance().read(actID));
+
             output[0] = comboBox.getValue();
             output[1] = instructorField.getText().trim();
             output[2] = clientField.getText().trim();
@@ -123,6 +131,6 @@ public class BookingModal
         window.setScene(scene);
         window.showAndWait();
 
-        return output;
+        return res;
     }
 }
