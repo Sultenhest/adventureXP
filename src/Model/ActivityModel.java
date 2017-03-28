@@ -27,9 +27,19 @@ public class ActivityModel
     {
         try
         {
-            String sqlStatement = "INSERT INTO activity (act_name, act_min_age, act_min_height) "  +
-                    "VALUES ('"+ activity.getActivityName() +"', " + activity.getAgeLimit() + ", "
-                    + activity.getHeightLimit() + ")";
+            String sqlStatement = null;
+            if (activity.getID() == -1)
+            {
+                sqlStatement = "INSERT INTO activity (act_name, act_min_age, act_min_height) "  +
+                        "VALUES ('"+ activity.getActivityName() +"', " + activity.getAgeLimit() + ", "
+                        + activity.getHeightLimit() + ")";
+            }
+            else if (activity.getID() >= 0)
+            {
+                sqlStatement = "INSERT INTO activity "  +
+                        "VALUES (" + activity.getID() + ", '" + activity.getActivityName() +"', " + activity.getAgeLimit() + ", "
+                        + activity.getHeightLimit() + ")";
+            }
 
             Connection conn = DatabaseConnect.getConnection();
             Statement st = conn.createStatement();

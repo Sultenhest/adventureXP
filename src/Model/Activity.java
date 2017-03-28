@@ -18,6 +18,7 @@ public class Activity
 
     public Activity(String name, int ageLimit, int heightLimit)
     {
+        ID = -1;
         activityName = name;
         this.ageLimit = ageLimit;
         this.heightLimit = heightLimit;
@@ -36,10 +37,10 @@ public class Activity
         return ID;
     }
 
-    public void setID(int ID)
-    {
-        this.ID = ID;
-    }
+//    public void setID(int ID)
+//    {
+//        this.ID = ID;
+//    }
 
     public int getAgeLimit()
     {

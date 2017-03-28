@@ -1,42 +1,35 @@
-//package Model;
+package Model;
+
+import org.junit.Test;
+
+import java.sql.Connection;
+
+import static org.junit.Assert.*;
+
 //
-//import org.junit.Test;
+//Created by DaMasterHam on 28-03-2017.
 //
-//import java.sql.Connection;
-//
-//import static org.junit.Assert.*;
-//
-////
-////Created by DaMasterHam on 21-03-2017.
-////
-//public class DatabaseConnectTest
-//{
-//    @Test
-//    public void SetDataConnectionValues() throws Exception
-//    {
-//        DatabaseConnect.setDbName("adventure_xp");
-//        DatabaseConnect.setUser("root");
-//        DatabaseConnect.setPass("pass1234");
-//        DatabaseConnect.setPort("4200");
-//
-//
-//        Connection conn = DatabaseConnect.getConnection();
-//
-//        assertNotNull(conn);
-//
-//    }
-//
-//    @Test
-//    public void SaveActivity() throws Exception
-//    {
-//        DatabaseConnect.setDbName("adventure_xp");
-//        DatabaseConnect.setUser("root");
-//        DatabaseConnect.setPass("pass1234");
-//        DatabaseConnect.setPort("4200");
-//
-//        Activity act = new Activity("Sumo", 15, 150);
-//        boolean saveSuccesful = act.save();
-//
-//        assertTrue(saveSuccesful);
-//    }
-//}
+public class DatabaseConnectTest
+{
+
+    private void setupDB()
+    {
+        // Change the credentials to your local db's credentials to test locally
+        DatabaseConnect.setDbName("adventure_xp");
+        DatabaseConnect.setUser("root");
+        DatabaseConnect.setPass("pass1234");
+        DatabaseConnect.setPort("4200");
+    }
+
+
+    @Test
+    public void GetDatabaseConnection() throws Exception
+    {
+        setupDB();
+
+        Connection conn = DatabaseConnect.getConnection();
+
+        assertFalse(conn.isClosed());
+    }
+
+}
