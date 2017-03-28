@@ -110,10 +110,11 @@ public class BookingView extends BaseScene implements BaseLayout
 
                 break;
             case 2:
-                //Delete
+                //Delete Reservation
                 if ( Alerts.doConfirmBox( "Er du sikker?", "Er du sikker på du vil slette det her?", null ) )
                 {
-                    //delete here
+                    ReservationController resCon = new ReservationController();
+                    resCon.deleteBooking(bookingTableView.getSelectionModel().selectedItemProperty().get());
                 }
                 break;
             default:
