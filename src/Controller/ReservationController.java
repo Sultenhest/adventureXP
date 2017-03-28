@@ -15,14 +15,14 @@ import java.util.Date;
  */
 public class ReservationController
 {
-    private ReservationModel reservationModel;
     private BookingView bookingView;
+    private ReservationModel reservationModel = ReservationModel.getInstance();
 
     // Constructor
     public ReservationController(BookingView bookingView)
     {
-        reservationModel = new ReservationModel(this);
         this.bookingView = bookingView;
+        this.bookingView.overideAllToTable(reservationModel.readAllReservations());
     }
 
     public void submitBooking(String[] informations)

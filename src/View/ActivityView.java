@@ -161,18 +161,6 @@ public class ActivityView extends BaseScene implements BaseLayout
         }
     }
 
-    public void addSingleToTable(Activity activity)
-    {
-        this.activityTableView.getItems().add(activity);
-    }
-
-    public void addMultiToTable(ArrayList<Activity> activities)
-    {
-        ObservableList<Activity> observableList = FXCollections.observableList(activities);
-
-        this.activityTableView.getItems().addAll(observableList);
-    }
-
     public void overideAllToTable(ArrayList<Activity> activities)
     {
         this.activityTableView.getItems().clear();

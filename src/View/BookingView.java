@@ -20,9 +20,6 @@ import java.util.GregorianCalendar;
 
 public class BookingView extends BaseScene implements BaseLayout
 {
-    // Controller
-    private ReservationController reservationController;
-
     private VBox layout;
 
     private Button createBooking;
@@ -37,15 +34,18 @@ public class BookingView extends BaseScene implements BaseLayout
 
     private ObservableList<Reservation> reservations;
 
+    private ReservationController reservationController;
+
     public BookingView(int ID)
     {
-        reservationController = new ReservationController(this);
-
         setID(ID);
         createLayout();
+        createTableColoumns();
         createLayoutSettings();
         attachLayoutToScene();
-        createTableColoumns();
+
+        reservationController = new ReservationController( this );
+
         bindTable();
         createCalendarTable();
         fillCalendarTable();
@@ -55,17 +55,16 @@ public class BookingView extends BaseScene implements BaseLayout
     public void createLayout()
     {
         layout = new VBox();
-        HBox searchFunction = new HBox();
 
         searchField = new TextField();
 
+        HBox searchFunction = new HBox();
         searchFunction.getChildren().addAll( searchLabel, searchField );
         searchFunction.getStyleClass().add("searchingBar");
 
         bookingTableView = new TableView<>();
 
         HBox bottomMenu = new HBox();
-
         createBooking = new Button("Opret ny");
         updateBooking = new Button("Opdater");
         deleteBooking = new Button("Slet");
@@ -73,11 +72,31 @@ public class BookingView extends BaseScene implements BaseLayout
 
         bottomMenu.getStyleClass().add("menu");
 
-        reservations = FXCollections.observableList(new ArrayList<>());
-
         bookingCalendarTableView = new TableView<>();
 
         layout.getChildren().addAll(searchFunction, bookingTableView , bookingCalendarTableView, bottomMenu );
+    }
+
+    public void createTableColoumns()
+    {
+        TableColumn<Reservation, String> date = new TableColumn<>("Dato");
+        date.setCellValueFactory(new PropertyValueFactory<Reservation, String>("startDateAsString"));
+
+        TableColumn<Reservation, String> customerName = new TableColumn<>("Customer Name");
+        customerName.setCellValueFactory(new PropertyValueFactory<Reservation, String>("customerName"));
+
+        TableColumn<Reservation, Integer> amountOfParticipants = new TableColumn<>("Amount Of Participants");
+        amountOfParticipants.setCellValueFactory(new PropertyValueFactory<Reservation, Integer>("amountOfParticipants"));
+
+        TableColumn<Reservation, String> instructor = new TableColumn<>("Instructor");
+        instructor.setCellValueFactory(new PropertyValueFactory<Reservation, String>("Instructor"));
+
+        TableColumn<Reservation, String> activityName = new TableColumn<>("Activity");
+        activityName.setCellValueFactory(new PropertyValueFactory<Reservation, String>("activityName"));
+
+        bookingTableView.getColumns().addAll(date, customerName, amountOfParticipants, instructor, activityName);
+
+        //addMultiToTableOb(FXCollections.observableList(reservationController.getReservationModel().readAllReservations()));
     }
 
     @Override
@@ -129,17 +148,6 @@ public class BookingView extends BaseScene implements BaseLayout
         }
     }
 
-    public void createStatusMessage(int buttonID, boolean succesfullAction)
-    {
-        String[] updateStatus = { "oprettet", "opdateret", "slettet" };
-
-        if ( succesfullAction ) {
-            Alerts.doInformationBox( "Succes", "Reservationen blev " + updateStatus[buttonID] + ".", null );
-        } else {
-            Alerts.doErrorBox( "Fejl", "Reservationen blev ikke " + updateStatus[buttonID] + ".", null );
-        }
-    }
-
     private void callBookingModal(int buttonID ,String title, String message, Reservation reservation ) {
         BookingModal bm = new BookingModal();
         String[] str = bm.display( title, message, reservation );
@@ -162,54 +170,24 @@ public class BookingView extends BaseScene implements BaseLayout
         }
     }
 
-    public void createTableColoumns()
+    public void createStatusMessage(int buttonID, boolean succesfullAction)
     {
-        TableColumn<Reservation, String> date = new TableColumn<>("Dato");
-        date.setCellValueFactory(new PropertyValueFactory<Reservation, String>("startDateAsString"));
+        String[] updateStatus = { "oprettet", "opdateret", "slettet" };
 
-        TableColumn<Reservation, String> customerName = new TableColumn<>("Customer Name");
-        customerName.setCellValueFactory(new PropertyValueFactory<Reservation, String>("customerName"));
-
-        TableColumn<Reservation, Integer> amountOfParticipants = new TableColumn<>("Amount Of Participants");
-        amountOfParticipants.setCellValueFactory(new PropertyValueFactory<Reservation, Integer>("amountOfParticipants"));
-
-        TableColumn<Reservation, String> instructor = new TableColumn<>("Instructor");
-        instructor.setCellValueFactory(new PropertyValueFactory<Reservation, String>("Instructor"));
-
-        TableColumn<Reservation, String> activityName = new TableColumn<>("Activity");
-        activityName.setCellValueFactory(new PropertyValueFactory<Reservation, String>("activityName"));
-
-        bookingTableView.getColumns().addAll(date, customerName, amountOfParticipants, instructor, activityName);
-
-        addMultiToTableOb(FXCollections.observableList(reservationController.getReservationModel().readAllReservations()));
-    }
-
-    public void addSingleToTable(Reservation reservation)
-    {
-        bookingTableView.getItems().add(reservation);
-    }
-
-    public void addMultiToTable(ArrayList<Reservation> reservations)
-    {
-        this.bookingTableView.getItems().clear();
-
-        this.reservations.addAll(reservations);
-
-        this.bookingTableView.getItems().addAll(reservations);
-    }
-
-    public void addMultiToTableOb(ObservableList<Reservation> reservations)
-    {
-        this.bookingTableView.getItems().addAll(reservations);
+        if ( succesfullAction ) {
+            Alerts.doInformationBox( "Succes", "Reservationen blev " + updateStatus[buttonID] + ".", null );
+        } else {
+            Alerts.doErrorBox( "Fejl", "Reservationen blev ikke " + updateStatus[buttonID] + ".", null );
+        }
     }
 
     public void overideAllToTable(ArrayList<Reservation> reservations)
     {
         this.bookingTableView.getItems().clear();
 
-        this.reservations.addAll(reservations);
+        ObservableList<Reservation> observableList = FXCollections.observableList(reservations);
 
-        this.bookingTableView.getItems().addAll(reservations);
+        this.bookingTableView.getItems().addAll(observableList);
     }
 
     @Override
@@ -224,9 +202,10 @@ public class BookingView extends BaseScene implements BaseLayout
         setScene(this.layout);
     }
 
-
     private void bindTable()
     {
+        reservations = FXCollections.observableList( reservationController.getReservationModel().readAllReservations() );
+
         FilteredList<Reservation> filteredData = new FilteredList<>(reservations, p -> true);
 
         searchField.textProperty().addListener((observable, oldValue, newValue) ->
