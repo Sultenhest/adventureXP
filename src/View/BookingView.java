@@ -39,12 +39,13 @@ public class BookingView extends BaseScene implements BaseLayout
 
     public BookingView(int ID)
     {
-        reservationController = new ReservationController(this);
-
         setID(ID);
         createLayout();
         createLayoutSettings();
         attachLayoutToScene();
+
+        reservationController = new ReservationController(this);
+
         createTableColoumns();
         bindTable();
         createCalendarTable();

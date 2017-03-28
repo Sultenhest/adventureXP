@@ -51,10 +51,10 @@ CREATE TABLE `booking` (
   `bk_act_id` int(11) NOT NULL,
   `bk_instructor` varchar(45) NOT NULL,
   `bk_customer` varchar(45) NOT NULL,
-  `bk_startDate` date DEFAULT NULL,
-  `bk_duration` varchar(5) DEFAULT NULL,
-  `bk_participants` int(11) DEFAULT NULL,
-  `bk_timestamp` timestamp NULL DEFAULT NULL
+  `bk_date` date DEFAULT NULL,
+  `bk_startTime` VARCHAR(5) DEFAULT NULL,
+  `bk_endTime` varchar(5) DEFAULT NULL,
+  `bk_participants` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- new addition

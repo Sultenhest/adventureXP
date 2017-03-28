@@ -37,12 +37,13 @@ public class ReservationModel
         try (Connection connection = DatabaseConnect.getConnection();
              Statement statement = connection.createStatement())
         {
-            String sql = "INSERT INTO booking (bk_act_id, bk_instructor, bk_customer, bk_startDate, bk_duration, bk_participants, bk_timestamp) " +
+            String sql = "INSERT INTO booking (bk_act_id, bk_instructor, bk_customer, bk_date, bk_startTime, bk_endTime, bk_participants) " +
                     "VALUES (" + reservation.getActivity().getID() + ", '" +
                     reservation.getInstructor() + "', '" +
                     reservation.getCustomerName() + "', " +
                     reservation.getDate() + ", " +
                     reservation.getEndTime() + ", " +
+                    reservation.getStartTime() + ", " +
                     reservation.getAmountOfParticipants() + ")";
 
             int rowsAffected = statement.executeUpdate(sql);
@@ -64,8 +65,9 @@ public class ReservationModel
             String sql = "UPDATE booking SET bk_act_id = " + reservation.getActivity().getID() +
                     ", bk_instructor = '" + reservation.getInstructor() +
                     "', bk_customer = '" + reservation.getCustomerName() +
-                    "', bk_startDate = " + reservation.getDate() +
-                    ", bk_duration = " + reservation.getEndTime() +
+                    "', bk_date = " + reservation.getDate() +
+                    ", bk_startTime = " + reservation.getStartTime() +
+                    ", bk_endTime = " + reservation.getEndTime() +
                     ", bk_participants = " + reservation.getAmountOfParticipants() +
                     ", bk_timestamp = " + new Date();
 
