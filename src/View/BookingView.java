@@ -1,9 +1,7 @@
 package View;
 
 import Controller.ReservationController;
-import Model.Activity;
 import Model.Reservation;
-import Model.ReservationModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -15,7 +13,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class BookingView extends BaseScene implements BaseLayout
 {
@@ -68,6 +65,8 @@ public class BookingView extends BaseScene implements BaseLayout
         bottomMenu.getChildren().addAll(createBooking, updateBooking, deleteBooking);
 
         bottomMenu.getStyleClass().add("menu");
+
+        reservations = FXCollections.observableList(new ArrayList<>());
 
         layout.getChildren().addAll(searchFunction, bookingTableView, bottomMenu );
     }
