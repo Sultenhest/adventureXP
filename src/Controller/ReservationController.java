@@ -33,7 +33,7 @@ public class ReservationController
         if (date == null || Integer.parseInt(informations[5]) == 0 || informations[2].equals("") || informations[1].equals("") || informations[0] == "")
             oneBookingFieldIsEmpty = false;
 
-        if (oneBookingFieldIsEmpty)
+        if (!oneBookingFieldIsEmpty)
         {
             bookingView.createStatusMessage(0, false);
         }
