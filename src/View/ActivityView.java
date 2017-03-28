@@ -137,14 +137,17 @@ public class ActivityView extends BaseScene implements BaseLayout
 
                 activityController.createActivity(buttonID, name, age, height);
             }
+            else
+                createStatusMessage(1, false);
         }
         // If Update
         else if (buttonID ==  1)
         {
             if (str.length == 3 && str[0] != null)
                 activityController.updateActivity(activity.getID(), str[0], str[1], str[2]);
+            else
+                createStatusMessage(1, false);
         }
-
     }
 
     public void createStatusMessage(int buttonID, boolean succesfullAction)

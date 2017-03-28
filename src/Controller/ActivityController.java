@@ -93,4 +93,15 @@ public class ActivityController
         activityView.overideAllToTable(activityModel.readAll());
     }
 
+    public void deleteActivity(Activity act)
+    {
+        if (act == null)
+            activityView.createStatusMessage(2, false);
+        else
+        {
+            activityView.createStatusMessage(2, activityModel.delete(act.getID()));
+            activityView.overideAllToTable(activityModel.readAll());
+        }
+    }
+
 }
