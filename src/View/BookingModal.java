@@ -62,8 +62,8 @@ public class BookingModal
     }
 
     private void createActivityLimitsAlert( Activity a ) {
-        String str  = "Aktiviteten har følgende aldersbegrænsning: " + a.getAgeLimit() + "\n";
-               str += "Aktiviteten har følgende højdebegrænsning:  " + a.getHeightLimit();
+        String str  = "Aktiviteten har følgende aldersbegrænsning: min. " + a.getAgeLimit() + " år\n";
+               str += "Aktiviteten har følgende højdebegrænsning:  min. " + a.getHeightLimit() + " cm";
 
         Alerts.doInformationBox( "Aktivitetsbegrænsninger", "Vær opmærksom på følgende vdr. " + a.getActivityName(), str );
     }
