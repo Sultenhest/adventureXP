@@ -45,7 +45,7 @@ public class ReservationController
         return !res.getCustomerName().equals("") || !res.getInstructor().equals("") || res.getActivity() != null || res.getDurationInMinutes() == 0 || res.getStartDate() != null;
     }
 
-    public void updateActivity(Reservation reservation)
+    public void updateBooking(Reservation reservation)
     {
         if (reservation == null)
             bookingView.createStatusMessage(1, false);
@@ -60,6 +60,21 @@ public class ReservationController
             else
             {
                 bookingView.createStatusMessage(1, false);
+            }
+        }
+    }
+
+    public void deleteBooking(Reservation res)
+    {
+        if (res == null)
+            bookingView.createStatusMessage(2, false);
+        else
+        {
+            if (validateInput(res))
+            {
+                //Deletes booking from DB and creates success message.
+                bookingView.createStatusMessage(2, reservationModel.deleteReservation(res.getID()));
+                bookingView.overideAllToTable(reservationModel.readAllReservations());
             }
         }
     }

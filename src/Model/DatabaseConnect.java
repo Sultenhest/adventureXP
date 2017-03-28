@@ -38,7 +38,7 @@ public class DatabaseConnect
         {
             String url = "" + db_url + ":" + db_port + "/" + db_name + "";
 
-            return DriverManager.getConnection(url, db_user, db_password );
+            return DriverManager.getConnection(url, db_user, db_password);
         }
         catch (Exception ex)
         {
@@ -46,8 +46,7 @@ public class DatabaseConnect
             return null;
         }
     }
-
-    //
+//
 //    private DatabaseConnect()
 //    {
 //        db_url = "jdbc:mysql://localhost";
