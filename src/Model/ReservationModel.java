@@ -15,6 +15,18 @@ import java.util.Date;
  */
 public class ReservationModel
 {
+    private static ReservationModel instance = null;
+
+    private ReservationModel() {}
+
+    public static ReservationModel getInstance()
+    {
+        if (instance == null)
+            instance = new ReservationModel();
+
+        return instance;
+    }
+
     // Controller
     private ReservationController reservationController;
 
