@@ -67,10 +67,14 @@ public class ActivityModel
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sqlStatement);
 
-            Activity act;
+            Activity act = null;
 
-            act = new Activity(rs.getInt(1), rs.getInt(3),
-                    rs.getInt(4), rs.getString(2));
+            if (rs.next())
+            {
+                act = new Activity(rs.getInt(1), rs.getInt(3),
+                        rs.getInt(4), rs.getString(2));
+            }
+
 
             st.close();
             conn.close();
