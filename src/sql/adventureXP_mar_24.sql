@@ -52,7 +52,6 @@ CREATE TABLE `booking` (
   `bk_instructor` varchar(45) NOT NULL,
   `bk_customer` varchar(45) NOT NULL,
   `bk_startDate` date DEFAULT NULL,
-  `bk_startTime` time NOT NULL,
   `bk_duration` varchar(5) DEFAULT NULL,
   `bk_participants` int(11) DEFAULT NULL,
   `bk_timestamp` timestamp NULL DEFAULT NULL

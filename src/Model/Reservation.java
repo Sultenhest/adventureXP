@@ -21,7 +21,7 @@ public class Reservation
 
     public Reservation(){}
 
-    public Reservation(int ID, long date, int durationInMinutes, String customerName, String Instructor, Activity activity, long timestamp)
+    public Reservation(int ID, long date, int durationInMinutes, String customerName, String Instructor, int amountOfParticipants, Activity activity, long timestamp)
     {
         this.ID = ID;
         this.durationInMinutes = durationInMinutes;
@@ -30,6 +30,7 @@ public class Reservation
         this.activity = activity;
         this.timestamp = new Date(timestamp);
         this.startTime = new Date(date);
+        this.amountOfParticipants = amountOfParticipants;
     }
 
     public Reservation(Date date, int durationInMinutes, String customerName, String Instructor, int amountOfParticipants, Activity activity)

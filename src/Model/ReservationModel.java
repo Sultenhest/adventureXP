@@ -83,7 +83,7 @@ public class ReservationModel
 
             ResultSet rs = statement.executeQuery(sql);
 
-            return new Reservation(rs.getInt("bk_id"), rs.getLong(5), rs.getInt(6), rs.getString(4), rs.getString(3), am.read(rs.getInt(1)), rs.getLong(8));
+            return new Reservation(rs.getInt("bk_id"), rs.getLong("bk_startDate"), rs.getInt("bk_duration"), rs.getString("bk_customer"), rs.getString("bk_instructor"), rs.getInt("bk_participants"), am.read(rs.getInt("bk_act_id")), rs.getLong("bk_timestamp"));
         }
         catch (SQLException sqlEx)
         {
@@ -105,7 +105,7 @@ public class ReservationModel
 
             while (rs.next())
             {
-                listOfReservations.add(new Reservation(rs.getInt("bk_id"), rs.getLong(5), rs.getInt(6), rs.getString(4), rs.getString(3), am.read(rs.getInt(1)), rs.getLong(8)));
+                listOfReservations.add(new Reservation(rs.getInt("bk_id"), rs.getLong(5), rs.getInt(6), rs.getString(4), rs.getString(3), rs.getInt("bk_participants"), am.read(rs.getInt(1)), rs.getLong(8)));
             }
 
             return listOfReservations;
