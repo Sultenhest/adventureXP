@@ -21,7 +21,7 @@ public class ReservationController
         reservationModel = new ReservationModel(this);
     }
 
-    public void submitBooking(Date date, String durationInMinutes, String customerName, String instructor, Activity activity)
+    public void submitBooking(Date date, String durationInMinutes, String customerName, String instructor, String activity)
     {
         boolean oneBookingFieldIsEmpty = true;
 
@@ -34,7 +34,9 @@ public class ReservationController
         }
         else //Creates reservation object & calls method in ReservationModel that insert "Reservation" object in DB
         {
-            Reservation reservation = new Reservation(date, Integer.parseInt(durationInMinutes), customerName, instructor, activity);
+
+
+            Reservation reservation = new Reservation(date, Integer.parseInt(durationInMinutes), customerName, instructor, act);
             reservationModel.insertReservationInDB(reservation);
             bookingView.createStatusMessage(0, true);
         }
