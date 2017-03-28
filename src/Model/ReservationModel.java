@@ -115,8 +115,8 @@ public class ReservationModel
 
             while (rs.next())
             {
-                listOfReservations.add(new Reservation(rs.getInt("bk_id"), rs.getDate("bk_startDate").toLocalDate(),
-                        rs.getString("bk_startTime"), rs.getString("bk_duration"), rs.getString("bk_customer"),
+                listOfReservations.add(new Reservation(rs.getInt("bk_id"), rs.getDate("bk_date").toLocalDate(),
+                        rs.getString("bk_startTime"), rs.getString("bk_endTime"), rs.getString("bk_customer"),
                         rs.getString("bk_instructor"), rs.getInt("bk_participants"), am.read(rs.getInt("bk_act_id"))));
             }
 
