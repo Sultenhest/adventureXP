@@ -10,6 +10,7 @@ import java.util.Date;
 
 public class Reservation
 {
+    private int ID;
     private Date startTime;
     private int durationInMinutes;
     private int amountOfParticipants;
@@ -20,8 +21,9 @@ public class Reservation
 
     public Reservation(){}
 
-    public Reservation(long date, int durationInMinutes, String customerName, String Instructor, Activity activity, long timestamp)
+    public Reservation(int ID, long date, int durationInMinutes, String customerName, String Instructor, Activity activity, long timestamp)
     {
+        this.ID = ID;
         this.durationInMinutes = durationInMinutes;
         this.customerName = customerName;
         this.Instructor = Instructor;
@@ -41,6 +43,16 @@ public class Reservation
         this.amountOfParticipants = amountOfParticipants;
     }
 
+    public int getID()
+    {
+        return ID;
+    }
+
+    public void setID(int ID)
+    {
+        this.ID = ID;
+    }
+
     public Date getStartDate()
     {
         return startTime;
@@ -49,6 +61,14 @@ public class Reservation
     public String getStartDateAsString()
     {
         DateFormat dateFormat = new SimpleDateFormat("d/M/y - k:m");
+
+
+        return dateFormat.format(startTime);
+    }
+
+    public String getStartTimeAsString()
+    {
+        DateFormat dateFormat = new SimpleDateFormat("kk:mm");
 
 
         return dateFormat.format(startTime);

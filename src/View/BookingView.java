@@ -13,10 +13,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class BookingView extends BaseScene implements BaseLayout
@@ -46,6 +45,8 @@ public class BookingView extends BaseScene implements BaseLayout
         attachLayoutToScene();
         createTableColoumns();
         bindTable();
+        createCalendarTable();
+        fillCalendarTable();
 
         reservationController = new ReservationController();
 
@@ -75,7 +76,9 @@ public class BookingView extends BaseScene implements BaseLayout
 
         reservations = FXCollections.observableList(new ArrayList<>());
 
-        layout.getChildren().addAll(searchFunction, bookingTableView, bottomMenu );
+        bookingCalendarTableView = new TableView<>();
+
+        layout.getChildren().addAll(searchFunction, bookingTableView , bookingCalendarTableView, bottomMenu );
     }
 
     @Override
@@ -187,14 +190,6 @@ public class BookingView extends BaseScene implements BaseLayout
 
         bookingTableView.getColumns().addAll(date, customerName, amountOfParticipants, instructor, activityName);
 
-//        Test
-//
-//        ArrayList<Reservation> reservations = new ArrayList<>();
-//        reservations.add(new Reservation(new Date(), 200, "Morten", "Torben", new Activity("goCart", 0, 0)));
-//        reservations.add(new Reservation(new Date(), 300, "Tim", "Simon", new Activity("Sumo", 0, 0)));
-//
-//        this.reservations = FXCollections.observableList(reservations);
-//
         ReservationController resCon = new ReservationController();
 
         addMultiToTableOb(FXCollections.observableList(resCon.getReservationModel().readAllReservations()));
@@ -289,8 +284,6 @@ public class BookingView extends BaseScene implements BaseLayout
 
     public void createCalendarTable()
     {
-        bookingCalendarTableView = new TableView<>();
-
         TableColumn<Reservation, String> time = new TableColumn<>("Tid");
         time.setCellValueFactory(new PropertyValueFactory<Reservation, String>("startTimeAsString"));
 
@@ -314,27 +307,19 @@ public class BookingView extends BaseScene implements BaseLayout
         Calendar calendar = new GregorianCalendar();
         calendar.set(2017, 03, 28, 0, 0);
 
-        DateFormat dateFormat = new SimpleDateFormat("k:m");
-
         this.bookingCalendarTableView.getItems().clear();
 
         int count = 30;
-        int hour = 0;
 
-        for (int i = 1; i <= 48; i++)
+        for (int i = 1; i < 48; i++)
         {
-            if (count != 60)
-            {
-                count += 30;
-            }
-            else
-            {
-                count = 0;
-                hour++;
-            }
+            count += 30;
 
-            calendar.set(2017, 03, 28, hour, count);
-            bookingCalendarTableView.getItems().add(new Reservation(dateFormat.format(calendar.getTime()), "Morten", "Torben", new Activity("", 0, 0)));
+            calendar.set(2017, 03, 28, 0, count, 0);
+            Date date = new Date();
+            date.setTime(calendar.getTimeInMillis());
+
+            bookingCalendarTableView.getItems().add(new Reservation(date, 0, "", "", new Activity("", 0, 0)));
 
         }
     }
