@@ -148,18 +148,6 @@ public class BookingView extends BaseScene implements BaseLayout
         }
     }
 
-    private void callBookingModal(int buttonID ,String title, String message, Reservation reservation ) {
-    public void createStatusMessage(int buttonID, boolean succesfullAction)
-    {
-        String[] updateStatus = { "oprettet", "opdateret", "slettet" };
-
-        if ( succesfullAction ) {
-            Alerts.doInformationBox( "Succes", "Reservationen blev " + updateStatus[buttonID] + ".", null );
-        } else {
-            Alerts.doErrorBox( "Fejl", "Reservationen blev ikke " + updateStatus[buttonID] + ".", null );
-        }
-    }
-
     private void callBookingModal(int buttonID ,String title, String message,Reservation reservation) {
         BookingModal bm = new BookingModal();
         Reservation res = bm.display( title, message, reservation);

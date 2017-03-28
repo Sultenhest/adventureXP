@@ -130,35 +130,37 @@ public class Reservation
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o)
+    {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
         Reservation that = (Reservation) o;
 
         if (getID() != that.getID()) return false;
-        if (getDurationInMinutes() != that.getDurationInMinutes()) return false;
         if (getAmountOfParticipants() != that.getAmountOfParticipants()) return false;
-        if (startTime != null ? !startTime.equals(that.startTime) : that.startTime != null) return false;
+        if (getDate() != null ? !getDate().equals(that.getDate()) : that.getDate() != null) return false;
+        if (getStartTime() != null ? !getStartTime().equals(that.getStartTime()) : that.getStartTime() != null)
+            return false;
+        if (getEndTime() != null ? !getEndTime().equals(that.getEndTime()) : that.getEndTime() != null) return false;
         if (getCustomerName() != null ? !getCustomerName().equals(that.getCustomerName()) : that.getCustomerName() != null)
             return false;
         if (getInstructor() != null ? !getInstructor().equals(that.getInstructor()) : that.getInstructor() != null)
             return false;
-        if (getActivity() != null ? !getActivity().equals(that.getActivity()) : that.getActivity() != null)
-            return false;
-        return timestamp != null ? timestamp.equals(that.timestamp) : that.timestamp == null;
+        return getActivity() != null ? getActivity().equals(that.getActivity()) : that.getActivity() == null;
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         int result = getID();
-        result = 31 * result + (startTime != null ? startTime.hashCode() : 0);
-        result = 31 * result + getDurationInMinutes();
+        result = 31 * result + (getDate() != null ? getDate().hashCode() : 0);
+        result = 31 * result + (getStartTime() != null ? getStartTime().hashCode() : 0);
+        result = 31 * result + (getEndTime() != null ? getEndTime().hashCode() : 0);
         result = 31 * result + getAmountOfParticipants();
         result = 31 * result + (getCustomerName() != null ? getCustomerName().hashCode() : 0);
         result = 31 * result + (getInstructor() != null ? getInstructor().hashCode() : 0);
         result = 31 * result + (getActivity() != null ? getActivity().hashCode() : 0);
-        result = 31 * result + (timestamp != null ? timestamp.hashCode() : 0);
         return result;
     }
 }
