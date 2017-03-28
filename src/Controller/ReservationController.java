@@ -96,8 +96,10 @@ public class ReservationController
         if (stringDate[2].length() != 2)
             stringDate[2] = "0" + stringDate[2];
 
+        s = stringDate[0] + "/" + stringDate[1] + "/" + stringDate[2];
+
         Date date = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/YYYY");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY/MM/dd");
         try
         {
             date = dateFormat.parse(s);
