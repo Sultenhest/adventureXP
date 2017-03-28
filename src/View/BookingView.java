@@ -39,6 +39,8 @@ public class BookingView extends BaseScene implements BaseLayout
 
     public BookingView(int ID)
     {
+        reservationController = new ReservationController(this);
+
         setID(ID);
         createLayout();
         createLayoutSettings();
@@ -47,9 +49,6 @@ public class BookingView extends BaseScene implements BaseLayout
         bindTable();
         createCalendarTable();
         fillCalendarTable();
-
-        reservationController = new ReservationController(this);
-
     }
 
     @Override
