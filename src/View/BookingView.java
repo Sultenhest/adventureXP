@@ -319,7 +319,7 @@ public class BookingView extends BaseScene implements BaseLayout
             Date date = new Date();
             date.setTime(calendar.getTimeInMillis());
 
-            bookingCalendarTableView.getItems().add(new Reservation(date, 0, "", "", new Activity("", 0, 0)));
+            bookingCalendarTableView.getItems().add(new Reservation(date, 0, "", "", 0, new Activity("", 0, 0)));
 
         }
     }
