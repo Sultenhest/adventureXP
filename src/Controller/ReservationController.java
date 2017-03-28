@@ -1,10 +1,13 @@
 package Controller;
 
 import Model.Activity;
+import Model.ActivityModel;
 import Model.Reservation;
 import Model.ReservationModel;
 import View.BookingView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -21,11 +24,12 @@ public class ReservationController
         reservationModel = new ReservationModel(this);
     }
 
-    public void submitBooking(Date date, String durationInMinutes, String customerName, String instructor, String activity)
+    public void submitBooking(String[] informations)
     {
         boolean oneBookingFieldIsEmpty = true;
+        Date date = splitTheDate(informations[3]);
 
-        if (date == null || Integer.parseInt(durationInMinutes) == 0 || customerName.equals("") || instructor.equals("") || activity == null)
+        if (date == null || Integer.parseInt(informations[5]) == 0 || informations[2].equals("") || informations[1].equals("") || informations[0] == "")
             oneBookingFieldIsEmpty = false;
 
         if (oneBookingFieldIsEmpty)
@@ -34,11 +38,12 @@ public class ReservationController
         }
         else //Creates reservation object & calls method in ReservationModel that insert "Reservation" object in DB
         {
+            int actID = Integer.parseInt(informations[0].substring(0, informations[0].indexOf(":")));
+            Activity act = ActivityModel.getInstance().read(actID);
 
-
-            Reservation reservation = new Reservation(date, Integer.parseInt(durationInMinutes), customerName, instructor, act);
-            reservationModel.insertReservationInDB(reservation);
-            bookingView.createStatusMessage(0, true);
+            Reservation reservation = new Reservation(date, Integer.parseInt(informations[5]), informations[2], informations[1], Integer.parseInt(informations[6]), act);
+            bookingView.createStatusMessage(0, reservationModel.insertReservationInDB(reservation));
+            bookingView.overideAllToTable(reservationModel.readAllReservations());
         }
     }
 
@@ -79,6 +84,30 @@ public class ReservationController
                 bookingView.overideAllToTable(reservationModel.readAllReservations());
             }
         }
+    }
+
+    private Date splitTheDate(String s)
+    {
+        String[] stringDate = s.split("/");
+
+        if (stringDate[0].length() != 2)
+            stringDate[0] = "0" + stringDate[0];
+
+        if (stringDate[1].length() != 2)
+            stringDate[1] = "0" + stringDate[1];
+
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/d/YYYY");
+        try
+        {
+            date = dateFormat.parse(s);
+        }
+        catch (ParseException pEx)
+        {
+            pEx.printStackTrace();
+        }
+
+        return date;
     }
 
     public ReservationModel getReservationModel()

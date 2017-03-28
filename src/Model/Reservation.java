@@ -32,7 +32,7 @@ public class Reservation
         this.startTime = new Date(date);
     }
 
-    public Reservation(Date date, int durationInMinutes, String customerName, String Instructor, Activity activity)
+    public Reservation(Date date, int durationInMinutes, String customerName, String Instructor, int amountOfParticipants, Activity activity)
     {
         this.durationInMinutes = durationInMinutes;
         this.customerName = customerName;
@@ -40,6 +40,7 @@ public class Reservation
         this.activity = activity;
         this.timestamp = new Date();
         this.startTime = date;
+        this.amountOfParticipants = amountOfParticipants;
     }
 
     public int getID()
