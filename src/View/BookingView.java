@@ -54,6 +54,7 @@ public class BookingView extends BaseScene implements BaseLayout
         searchField = new TextField();
 
         searchFunction.getChildren().addAll( searchLabel, searchField );
+        searchFunction.getStyleClass().add("searchingBar");
 
         bookingTableView = new TableView<>();
 

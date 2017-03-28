@@ -16,3 +16,13 @@
     -fx-font-size: 30px;
     -fx-padding: 14px 0 0 0;
 }
+
+.root .searchingBar{
+    -fx-padding: 0 14px 14px 14px;
+    -fx-spacing: 10px;
+}
+
+.root .searchingBar Label{
+    -fx-padding: 0 0 0 160px;
+    -fx-font-size: 18px;
+}
