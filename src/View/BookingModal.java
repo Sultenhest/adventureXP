@@ -3,6 +3,8 @@ package View;
 import Model.Activity;
 import Model.ActivityModel;
 import Model.Reservation;
+import Model.ReservationModel;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -52,9 +54,18 @@ public class BookingModal
 
         comboBox.setItems( activities );
 
-        comboBox.getSelectionModel().selectFirst();
+        comboBox.getSelectionModel().selectedItemProperty().addListener(
+                (v, oldValue, newValue) -> createActivityLimitsAlert( ActivityModel.getInstance().read( Integer.parseInt( newValue.substring(0, newValue.indexOf(":") ) ) ) )
+        );
 
         return comboBox;
+    }
+
+    private void createActivityLimitsAlert( Activity a ) {
+        String str  = "Aktiviteten har følgende aldersbegrænsning: " + a.getAgeLimit() + "\n";
+               str += "Aktiviteten har følgende højdebegrænsning:  " + a.getHeightLimit();
+
+        Alerts.doInformationBox( "Aktivitetsbegrænsninger", "Vær opmærksom på følgende:", str );
     }
 
     public String[] display(String title, String message, Reservation reservation)
