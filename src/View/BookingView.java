@@ -161,7 +161,7 @@ public class BookingView extends BaseScene implements BaseLayout
         else if (buttonID ==  1)
             if (res != null)
             {
-                //update in reservationController
+                reservationController.updateBooking(res);
             }
     }
 
