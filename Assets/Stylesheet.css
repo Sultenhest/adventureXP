@@ -1,3 +1,7 @@
+.root{
+    -fx-background-color: #ecf0f1;
+}
+
 .root Button{
     -fx-border-width: 5px;
     -fx-background-color: #f1c40f;
