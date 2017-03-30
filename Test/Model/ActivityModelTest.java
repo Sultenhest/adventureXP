@@ -31,6 +31,17 @@ public class ActivityModelTest
 
     }
 
+    @Test
+    public void ReadActivity() throws Exception
+    {
+        setupDB();
+        Activity activity = new Activity(1, 18, 150, "Gokart");
+
+        Activity activityDb = ActivityModel.getInstance().read(1);
+
+        assertEquals(activity, activityDb);
+    }
+
     public boolean InsertActivity() throws Exception
     {
         return ActivityModel.getInstance().insert(new Activity(99, 12, 123,"Activity_Test"));
