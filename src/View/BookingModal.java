@@ -2,9 +2,7 @@ package View;
 
 import Model.Activity;
 import Model.ActivityModel;
-import Model.Reservation;
-import Model.ReservationModel;
-import javafx.beans.value.ChangeListener;
+import Model.Booking;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -53,7 +51,7 @@ public class BookingModal
         Alerts.doInformationBox( "Aktivitetsbegrænsninger", "Vær opmærksom på følgende vdr. " + a.getActivityName(), str );
     }
 
-    public Reservation display(String title, String message, Reservation reservation)
+    public Booking display(String title, String message, Booking booking)
     {
         window.setTitle( title );
         window.initModality(Modality.APPLICATION_MODAL);
@@ -90,15 +88,15 @@ public class BookingModal
         TextField durationField = new TextField();
         TextField participantsField = new TextField();
 
-        if( reservation != null ) {
+        if( booking != null ) {
             Alerts.doInformationBox("Aktivitet", "Valg af aktivitet", "Grundet dårlig programmering, skal du vælge den samme eller en ny aktivitet igen. Sorry senpai :(");
 
-            instructorField.setText( reservation.getInstructor() );
-            clientField.setText( reservation.getCustomerName() );
-            date.setValue( reservation.getDate() );
-            startTimeField.setText( reservation.getStartTime() );
-            durationField.setText( reservation.getEndTime() );
-            participantsField.setText( "" + reservation.getAmountOfParticipants() );
+            instructorField.setText( booking.getInstructor() );
+            clientField.setText( booking.getCustomerName() );
+            date.setValue( booking.getDate() );
+            startTimeField.setText( booking.getStartTime() );
+            durationField.setText( booking.getEndTime() );
+            participantsField.setText( "" + booking.getAmountOfParticipants() );
         }
 
         grid.add(createComboBox(), 1, 0);
@@ -114,19 +112,19 @@ public class BookingModal
         submitButton.setOnAction(e -> {
             int actID = Integer.parseInt(comboBox.getValue().substring(0, comboBox.getValue().indexOf(":")));
 
-            reservation.setActivity( ActivityModel.getInstance().read(actID) );
-            reservation.setInstructor( instructorField.getText().trim() );
-            reservation.setCustomerName( clientField.getText().trim() );
-            reservation.setDate( date.getValue() );
-            reservation.setStartTime( startTimeField.getText().trim() );
-            reservation.setEndTime( durationField.getText().trim() );
-            reservation.setAmountOfParticipants( Integer.parseInt(participantsField.getText().trim()) );
+            booking.setActivity( ActivityModel.getInstance().read(actID) );
+            booking.setInstructor( instructorField.getText().trim() );
+            booking.setCustomerName( clientField.getText().trim() );
+            booking.setDate( date.getValue() );
+            booking.setStartTime( startTimeField.getText().trim() );
+            booking.setEndTime( durationField.getText().trim() );
+            booking.setAmountOfParticipants( Integer.parseInt(participantsField.getText().trim()) );
 
             window.close();
         });
 
         closeButton.setOnAction( e-> {
-            reservation.setCustomerName("DONOTUPDATE");
+            booking.setCustomerName("DONOTUPDATE");
             window.close();
         } );
 
@@ -139,6 +137,6 @@ public class BookingModal
         window.setScene(scene);
         window.showAndWait();
 
-        return reservation;
+        return booking;
     }
 }

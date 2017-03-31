@@ -1,50 +1,49 @@
 package Model;
 
-import Controller.ReservationController;
+import Controller.BookingController;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 
-public class ReservationModel
+public class BookingModel
 {
-    private static ReservationModel instance = null;
+    private static BookingModel instance = null;
 
-    private ReservationModel() {}
+    private BookingModel() {}
 
-    public static ReservationModel getInstance()
+    public static BookingModel getInstance()
     {
         if (instance == null)
-            instance = new ReservationModel();
+            instance = new BookingModel();
 
         return instance;
     }
 
     // Controller
-    private ReservationController reservationController;
+    private BookingController bookingController;
 
     // Constructor
-    public ReservationModel(ReservationController reservationController)
+    public BookingModel(BookingController bookingController)
     {
-        this.reservationController = reservationController;
+        this.bookingController = bookingController;
     }
 
-    public boolean insertReservationInDB(Reservation reservation)
+    public boolean insertBookingInDB(Booking booking)
     {
         try (Connection connection = DatabaseConnect.getConnection();
              Statement statement = connection.createStatement())
         {
             String sql = "INSERT INTO booking (bk_act_id, bk_instructor, bk_customer, bk_date, bk_startTime, bk_endTime, bk_participants) " +
-                    "VALUES (" + reservation.getActivity().getID() + ", '" +
-                    reservation.getInstructor() + "', '" +
-                    reservation.getCustomerName() + "', '" +
-                    reservation.getDate() + "', '" +
-                    reservation.getEndTime() + "', '" +
-                    reservation.getStartTime() + "', " +
-                    reservation.getAmountOfParticipants() + ")";
+                    "VALUES (" + booking.getActivity().getID() + ", '" +
+                    booking.getInstructor() + "', '" +
+                    booking.getCustomerName() + "', '" +
+                    booking.getDate() + "', '" +
+                    booking.getEndTime() + "', '" +
+                    booking.getStartTime() + "', " +
+                    booking.getAmountOfParticipants() + ")";
 
             int rowsAffected = statement.executeUpdate(sql);
 
@@ -57,17 +56,17 @@ public class ReservationModel
         }
     }
 
-    public boolean updateReservation(Reservation reservation)
+    public boolean updateBooking(Booking booking)
     {
         try {
-            String sql = "UPDATE booking SET bk_act_id = " + reservation.getActivity().getID() +
-                    ", bk_instructor = '" + reservation.getInstructor() +
-                    "', bk_customer = '" + reservation.getCustomerName() +
-                    "', bk_date = '" + reservation.getDate() +
-                    "', bk_startTime = '" + reservation.getStartTime() +
-                    "', bk_endTime = '" + reservation.getEndTime() +
-                    "', bk_participants = " + reservation.getAmountOfParticipants() +
-                    " WHERE bk_id = " + reservation.getID();
+            String sql = "UPDATE booking SET bk_act_id = " + booking.getActivity().getID() +
+                    ", bk_instructor = '" + booking.getInstructor() +
+                    "', bk_customer = '" + booking.getCustomerName() +
+                    "', bk_date = '" + booking.getDate() +
+                    "', bk_startTime = '" + booking.getStartTime() +
+                    "', bk_endTime = '" + booking.getEndTime() +
+                    "', bk_participants = " + booking.getAmountOfParticipants() +
+                    " WHERE bk_id = " + booking.getID();
 
             Connection connection = DatabaseConnect.getConnection();
             Statement statement = connection.createStatement();
@@ -83,7 +82,7 @@ public class ReservationModel
         }
     }
 
-    public Reservation readReservation(int id)
+    public Booking readBooking(int id)
     {
         try (Connection connection = DatabaseConnect.getConnection();
              Statement statement = connection.createStatement())
@@ -93,7 +92,7 @@ public class ReservationModel
 
             ResultSet rs = statement.executeQuery(sql);
 
-            return new Reservation(rs.getInt("bk_id"), rs.getDate("bk_startDate").toLocalDate(),
+            return new Booking(rs.getInt("bk_id"), rs.getDate("bk_startDate").toLocalDate(),
                     rs.getString("bk_startTime"), rs.getString("bk_duration"), rs.getString("bk_customer"),
                     rs.getString("bk_instructor"), rs.getInt("bk_participants"), am.read(rs.getInt("bk_act_id")));
         }
@@ -104,7 +103,7 @@ public class ReservationModel
         }
     }
 
-    public ArrayList<Reservation> readAllReservations()
+    public ArrayList<Booking> readAllBookings()
     {
         try(Connection connection = DatabaseConnect.getConnection();
             Statement statement = connection.createStatement())
@@ -113,16 +112,16 @@ public class ReservationModel
             ActivityModel am = ActivityModel.getInstance();
 
             ResultSet rs = statement.executeQuery(sql);
-            ArrayList<Reservation> listOfReservations = new ArrayList<>();
+            ArrayList<Booking> listOfBookings = new ArrayList<>();
 
             while (rs.next())
             {
-                listOfReservations.add(new Reservation(rs.getInt("bk_id"), rs.getDate("bk_date").toLocalDate(),
+                listOfBookings.add(new Booking(rs.getInt("bk_id"), rs.getDate("bk_date").toLocalDate(),
                         rs.getString("bk_startTime"), rs.getString("bk_endTime"), rs.getString("bk_customer"),
                         rs.getString("bk_instructor"), rs.getInt("bk_participants"), am.read(rs.getInt("bk_act_id"))));
             }
 
-            return listOfReservations;
+            return listOfBookings;
         }
         catch (SQLException sqlEx)
         {
@@ -131,7 +130,7 @@ public class ReservationModel
         }
     }
 
-    public boolean deleteReservation(int id)
+    public boolean deleteBooking(int id)
     {
         try (Connection connection = DatabaseConnect.getConnection();
             Statement statement = connection.createStatement())

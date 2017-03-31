@@ -3,10 +3,8 @@ package Model;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 
-public class Reservation
+public class Booking
 {
     private int ID;
     private LocalDate date;
@@ -17,9 +15,9 @@ public class Reservation
     private String Instructor;
     private Activity activity;
 
-    public Reservation(){}
+    public Booking(){}
 
-    public Reservation(int ID, LocalDate date, String startTime, String endTime, String customerName, String Instructor, int amountOfParticipants, Activity activity)
+    public Booking(int ID, LocalDate date, String startTime, String endTime, String customerName, String Instructor, int amountOfParticipants, Activity activity)
     {
         this.ID = ID;
         this.endTime = endTime;
@@ -31,7 +29,7 @@ public class Reservation
         this.amountOfParticipants = amountOfParticipants;
     }
 
-    public Reservation(LocalDate date, String startTime, String endTime, String customerName, String Instructor, int amountOfParticipants, Activity activity)
+    public Booking(LocalDate date, String startTime, String endTime, String customerName, String Instructor, int amountOfParticipants, Activity activity)
     {
         this.endTime = endTime;
         this.startTime = startTime;
@@ -139,7 +137,7 @@ public class Reservation
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Reservation that = (Reservation) o;
+        Booking that = (Booking) o;
 
         if (getID() != that.getID()) return false;
         if (getAmountOfParticipants() != that.getAmountOfParticipants()) return false;

@@ -48,7 +48,7 @@ public abstract class BaseScene
 
         imv.setImage( new Image("file:Assets/Logo.png", true) );
         Button activityButton = new Button( "Aktiviteter" );
-        Button bookingButton = new Button( "Bookings" );
+        Button bookingButton = new Button( "Reservationer" );
 
         activityButton.setOnAction( e -> {
             SceneHandler.getInstance().applyScene(0);
