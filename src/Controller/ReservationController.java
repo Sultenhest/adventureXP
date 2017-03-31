@@ -43,21 +43,22 @@ public class ReservationController
 
     public void updateBooking(Reservation reservation)
     {
-        if (reservation == null)
+        if (reservation == null) {
             bookingView.createStatusMessage(1, false);
-        else
+        }else
         {
             if (validateInput(reservation))
             {
                 // Updates booking to db, and creates success message
                 bookingView.createStatusMessage( 1, reservationModel.updateReservation(reservation));
-                bookingView.overideAllToTable(reservationModel.readAllReservations());
             }
             else
             {
                 bookingView.createStatusMessage(1, false);
             }
         }
+
+        bookingView.overideAllToTable(reservationModel.readAllReservations());
     }
 
     public void deleteBooking(Reservation res)

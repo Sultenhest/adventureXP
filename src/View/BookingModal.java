@@ -24,7 +24,6 @@ public class BookingModal
     private VBox layout = new VBox(10);
     private GridPane grid = new GridPane();
     private Button closeButton = new Button("Annuller");
-    private Reservation res;
 
     private ObservableList<String> activities;
     private ComboBox<String> comboBox;
@@ -91,6 +90,17 @@ public class BookingModal
         TextField durationField = new TextField();
         TextField participantsField = new TextField();
 
+        if( reservation != null ) {
+            Alerts.doInformationBox("Aktivitet", "Valg af aktivitet", "Grundet dårlig programmering, skal du vælge den samme eller en ny aktivitet igen. Sorry senpai :(");
+
+            instructorField.setText( reservation.getInstructor() );
+            clientField.setText( reservation.getCustomerName() );
+            date.setValue( reservation.getDate() );
+            startTimeField.setText( reservation.getStartTime() );
+            durationField.setText( reservation.getEndTime() );
+            participantsField.setText( "" + reservation.getAmountOfParticipants() );
+        }
+
         grid.add(createComboBox(), 1, 0);
         grid.add(instructorField, 1, 1);
         grid.add(clientField, 1, 2);
@@ -102,25 +112,23 @@ public class BookingModal
         Button submitButton = new Button(title);
 
         submitButton.setOnAction(e -> {
-
             int actID = Integer.parseInt(comboBox.getValue().substring(0, comboBox.getValue().indexOf(":")));
 
-            this.res = new Reservation(date.getValue(), startTimeField.getText(), durationField.getText(),
-                    clientField.getText(), instructorField.getText(), Integer.parseInt(participantsField.getText()),
-                    ActivityModel.getInstance().read(actID));
-
-            output[0] = comboBox.getValue();
-            output[1] = instructorField.getText().trim();
-            output[2] = clientField.getText().trim();
-            output[3] = date.getValue().toString();
-            output[4] = startTimeField.getText().trim();
-            output[5] = durationField.getText().trim();
-            output[6] = participantsField.getText().trim();
+            reservation.setActivity( ActivityModel.getInstance().read(actID) );
+            reservation.setInstructor( instructorField.getText().trim() );
+            reservation.setCustomerName( clientField.getText().trim() );
+            reservation.setDate( date.getValue() );
+            reservation.setStartTime( startTimeField.getText().trim() );
+            reservation.setEndTime( durationField.getText().trim() );
+            reservation.setAmountOfParticipants( Integer.parseInt(participantsField.getText().trim()) );
 
             window.close();
         });
 
-        closeButton.setOnAction( e-> window.close() );
+        closeButton.setOnAction( e-> {
+            reservation.setCustomerName("DONOTUPDATE");
+            window.close();
+        } );
 
         HBox bottom = new HBox(10, submitButton, closeButton);
 
@@ -131,6 +139,6 @@ public class BookingModal
         window.setScene(scene);
         window.showAndWait();
 
-        return res;
+        return reservation;
     }
 }

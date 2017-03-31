@@ -59,20 +59,22 @@ public class ReservationModel
 
     public boolean updateReservation(Reservation reservation)
     {
-        try (Connection connection = DatabaseConnect.getConnection();
-             Statement statement = connection.createStatement())
-        {
+        try {
             String sql = "UPDATE booking SET bk_act_id = " + reservation.getActivity().getID() +
                     ", bk_instructor = '" + reservation.getInstructor() +
                     "', bk_customer = '" + reservation.getCustomerName() +
                     "', bk_date = '" + reservation.getDate() +
                     "', bk_startTime = '" + reservation.getStartTime() +
                     "', bk_endTime = '" + reservation.getEndTime() +
-                    "', bk_participants = " + reservation.getAmountOfParticipants();
+                    "', bk_participants = " + reservation.getAmountOfParticipants() +
+                    " WHERE bk_id = " + reservation.getID();
+
+            Connection connection = DatabaseConnect.getConnection();
+            Statement statement = connection.createStatement();
 
             int rowsAffected = statement.executeUpdate(sql);
 
-            return rowsAffected == 1;
+            return (rowsAffected == 1);
         }
         catch (SQLException sqlEx)
         {

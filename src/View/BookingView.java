@@ -159,15 +159,18 @@ public class BookingView extends BaseScene implements BaseLayout
         Reservation res = bm.display( title, message, reservation);
 
         // If Insert
-        if (buttonID == 0)
-            if(res != null )
-                reservationController.submitBooking(res);
-        // If Update
-        else if (buttonID ==  1)
+        if (buttonID == 0) {
             if (res != null)
+                reservationController.submitBooking(res);
+            // If Update
+        }else if (buttonID ==  1) {
+            if( !res.getCustomerName().equals("DONOTUPDATE") )
             {
                 reservationController.updateBooking(res);
+            } else {
+                createStatusMessage(buttonID, false);
             }
+        }
     }
 
     public void createStatusMessage(int buttonID, boolean succesfullAction)
@@ -177,7 +180,7 @@ public class BookingView extends BaseScene implements BaseLayout
         if ( succesfullAction ) {
             Alerts.doInformationBox( "Succes", "Reservationen blev " + updateStatus[buttonID] + ".", null );
         } else {
-            Alerts.doErrorBox( "Fejl", "Reservationen blev ikke " + updateStatus[buttonID] + ".", null );
+            Alerts.doErrorBox("Fejl", "Reservationen blev ikke " + updateStatus[buttonID] + ".", null);
         }
     }
 

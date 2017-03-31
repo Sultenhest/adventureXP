@@ -57,6 +57,10 @@ public class Reservation
         return date;
     }
 
+    public void setDate( LocalDate date ) {
+        this.date = date;
+    }
+
     public String getDateAsString()
     {
         DateFormat dateFormat = new SimpleDateFormat("d/M/y - k:m");
