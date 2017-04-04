@@ -151,7 +151,7 @@ public class ActivityView extends BaseScene implements BaseLayout
         String[] updateStatus = { "oprettet", "opdateret", "slettet" };
 
         if ( succesfullAction ) {
-            Alerts.doConfirmBox( "Succes", "Aktiviteten blev " + updateStatus[buttonID] + ".", null );
+            Alerts.doInformationBox( "Succes", "Aktiviteten blev " + updateStatus[buttonID] + ".", null );
         } else {
             Alerts.doErrorBox( "Fejl", "Aktiviteten blev ikke " + updateStatus[buttonID] + ".", null );
         }
